@@ -1,0 +1,62 @@
+@forward './colors';
+@forward './typography';
+@use './typography' as typography;
+
+// The legacy variables as a Sass module. Emits no CSS.
+
+$btn-font-weight: typography.$font-weight-bold;
+$btn-tile-border-radius: 3px;
+
+$body-font-family: "Nunito Sans";
+
+$input-max-height: 46px;
+
+$container-max-widths: (
+  md: 100%,
+  lg: 100%,
+  xl: 1344px
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 976px,
+  lg: 1200px,
+  xl: 1400px,
+);
+
+$card-text-padding: 24px;
+$card-subtitle-padding: 24px;
+
+$btn-sizes: (
+  x-small: 32,
+  small: 32,
+  default: 40,
+  large: 48,
+  x-large: 56
+);
+
+$btn-font-sizes: (
+  x-small: 14px,
+  small: 14px,
+  default: 14px,
+  large: 16px,
+  x-large: 18px
+);
+
+$box-shadow-elevation-8: 0px 12px 32px 6px var(--shadowColor2), 0px 16px 72px 8px var(--shadowColor3);
+$box-shadow-elevation-4: 0px 8px 24px 6px var(--shadowColor4), 0px 0px 1px 0px var(--shadowColor5);
+$box-shadow-elevation-2: 0px 8px 32px 0px var(--shadowColor6), 0px 8px 48px 6px var(--shadowColor7), 0px 0px 1px 0px var(--shadowColor8);
+// V2 vendor shadow of an elevated button (`.v-btn:not(.v-btn--flat)`, elevation 2); V4's is the MD3 level 1.
+$box-shadow-v2-btn: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+// The instance avatar `.v-avatar` box-shadow (desktop) and the `max-width: 975px` variant without the third layer.
+$box-shadow-avatar: 0px 0px 1px rgba(0, 0, 0, 0.12), 0px 8px 48px 6px rgba(0, 0, 0, 0.04), 0px 8px 32px rgba(0, 0, 0, 0.05);
+$box-shadow-avatar-mobile: 0px 0px 1px rgba(0, 0, 0, 0.12), 0px 8px 48px 6px rgba(0, 0, 0, 0.04);
+// V2 elevation-0 shadow (`.v-list`, flat `.v-btn`): three zero-extent layers (computed style kept 1:1; V4 draws two layers).
+$box-shadow-v2-list-flat: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+// Height of the signed-in shell footer (`AppFooter`, 48px); published as `--shell-footer-height` by `.has-shell-footer`.
+$shell-footer-height: 48px;
+// Width of the Bandwidth and Storage columns of the project table, shared by the header (`_tables.scss`, `.item--bandwidth`,
+// `.item--storage`) and the cells (`BandwidthItem.vue`, `StorageItem.vue`), so the data sits under its header. Legacy had 126px
+// in the header and 132 / 152px in the cells, so every column after Bandwidth drifted right.
+$instance-usage-column-width: 142px;

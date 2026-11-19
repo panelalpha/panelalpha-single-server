@@ -1,0 +1,361 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-menu__content` -> `.v-menu > .v-overlay__content`,
+// `.v-tooltip__content` -> `.v-tooltip > .v-overlay__content`, `.v-list-item__title` -> `.v-list-item-title`,
+// V2 `::before` state overlay -> `.v-list-item__overlay` / `.v-btn__overlay`, `.info--text`/`.error--text` -> `.text-info`/`.text-error`.
+
+// V2 menu content carried a theme text colour; V4 overlays inherit from where they are attached.
+.v-theme--light.v-menu > .v-overlay__content {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.v-theme--dark.v-menu > .v-overlay__content {
+  color: #fff;
+}
+
+.v-menu > .v-overlay__content {
+  overflow-y: auto;
+  box-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06),
+    0px 16px 72px 8px rgba(0, 0, 0, 0.08) !important;
+  background: var(--v-tooltip-base);
+  border-radius: 8px;
+
+  // Legacy 220px did not reach select menus (V2 set their width inline); keep V4 select/autocomplete/combobox menus out.
+  &:not(.v-select__content, .v-autocomplete__content, .v-combobox__content) {
+    max-width: 220px;
+  }
+
+  &.disable-scroll {
+    overflow: visible !important;
+  }
+
+  &.menu-tooltip {
+    // Legacy `.v-tooltip` content (content-class of the copy menu) took the app text colour, not the menu's theme colour above.
+    color: var(--v-text-base);
+    border-radius: 0px;
+    z-index: 9999 !important;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      transform: rotate(45deg);
+      transform-origin: center;
+      top: -12px;
+      z-index: 99;
+      left: calc(50% - 15px);
+    }
+  }
+
+  .v-list,
+  .v-sheet {
+    background: var(--v-tooltip-base);
+  }
+}
+
+.v-list-item {
+  &.v-list-item:hover {
+    .v-list-item-title,
+    .v-icon {
+      color: map.get(v.$primary, darken1) !important;
+    }
+
+    .v-list-item__overlay {
+      opacity: 0.05;
+    }
+  }
+
+  .v-list-item-title {
+    color: map.get(v.$text, headings);
+    transition: color 0.24s ease, font-weight 0.24s ease;
+  }
+
+  &.text-info {
+    &:hover {
+      .v-list-item-title,
+      .v-icon {
+        color: map.get(v.$info, base) !important;
+      }
+    }
+  }
+
+  &.text-error {
+    &:hover {
+      .v-list-item-title,
+      .v-icon {
+        color: map.get(v.$error, base) !important;
+      }
+    }
+  }
+}
+
+.v-tooltip > .v-overlay__content {
+  background: var(--v-tooltip-base);
+  opacity: 1 !important;
+  padding: 12px 16px;
+  color: var(--v-gray-darken1);
+  // V4 connected overlay sets an inline `max-width`; `!important` keeps the V2 370px limit.
+  max-width: 370px !important;
+  // V2 `.v-tooltip__content` line-height 22px; V4 inherits 1.6 x 14 = 22.4px.
+  line-height: 22px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06),
+      0px 16px 72px 8px rgba(0, 0, 0, 0.08);
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    z-index: 1;
+    background: var(--v-tooltip-base);
+  }
+
+  &.tooltip-left-center {
+    &::after {
+      top: calc(50% - 7px);
+      left: -7px;
+    }
+  }
+
+  &.dropdown-right {
+    &::after {
+      left: 20px;
+    }
+  }
+
+  &.dropdown-left {
+    right: 20px;
+  }
+
+  &.dropdown-top::after {
+    bottom: -8px !important;
+    top: unset !important;
+  }
+}
+
+// V4 draws a 2px frame (`::after`, opacity .15, `.v-list-item:focus-visible`) on the focused option, and a select menu focuses the
+// selected option as it opens (also after a mouse click), so the selected row looked like a bordered box. V2 had no frame, so the
+// selected option stays plain in every select menu; the other options keep the frame while the arrow keys move over them.
+.v-menu > .v-overlay__content:is(.v-select__content, .v-autocomplete__content, .v-combobox__content) .v-list-item.v-list-item--active::after {
+  opacity: 0;
+}
+
+// V2 select menu content took the app text colour (`--v-text-base`); the overlay colour above is for detached menus.
+.v-menu > .v-overlay__content.custom-dropdown-select {
+  color: var(--v-text-base);
+}
+
+.custom-dropdown-select {
+  .v-list-item {
+    min-height: 38px;
+    max-height: 38px;
+    padding: 0;
+
+    span {
+      transition: color 0.24s ease;
+    }
+
+    .v-list-item__overlay {
+      background-color: map.get(v.$primary, base);
+    }
+
+    &:hover {
+      span {
+        color: map.get(v.$primary, darken1);
+      }
+
+      .v-list-item__overlay {
+        opacity: 0.05;
+      }
+    }
+
+    &--error {
+      &:hover {
+        span {
+          color: map.get(v.$error, base);
+        }
+      }
+    }
+  }
+
+  &--plans {
+    .v-list-item {
+      max-height: unset;
+      padding: 4px 16px;
+    }
+  }
+
+  &.custom-dropdown-select--onboarding {
+    .v-list-item {
+      max-height: unset;
+      padding: 0 8px;
+    }
+  }
+
+  &.custom-dropdown-select--autocomplete {
+    padding: 0px 8px;
+    overflow-y: auto !important;
+
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: none;
+      background-color: transparent;
+      max-width: 8px;
+      border: 3px solid transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--v-gray-lighten2);
+      border-radius: 8px;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .v-list-item {
+      min-height: 38px;
+      max-height: unset;
+      padding: 8px 12px;
+      border-radius: 4px;
+
+      .v-list-item__overlay {
+        background-color: currentColor;
+      }
+
+      &:hover {
+        .v-list-item__overlay {
+          color: map.get(v.$gray, base) !important;
+          opacity: 0.08;
+        }
+      }
+    }
+
+    &-share {
+      .v-list-item {
+        * {
+          transition: color 0.24s ease;
+        }
+
+        &:hover {
+          * {
+            color: var(--v-primary-base) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.v-list {
+  .instance-top-dropdown-item {
+    padding: 0;
+
+    > div {
+      width: 100%;
+      height: 48px;
+    }
+  }
+}
+
+.base-dropdown-btn {
+  &.v-btn {
+    padding: 0 16px;
+    width: 100%;
+    height: 48px;
+    border-radius: 0px !important;
+    transition: color 0.24s ease;
+
+    // V2 `::before` state overlay is `.v-btn__overlay` in V4 (plus its `.v-btn__underlay`).
+    &:after,
+    &:before,
+    > .v-btn__overlay,
+    > .v-btn__underlay {
+      display: none !important;
+      border-radius: 0;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: none !important;
+      background-color: unset !important;
+      color: var(--v-primary-darken1) !important;
+    }
+
+    .v-btn__content {
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    // V4's ripple directive creates the same `.v-ripple__container` element.
+    > .v-ripple__container {
+      display: none !important;
+    }
+
+    &.v-btn--disabled {
+      .v-btn__content {
+        .v-icon {
+          color: inherit !important;
+        }
+      }
+    }
+  }
+}
+
+.sand-darken1 {
+  color: var(--v-sand-darken1) !important;
+}
+
+// Wrong DNS nameserver menu of the Cloudflare page (`CloudflareView.vue`, content class `cloudflare-nameservers-menu`). V2 menu content
+// carried no theme colour, so it takes the app text colour; the connected location strategy writes the activator width into an inline
+// `min-width`, which wins over the prop, so the legacy 300px minimum is `!important`.
+.v-menu > .v-overlay__content.cloudflare-nameservers-menu.cloudflare-nameservers-menu {
+  color: var(--v-text-base);
+  min-width: 300px !important;
+}
+
+// Security level select of the Cloudflare page (`CloudflareView.vue`, content class `cloudflare-security-menu`). V2 options had no vertical
+// padding (`v-select` `offsetY`), V4 gives 4px; the V2 active option took the primary colour, V4 keeps the text
+// colour unless it is set. Menu content takes the app text colour (`--v-text-base`), as the other select menus do.
+// `edge-cache-ttl-menu`: the TTL select of the Edge Cache page (`EdgeCacheView.vue`), the same V2 `v-select` menu.
+.v-menu > .v-overlay__content.cloudflare-security-menu.cloudflare-security-menu,
+.v-menu > .v-overlay__content.edge-cache-ttl-menu.edge-cache-ttl-menu {
+  color: var(--v-text-base);
+
+  .v-list-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .v-list-item--active {
+    color: rgb(var(--v-theme-primary));
+  }
+}
+
+// SMTP SSL type select of the reseller Email Settings page (`EmailSettingsView.vue`, content class `email-settings-ssl-menu`). V2 options had
+// no vertical padding and the active option kept the text colour; V4 gives 4px.
+.v-menu > .v-overlay__content.email-settings-ssl-menu.email-settings-ssl-menu {
+  color: var(--v-text-base);
+
+  .v-list-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

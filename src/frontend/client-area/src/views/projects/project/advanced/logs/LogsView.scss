@@ -1,0 +1,147 @@
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+// Legacy styles were not scoped, so their rules reached every page. Here every rule is
+// scoped to `.instance-logs`: the `.v-tab svg path` stroke would otherwise recolour the tab icons of every screen opened after Logs.
+// V2 `.v-tab--active` is `.v-tab--selected` in V4, and `var(--v-primary-base)` is `rgb(var(--v-theme-primary))` .
+
+// Legacy inline `height: 344px` / `max-height: 328px` of the empty states and the log text; `letter-spacing` of the LIVE badge.
+.instance-logs .logs-panel-height {
+  height: 344px;
+}
+
+.instance-logs .logs-pre {
+  max-height: 328px;
+}
+
+// V2 `.v-card > *:first-child` / `:last-child` take the card radius (4px); V4 clips nothing, so the info row and the text carry it.
+.instance-logs .logs-info-row {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+
+  // V2 `.v-btn__content` has `line-height: normal` (the button keeps its 21px); V4 content inherits the 21px.
+  .v-btn .v-btn__content {
+    line-height: normal;
+  }
+}
+
+.instance-logs .logs-pre {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.instance-logs .logs-live-badge {
+  letter-spacing: 0.04em;
+}
+
+// Legacy global `.font-weight-semibold { font-weight: 600 !important }` on the "max entries" line.
+.instance-logs .logs-info-row__text {
+  font-weight: v.$font-weight-semibold;
+}
+
+.instance-logs .border-bottom-gray {
+  border-bottom: 1px solid map.get(v.$gray, lighten2);
+}
+
+.instance-logs .logs-lh {
+  line-height: 24px;
+}
+
+// The deploy run select stretches its selection over the whole field. `.v-select__selections` is
+// `.v-field__input` in V4.
+.instance-logs .deploy-logs-select {
+  .v-field__input {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  .v-select__selection {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+}
+
+.instance-logs .v-tab {
+  svg path {
+    transition: 0.3s;
+  }
+
+  &.v-tab--selected {
+    svg path {
+      stroke: rgb(var(--v-theme-primary-darken-1));
+    }
+  }
+
+  &:hover {
+    svg path {
+      stroke: rgb(var(--v-theme-primary));
+    }
+  }
+}
+
+// The info icon of the PHP tab is a V2 `v-icon` (`rgba(0,0,0,.54)`, no margin to the label); V4 gives a tab icon the tab colour and a 10px end margin.
+.instance-logs .v-tab .v-icon.logs-tab-info {
+  margin-right: 0;
+  color: var(--v-icon-inactive-color);
+}
+
+// The content containers below the title: V2 `.container` padding is 12px and its `.row` has a -16px margin (V4 16px and none), so the
+// card started 4px low and the page ended 4px long.
+.instance-logs .v-window .v-container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+// The controls of the active tab (search, file or run select, Download): one row with a 16px gap, beside the "Logs" heading (the tab strip is in
+// the second row of the title, as on MySQL Databases).
+.instance-logs .logs-filters {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+
+  // `w-100` of the legacy controls (below `lg`) must not decide the size here: the search keeps a 240px base, the select the rest.
+  > .data-iterator-filter-controls {
+    flex: 0 0 240px;
+    min-width: 200px;
+  }
+
+  // The select is 48px high (`v-input--lg`), as the search and Download, and only as wide as a file name or a run label needs.
+  > .v-select {
+    flex: 0 1 260px;
+    min-width: 200px;
+  }
+
+  > .deploy-logs-select {
+    flex-basis: 320px;
+  }
+
+  > .v-btn {
+    flex: 0 0 auto;
+  }
+}
+
+// Wide screens: the heading takes its own width and the filter column the rest (the kit gives both columns `flex: 1 0 0%`, half each, which
+// left the search, the select and Download too little room).
+@media (min-width: 976px) {
+  .instance-logs .page-title__row > .page-title__title-box {
+    flex: 0 0 auto;
+  }
+
+  .instance-logs .page-title__row > .page-title__filter-controls {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 975.98px) {
+  .instance-logs .logs-filters > .data-iterator-filter-controls,
+  .instance-logs .logs-filters > .v-select {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+}

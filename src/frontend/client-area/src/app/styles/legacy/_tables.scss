@@ -1,0 +1,345 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// V2 `.v-data-table__wrapper` -> `.v-table__wrapper`, `.v-data-table-header tr th` -> `thead tr th`,
+// `.v-data-table__empty-wrapper` -> `.v-data-table-rows-no-data`, `.v-btn--round.v-size--small` -> `.v-btn--size-small`, `::before` -> `.v-btn__overlay`.
+
+.data-table {
+  width: 100%;
+  &.v-card {
+    border-radius: 8px !important;
+  }
+  .actions-row {
+    display: flex;
+    justify-content: flex-end;
+
+    .v-btn {
+      color: #333342;
+
+      + .v-btn {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  span.bold {
+    font-weight: v.$font-weight-bold;
+  }
+
+  .select-all {
+    max-width: 24px;
+  }
+
+  tr {
+    background: transparent !important;
+
+    &:not(:last-child) {
+      background: transparent !important;
+      position: relative;
+      td {
+        border-bottom: 1px solid var(--v-gray-lighten2) !important;
+      }
+    }
+  }
+
+  &.data-table--selectable {
+    tr {
+      td:first-child {
+        max-width: 60px;
+        width: 60px;
+      }
+    }
+  }
+
+  .data-iterator-footer {
+    position: relative;
+    margin: 0 !important;
+    padding: 12px 16px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: var(--v-gray-lighten2);
+      left: 0;
+      top: 0;
+    }
+  }
+
+  td {
+    font-size: v.$font-size-sm;
+    line-height: v.$line-height-sm;
+
+    &:first-child {
+      padding-left: 24px !important;
+    }
+
+    &:last-child {
+      padding-right: 24px !important;
+    }
+
+    .v-btn {
+      &.v-btn--icon {
+        &.v-btn--size-small {
+          height: 35px;
+          width: 35px;
+          color: var(--v-text-darken1);
+          .v-btn__overlay {
+            border-radius: 5px;
+          }
+
+          // A disabled row icon is only greyed (`--v-btn-disabled-text`, `_buttons.scss`), without the gray fill every disabled
+          // `.v-btn` gets (`_buttons.scss` `.v-btn.v-btn--disabled`), which drew a circle under the icon.
+          &.v-btn--disabled {
+            background-color: transparent !important;
+
+            // The icon colours of a table button sit on the icon and its svg (`_general.scss` `.v-icon`, `_icons.scss`
+            // `.v-table__wrapper .v-btn .v-icon > svg`), so the disabled grey is set on both.
+            .v-icon,
+            .v-icon svg {
+              color: var(--v-btn-disabled-text) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    td {
+      padding-top: 6px !important;
+      padding-bottom: 6px !important;
+
+      &:first-child {
+        padding-left: 24px !important;
+      }
+
+      &:last-child {
+        padding-right: 12px !important;
+      }
+    }
+  }
+
+  &--links {
+    tbody {
+      tr:hover {
+        background: var(--v-table-row-hover) !important;
+      }
+    }
+  }
+
+  .v-data-table-rows-no-data {
+    color: var(--v-gray-darken1) !important;
+    > td {
+      padding-top: 0px !important;
+    }
+  }
+
+  .v-progress-linear {
+    display: none;
+  }
+
+  &--loading {
+    .data-iterator-footer {
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.v-data-table.custom-data-table {
+  > .v-table__wrapper > table {
+    > tbody,
+    > thead,
+    > tfoot {
+      > tr > td {
+        font-size: v.$font-size-sm;
+        line-height: v.$line-height-sm;
+        font-weight: v.$font-weight-normal;
+
+        &.p-3 {
+          font-size: v.$font-size-sm;
+          line-height: v.$line-height-sm;
+        }
+      }
+    }
+  }
+
+  thead {
+    tr th {
+      .v-icon {
+        margin-left: 8px;
+        margin-top: -2px;
+      }
+
+      &,
+      .v-icon {
+        transition: color 0.3s ease;
+        font-size: v.$font-size-sm;
+        line-height: v.$line-height-sm;
+        font-weight: v.$font-weight-bold;
+        text-transform: uppercase;
+      }
+
+      // V2 `.active` on the sorted header and its sort icon.
+      &.v-data-table__th--sorted,
+      &.v-data-table__th--sorted .v-icon {
+        color: map.get(v.$primary, base);
+
+        .v-icon {
+          color: map.get(v.$primary, base);
+        }
+      }
+    }
+  }
+
+  tbody {
+    .table-row:hover {
+      background: transparent !important;
+    }
+  }
+
+  &--links {
+    tbody {
+      .table-row:hover {
+        background: var(--v-table-row-hover) !important;
+      }
+    }
+  }
+}
+
+// V2 `.text-start, .text-end` (cell alignment classes) zeroed every data-table cell. V4 cells carry `.v-data-table-column--align-*`
+// instead, and the V4 `.text-start/.text-end` utilities are alignment helpers used anywhere, so this is narrowed to cells of the legacy
+// table classes. `:where()` keeps the legacy specificity (a single class), so the `.data-table td` rules above still win.
+:where(.data-table, .v-data-table.custom-data-table) :where(td, th).v-data-table-column--align-start,
+:where(.data-table, .v-data-table.custom-data-table) :where(td, th).v-data-table-column--align-end {
+  padding: 0px !important;
+  border: 0 !important;
+}
+
+.table-item {
+  padding: 0 16px;
+
+  .v-icon {
+    transition: none !important;
+  }
+
+  &.table-item--name {
+    padding: 0 16px 0 24px;
+  }
+}
+.table-row::after {
+  background-color: var(--v-gray-lighten2) !important;
+}
+
+.custom-instance-table {
+  .custom-sort {
+    .item--actions {
+      margin-left: auto;
+    }
+  }
+  .item {
+    &--select {
+      max-width: 40px;
+      min-width: 40px;
+    }
+
+    &--title {
+      min-width: 276px;
+      max-width: 276px;
+    }
+
+    &--tags {
+      max-width: 106px;
+      min-width: 106px;
+    }
+
+    &--status {
+      max-width: 96px;
+      min-width: 96px;
+    }
+
+    &--shares {
+      max-width: 81px;
+      min-width: 81px;
+      display: flex;
+    }
+
+    &--newest {
+      max-width: 106px;
+      min-width: 106px;
+      display: flex;
+    }
+    &--actions {
+      max-width: 82px;
+      min-width: 82px;
+      padding-right: 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &--visitors {
+      max-width: 136px;
+      min-width: 136px;
+    }
+    // One width with the cells (`v.$instance-usage-column-width`; legacy 126px here, 132 / 152px in the cells).
+    &--bandwidth,
+    &--storage {
+      max-width: v.$instance-usage-column-width;
+      min-width: v.$instance-usage-column-width;
+    }
+  }
+}
+
+// V4 `.v-table` sets `font-size: .875rem` and the line height on the root, and a 52px row; V2 set them on `td` / `th` only (the rows
+// themselves inherit the page's 16px / 24px) and its rows are 48px. A screen with another row height (`DevicesTable`: 60px) restates it.
+// SKELETONS TABLE
+.v-data-table {
+  --v-table-row-height: 48px;
+
+  font-size: 1rem;
+  line-height: 1.5;
+  background: var(--v-panel-base) !important;
+  table {
+    tr {
+      td {
+        padding-right: 12px !important;
+      }
+    }
+  }
+}
+.v-table__wrapper {
+  .v-data-table-rows-no-data {
+    td {
+      // `.no-data--panel`: the padded empty card of `EmptyState` variant `panel` (Reseller API), legacy kept it outside the table.
+      &:has(.no-data-container),
+      &:has(.no-data--panel) {
+        padding: 0 !important;
+      }
+      .no-data-container {
+        min-height: 344px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &__description {
+          font-size: 14px;
+          line-height: 24px;
+          color: var(--v-gray-darken1);
+        }
+      }
+    }
+  }
+}
+
+// The row added last on the hosting pages of the project Advanced tab
+// (the same highlight as `.page-frame tr.highlight` in `_pageTitle.scss`).
+.advanced-hosting-page tr {
+  transition: background-color 10s ease;
+}
+
+.advanced-hosting-page tr.highlight {
+  background-color: var(--v-primary-lighten2) !important;
+}

@@ -1,0 +1,1190 @@
+[
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.014,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.381%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0139,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.376%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.2639,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 26.371%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-default",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.014,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.381%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0139,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.376%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.3408,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 34.064%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "site-name-cancel",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "site-name-field",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-disabled",
+    "variant": "light-mobile",
+    "probe": "site-name-submit",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-empty",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.039,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 3.890%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.039,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 3.885%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.2712,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 27.103%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-error",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.014,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.381%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "background-color",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-bottom-left-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-bottom-right-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-top-left-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-top-right-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "box-shadow",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0139,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.376%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "background-color",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-bottom-left-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-bottom-right-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-top-left-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "border-top-right-radius",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-focus-overlay",
+    "property": "box-shadow",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.2639,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 26.371%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-focus",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.014,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.381%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "probe": "advanced-security-overlay",
+    "property": "opacity",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "probe": "advanced-security-title",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0139,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.376%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "probe": "advanced-security-overlay",
+    "property": "opacity",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "probe": "advanced-security-title",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.2639,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 26.372%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-hover",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.2578,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 25.761%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "probe": "installation-skeleton-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-loading",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.014,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.382%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "dark-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0139,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.376%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-desktop",
+    "probe": "screenshot-card",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.3393,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 33.918%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-name-error",
+    "variant": "light-mobile",
+    "probe": "site-name-header",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "dark-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0135,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.339%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "dark-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "dark-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-desktop",
+    "property": "pixel",
+    "maxRatio": 0.0135,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 1.334%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-desktop",
+    "probe": "advanced-sidebar",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-desktop",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "property": "pixel",
+    "maxRatio": 0.065,
+    "reason": "Pixel diff of the Details page, measured the same on the baseline without this change. Hypothesis: the deployed app-lite has drifted from the frozen fixtures (Version 6.5.0 vs 6.4.0 in the details text, screenshot card present only in next, installation card and sidebar heights differ), and below lgAndDown next has no selected tab, which shifts the page (mobile). This change also adds one intended delta: the Project Name row follows the rename privilege like the top bar (edit icon and wrapper in next, plain text in legacy for the same privileges; the legacy reversed check is not kept). Measured 6.489%. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "advanced-selected-tab",
+    "property": "missing",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "advanced-sidebar",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "advanced-title",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "height",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "installation-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  },
+  {
+    "state": "instance-advanced-frame-no-hosting",
+    "variant": "light-mobile",
+    "probe": "site-details-card",
+    "property": "y",
+    "reason": "Style delta of the Details page, measured the same on the baseline without this change. Hypothesis: drift between the deployed app-lite and the frozen fixtures (missing screenshot card, card heights) or the missing selected tab below lgAndDown, which moves the cards (y). Not caused by the Project Name row change. Attempts: 3 gate runs on 2026-11-17 (implementer run with the change, implementer baseline runs without it, impl-review run with the change); the numbers match within 0.05 percentage points each time.",
+    "approvedBy": "auto:project-details-rename",
+    "date": "2026-11-17"
+  }
+]

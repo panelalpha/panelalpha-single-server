@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- Layer order first, inline: no extra render-blocking request (performance audit E1; was `/layers.css`). -->
+    <style>
+      @layer vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final;
+    </style>
+    <!-- Boot indicator until the first navigation ends (`src/main.ts`), instead of a blank page (performance audit A4).
+         Hidden for the first second: a fast start stays blank like legacy, only a slow one shows it. -->
+    <style>
+      #boot-indicator {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        opacity: 0;
+        animation: boot-indicator-show 0s linear 1s forwards;
+      }
+      @keyframes boot-indicator-show {
+        to { opacity: 1; }
+      }
+      #boot-indicator::after {
+        content: '';
+        width: 32px;
+        height: 32px;
+        /* Primary color of the page: Vuetify `--v-theme-primary` once the app sets it, before that the brand base
+           from `localStorage.theme` (inline script below), else the default brand `#07C07E` (`DEFAULT_BRAND_COLORS`). */
+        --boot-primary: var(--v-theme-primary, var(--boot-brand-primary, 7, 192, 126));
+        border: 3px solid rgba(var(--boot-primary), 0.25);
+        border-top-color: rgb(var(--boot-primary));
+        border-radius: 50%;
+        animation: boot-indicator-spin 0.8s linear infinite;
+      }
+      @keyframes boot-indicator-spin {
+        to { transform: rotate(360deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-indicator::after { animation-duration: 2.4s; }
+      }
+    </style>
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PanelAlpha</title>
+  </head>
+  <body>
+    <div id="boot-indicator" aria-hidden="true"></div>
+    <script>
+      // Brand base saved by the Style Manager (`localStorage.theme`, `brand-theme.ts`) as `r, g, b` for the boot indicator.
+      // Only `#rgb` / `#rrggbb` pass (like `isHexColor`); anything else keeps the default primary.
+      try {
+        var base = JSON.parse(localStorage.getItem('theme') || 'null').colors.base
+        var hex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(base)[1]
+        if (hex.length === 3) hex = hex.replace(/./g, '$&$&')
+        var n = parseInt(hex, 16)
+        document.documentElement.style.setProperty('--boot-brand-primary', (n >> 16) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255))
+      } catch (e) {}
+    </script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

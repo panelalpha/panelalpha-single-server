@@ -1,0 +1,8 @@
+// The layout rules shared by the hosting screens (V2 `.container` / `.row` / `.col` offsets, the title row columns, the Add icon) come from
+// `../hosting-screen.scss`. What is left is only Domains.
+
+// V2 `.v-btn .v-icon` took the label colour (the empty state's Add button too, which `hosting-screen.scss` does not reach); the global V4 `.v-icon`
+// colour beats the button's.
+.v-btn .v-icon {
+  color: inherit;
+}

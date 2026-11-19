@@ -1,0 +1,248 @@
+// V2 had `.v-dialog__content` (full-screen wrapper) and `.v-dialog` (box);
+// V4 has one `.v-overlay.v-dialog` root (= wrapper) and `.v-dialog > .v-overlay__content` (= box).
+// A bare `.v-overlay` / `.v-overlay__content` would also hit menus, tooltips and snackbars, so everything is scoped to dialogs.
+
+.v-dialog.v-dialog--fullscreen > .v-overlay__content {
+  width: 100%;
+  scrollbar-gutter: stable;
+  overflow-y: overlay;
+  background: #fff;
+
+  &.v-dialog--ov {
+    overflow-y: auto !important;
+  }
+}
+
+// Omitted: legacy `html:not(.overflow-y-hidden) .v-dialog--fullscreen { overflow-y: hidden !important }`. V4 never sets
+// `html.overflow-y-hidden`, so it would always match and stop fullscreen dialogs from scrolling.
+
+// Scroll-lock compensation for the app-driven `html.scrollLock`, and for `html.overflow-y-hidden`, which V2 `VDialog` set on
+// screens under 768px and V4 does not. A dialog that has to keep that mobile shift sets it through `useMobileScrollLock`
+// (`src/shared/ui/modal/mobile-scroll-lock.ts`).
+html.overflow-y-hidden,
+html.scrollLock {
+  .v-application,
+  .v-app-bar {
+    margin-right: 16px;
+  }
+
+  // V2 sized the fixed bar with `left: 0; right: 0`, so the margin shrank it; V4 sets an inline `width: calc(100% + 0px)`, which a margin cannot shrink.
+  .v-app-bar {
+    width: calc(100% - 16px) !important;
+  }
+}
+
+// V2 menus took an `activeZIndex` above the open dialog (the select list of a dialog field showed over the card). V4 numbers the
+// overlay stack from a small base (dialog 61, its menu 71) and the dialog rule below pins 1010 with `!important`, so a menu opened
+// from a dialog field fell underneath it. Menus sit above the pinned dialog(copy dialog service select).
+.v-overlay.v-menu {
+  z-index: 1020 !important;
+}
+
+// Backdrop of the onboarding steps (`src/views/onboarding/OnboardingModalWrapper.vue`). Legacy `.v-overlay`
+// pins z-index 1009 with `!important`, which beats the inline 1010 the wrapper passes; the dialogs of the steps sit at 1010 above it.
+.v-overlay.main-overlay {
+  z-index: 1009 !important;
+
+  > .v-overlay__scrim {
+    background: #fff !important;
+    opacity: 0 !important;
+  }
+
+  &.v-overlay--active {
+    background: rgba(255, 255, 255, 1);
+
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+      background: var(--v-backdrop-base);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(30px);
+    }
+  }
+}
+
+// Legacy `.v-overlay.v-overlay--active` also frosted the in-card loading overlay of the template chooser
+// (`OnboardingChooseTemplateModal.vue`, `.onboarding-loading-overlay`). Its z-index stays the prop's 1400: V2 rendered it inside the dialog card,
+// the V4 overlay is teleported and must sit above the dialog's 1010.
+.v-overlay.onboarding-loading-overlay.v-overlay--active {
+  background: rgba(255, 255, 255, 1);
+
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    background: var(--v-backdrop-base);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(30px);
+  }
+}
+
+// V2 `.v-dialog__content` z-index 1010 and `.v-overlay` z-index 1009 are one element in V4: the dialog root.
+.v-overlay.v-dialog {
+  z-index: 1010 !important;
+
+  > .v-overlay__scrim {
+    background: #fff !important;
+    opacity: 0 !important;
+  }
+
+  &.v-overlay--active {
+    background: rgba(255, 255, 255, 1);
+
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+      background: var(--v-backdrop-base);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(30px);
+    }
+  }
+}
+
+.v-dialog > .v-overlay__content {
+  box-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06),
+    0px 16px 72px 8px rgba(0, 0, 0, 0.1) !important;
+  overflow-y: auto;
+
+  .v-card {
+    box-shadow: none !important;
+    overflow: visible !important;
+    border-radius: 8px;
+  }
+
+  > .container {
+    scrollbar-gutter: stable;
+  }
+
+  .card-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.v-dialog.v-dialog--fullscreen > .v-overlay__content {
+  overflow-x: hidden;
+}
+
+// V2 vendor: legacy `.v-dialog .v-card .v-card__title` (0,3,0) lost to the scoped `BasicModal.scss` rule (0,4,0). The V4 dialog box adds
+// `> .v-overlay__content` (0,4,0 here), which would tie with the scoped rule, so the box is wrapped in `:where()`.
+:where(.v-dialog > .v-overlay__content) .v-card {
+  .v-card-title {
+    padding: 32px;
+  }
+
+  .v-card-text {
+    padding: 0px 32px;
+  }
+
+  .v-card-actions {
+    padding: 32px;
+    padding-top: 18px;
+  }
+}
+
+.v-dialog:not(.v-dialog--fullscreen) > .v-overlay__content {
+  max-height: 100% !important;
+  height: 100%;
+  width: calc(100vw - 16px) !important;
+  overflow: auto;
+  display: flex;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 48px;
+  margin-right: auto;
+  // V2 vendor: the V2 dialog box had no `max-width` (the width above wins), and `.v-application` gave it the text colour
+  // (`currentColor` of its border) and a 4px radius. V4 caps it at `100% - 48px`, and the overlay sits outside `.v-application`.
+  max-width: none;
+  // Takes the `margin-right: auto` above: V4 positions `.v-overlay__content` absolutely, where auto margins do not pack the box left.
+  position: relative;
+  color: var(--v-text-base);
+  border-radius: 4px;
+
+  .v-card {
+    box-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06),
+      0px 16px 72px 8px rgba(0, 0, 0, 0.1) !important;
+    overflow: visible !important;
+    border-radius: 8px;
+    width: 720px;
+    // V2 vendor: `.v-card { max-width: 100% }`; V4 has no cap, so the 720px card overflowed a narrow box.
+    max-width: 100%;
+    margin: auto;
+    // V2 vendor: the V2 box was a plain flex row and the card kept its `width`; V4 gives the card `flex: 1 1 100%`
+    // in a column, which stretches it to the full box height and hides the auto margins.
+    flex: 0 1 auto;
+
+    // V2 `.v-card__actions` had no `gap`; V4 spaces its children with `gap: 0.5rem`, which made the onboarding modal cards 8px taller.
+    &.onboarding-modal .v-card-actions {
+      gap: 0;
+    }
+
+    // V2 kept the native input's own 8px paddings in the 48px `md` slot (41px input).
+    // Scoped to the onboarding modals: the global `md` rule in `_inputs.scss` keeps 0 for the views measured with it.
+    &.onboarding-modal .v-input.v-input--md .v-input__control .v-field .v-field__input {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    // Legacy `<v-card style="width: 560px">` (Create staging, Issue resolve, phpMyAdmin SSO, ...): the inline width won over the 720px above.
+    &.card-width-560 {
+      width: 560px;
+    }
+
+    // Legacy `<v-card style="width: 860px">` (Containers, Logs).
+    &.card-width-860 {
+      width: 860px;
+    }
+
+    // Legacy inline `width: 724px` (share access modal).
+    &.card-width-724 {
+      width: 724px;
+    }
+
+    // Legacy inline `width: 640px; max-width: 95vw` (env vars modal).
+    &.card-width-640 {
+      width: 640px;
+      max-width: 95vw;
+    }
+  }
+}
+
+.full-screen-dialog {
+  overflow: visible;
+
+  .v-card {
+    max-width: 720px;
+  }
+}
+
+// `transition="custom-dialog-transition"`: Vue 3 transition classes (`-enter-from`, `-leave-from`) replace `-enter` / `-leave`.
+.custom-dialog-transition {
+  &-leave-active {
+    overflow: hidden !important;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    margin-right: 14px;
+
+    .v-card {
+      transition: transform 0.24s ease, opacity 0.24s ease;
+      pointer-events: none !important;
+    }
+  }
+
+  &-enter-from,
+  &-leave-to {
+    .v-card {
+      transform: scale(0.5) !important;
+      opacity: 0 !important;
+    }
+  }
+
+  &-enter-to,
+  &-leave-from {
+    .v-card {
+      opacity: 1 !important;
+    }
+  }
+}

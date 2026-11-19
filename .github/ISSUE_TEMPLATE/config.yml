@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask on Discord
+    url: https://discord.gg/9twHWR7xGX
+    about: Have a question or need a hand? Ask the PanelAlpha team and the community on Discord.
+  - name: Community forum
+    url: https://community.panelalpha.com/
+    about: Ask questions, share ideas and show what you host.
+  - name: Report a security vulnerability
+    url: https://manage.panelalpha.com/contact
+    about: Report security issues privately, never in a public issue. See SECURITY.md.

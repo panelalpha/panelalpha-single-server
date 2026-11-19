@@ -1,0 +1,512 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// App-lite wins over app. Selectors rewritten for Vuetify 4.
+
+body {
+  background: rgb(var(--v-theme-background)); // `--v-body-base` only exists on `.v-theme--*` elements, not on `body`
+}
+
+.v-application {
+  background: var(--v-body-base) !important;
+  color: var(--v-text-base) !important;
+}
+
+// NEXT-only: set by `App.vue` on `v-app` once `home.user` exists (footer shown); read by `AuthFrame.vue` (`min-height`).
+.v-application.has-shell-footer {
+  --shell-footer-height: #{v.$shell-footer-height};
+}
+
+.bg-success-lighten-5 {
+  background-color: var(--v-success-base) !important;
+}
+
+.v-row.title-row {
+  padding: 0 4px;
+}
+
+.scrollLock {
+  overflow: hidden !important;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+b,
+strong {
+  color: map.get(v.$text, headings) !important;
+}
+
+.text--heading {
+  color: map.get(v.$text, headings) !important;
+}
+
+.text--body {
+  color: map.get(v.$text, base) !important;
+}
+
+.text--gray-darken1 {
+  color: map.get(v.$gray, darken1) !important;
+}
+
+.text--gray-lighten1 {
+  color: map.get(v.$gray, lighten1) !important;
+}
+
+.text--gray-darken2 {
+  color: map.get(v.$gray, darken2) !important;
+}
+
+.text--darken1 {
+  color: map.get(v.$text, dark) !important;
+}
+
+.text--darken2 {
+  color: map.get(v.$text, headings) !important;
+}
+
+.text--error-base {
+  color: map.get(v.$error, base) !important;
+}
+
+.v-main {
+  transition: none !important;
+}
+
+.bg-none {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.v-btn.disabled-gray {
+  &.bg-primary,
+  &.bg-error {
+    background-color: var(--v-gray-lighten5) !important;
+    border-color: var(--v-gray-lighten5) !important;
+    color: var(--v-gray-base);
+    pointer-events: none;
+
+    .v-btn-icon {
+      color: var(--v-gray-base);
+    }
+  }
+}
+
+body .v-application {
+  font-family: v.$body-font-family;
+}
+
+// Legacy sets the font only on `.v-application`, so text written into `#app` before Vue
+// mounts (SSO login) gets browser defaults. Undo Vuetify's `html` font and line-height while a view shows bare text.
+#app[data-pre-mount] {
+  font-family: initial;
+  line-height: normal;
+}
+
+.v-icon {
+  color: var(--v-gray-darken1);
+}
+
+body .v-application.disable-shadow {
+  .elevation-2 {
+    filter: none !important;
+    box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+
+    &--before::before {
+      filter: none !important;
+      box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+    }
+
+    &--after::after {
+      filter: none !important;
+      box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+    }
+  }
+
+  .elevation-4 {
+    box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+
+    &--before::before {
+      box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+    }
+
+    &--after::after {
+      box-shadow: 0px 0px 0px 1px var(--v-gray-lighten5) !important;
+    }
+  }
+
+  .elevation-8 {
+    box-shadow: 0px 0px 0px 1px var(--v-gray-base) !important;
+
+    &--before::before {
+      box-shadow: 0px 0px 0px 1px var(--v-gray-base) !important;
+    }
+
+    &--after::after {
+      box-shadow: 0px 0px 0px 1px var(--v-gray-base) !important;
+    }
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+// The margins are zeroed by the V2 reset (`reset.scss`). The port flattened legacy `body .v-application ul` (0,1,2) to a bare `ul`,
+// which would lose to the reset's `ul, ol { padding-left: 24px }` (0,1,1), so the selector restores the legacy specificity.
+// `ol` keeps its 24px, as in V2.
+body :is(.v-application, .v-overlay-container) ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.v-skeleton-loader__bone {
+  background: var(--v-gray-lighten2) !important;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+// Legacy nested these in `body .v-application { … }` (0,2,1), which beat the V2 utilities. The port flattened them to (0,1,0),
+// and V4 `.elevation-N` is now `!important` with (0,2,0), so the prefix restores the legacy specificity.
+// `.elevation-8` has no V4 counterpart (V4 stops at 5), so it stays bare.
+body :is(.v-application, .v-overlay-container) {
+  // V2 vendor: `.elevation-0` was a three-layer zero shadow; V4's has two layers, so only the computed string differs.
+  .elevation-0 {
+    box-shadow:
+      0 0 0 0 rgba(0, 0, 0, 0.2),
+      0 0 0 0 rgba(0, 0, 0, 0.14),
+      0 0 0 0 rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .elevation-2 {
+    box-shadow: v.$box-shadow-elevation-2 !important;
+
+    &--before::before {
+      box-shadow: v.$box-shadow-elevation-2 !important;
+    }
+
+    &--after::after {
+      box-shadow: v.$box-shadow-elevation-2 !important;
+    }
+  }
+
+  .elevation-4 {
+    box-shadow: v.$box-shadow-elevation-4 !important;
+
+    &--before::before {
+      box-shadow: v.$box-shadow-elevation-4 !important;
+    }
+
+    &--after::after {
+      box-shadow: v.$box-shadow-elevation-4 !important;
+    }
+  }
+}
+
+.elevation-8 {
+  box-shadow: v.$box-shadow-elevation-8 !important;
+
+  &--before::before {
+    box-shadow: v.$box-shadow-elevation-8 !important;
+  }
+
+  &--after::after {
+    box-shadow: v.$box-shadow-elevation-8 !important;
+  }
+}
+
+.v-app-bar:not(.v-toolbar--absolute) {
+  z-index: 30;
+  background: var(--v-nav-base) !important;
+}
+
+.bg-gray-lighten-2 {
+  background-color: map.get(v.$gray, lighten2) !important;
+  border-color: map.get(v.$gray, lighten2) !important;
+}
+
+.v-divider {
+  border-color: map.get(v.$gray, lighten5);
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.always-ltr {
+  direction: ltr !important;
+}
+
+tr:hover {
+  .show-on-hover {
+    opacity: 1;
+  }
+}
+
+.show-on-hover {
+  opacity: 0;
+  transition: opacity 0.24s ease, color 0.24s ease;
+}
+
+td:hover {
+  .primary-on-hover {
+    color: var(--v-primary-base) !important;
+    transition: color 0.24s ease;
+
+    .v-icon svg {
+      color: var(--v-primary-base) !important;
+      caret-color: var(--v-primary-base) !important;
+    }
+  }
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.white-space-nowrap {
+  white-space: nowrap !important;
+}
+
+.select-truncate-100 {
+  .v-select__selection {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 95%;
+    overflow: hidden;
+  }
+}
+
+.text-info {
+  .v-icon > svg {
+    color: var(--v-info-base);
+  }
+}
+
+.v-theme--dark {
+  .v-label {
+    color: var(--v-text-darken2);
+  }
+}
+
+.link-text {
+  color: var(--v-link-base) !important;
+}
+
+.link-text:hover {
+  color: var(--v-link-hover) !important;
+}
+
+.white-text {
+  color: var(--v-white-base);
+
+  .v-icon > svg {
+    color: var(--v-white-base) !important;
+  }
+}
+
+.gray-darken-text {
+  color: var(--v-gray-darken1) !important;
+}
+
+.apexcharts-graphical {
+  line {
+    stroke: var(--v-gray-lighten2);
+  }
+}
+
+.ga-1 {
+  gap: 4px;
+}
+
+.ga-2 {
+  gap: 8px;
+}
+
+.ga-3 {
+  gap: 12px;
+}
+
+p {
+  color: var(--v-gray-lighten1);
+}
+
+ol > li {
+  color: var(--v-gray-lighten1);
+}
+
+.v-card {
+  box-shadow: v.$box-shadow-elevation-2 !important;
+}
+
+// Legacy `iframe.file-manager`. Next renders a native file manager in a `div.file-manager` instead of the `/fm/` iframe, so the
+// rule targets `div.file-manager` (the tag keeps it from styling other elements with this class). The card keeps the geometry of the legacy iframe in the `.file-manager-frame` class (`FileManagerView.vue`,
+// no stylesheet sets `display` on it), so its column is 700px plus the descender of the line box, as legacy. `overflow: hidden` makes
+// the baseline the bottom margin edge, as for a replaced iframe; without it, the native content's text baseline shrinks the column by 7px.
+div.file-manager {
+  display: inline-block;
+  vertical-align: baseline;
+  overflow: hidden;
+  border: unset;
+  box-shadow: 0px 8px 24px 6px rgba(0, 0, 0, 0.05), 0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+}
+
+.v-toolbar {
+  transition: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: none;
+  background-color: var(--v-scrollbar-bg);
+  max-width: 8px;
+  border-left: 1px solid var(--v-scrollbar-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--v-scrollbar-thumb-bg);
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.24s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--v-scrollbar-hover);
+}
+
+// Legacy `.v-application--wrap .v-main__wrap` is the page area: `.v-main` in V4 (never an overlay).
+.v-main {
+  .v-card {
+    .actions {
+      button {
+        .v-btn__content {
+          span {
+            color: var(--v-secondary-darken2) !important;
+            font-weight: 600 !important;
+            transition: color 0.24s ease;
+          }
+        }
+
+        &:hover {
+          .v-btn__content {
+            span {
+              color: var(--v-primary-base) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .v-card-text {
+    .not-installed {
+      .v-icon {
+        svg {
+          color: var(--v-darkicon-base) !important;
+        }
+      }
+    }
+
+    div {
+      div.text-grey b {
+        color: var(--v-gray-darken2) !important;
+      }
+    }
+  }
+
+  .data-table.v-card {
+    .v-table__wrapper {
+      span.text-grey {
+        color: var(--v-gray-darken1) !important;
+      }
+    }
+  }
+}
+
+.v-application .error-page .card {
+  background-color: var(--v-body-base) !important;
+}
+
+.v-dialog > .v-overlay__content {
+  .v-card-text {
+    .input-group {
+      .v-btn {
+        .v-btn__content {
+          .v-icon > svg {
+            color: var(--v-darkicon-base) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.v-expansion-panel {
+  background-color: transparent !important;
+}
+
+.no-transition *,
+.no-transition div::before,
+.no-transition div::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+.v-theme--dark {
+  .no-data {
+    &--instances {
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(30px);
+        background: #0E0D1099;
+      }
+    }
+  }
+}
+
+.v-theme--light {
+  .no-data {
+    &--instances {
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(30px);
+        background: #FFFFFFCC;
+      }
+    }
+  }
+}
+
+// Legacy also pinned `top: 442px !important`; V4 positions overlays inline, so it is dropped.
+.v-menu > .v-overlay__content.menu-tooltip {
+  overflow: visible;
+  contain: unset;
+
+  div {
+    overflow: visible;
+  }
+
+  &::after {
+    background-color: var(--v-tooltip-base);
+  }
+}
+
+.v-tabs .v-tab {
+  text-transform: none;
+}

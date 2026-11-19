@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// V2 `li > button.v-pagination__item` is the V4 `li.v-pagination__item > .v-btn`; the active page is
+// `li.v-pagination__item--is-active`, and prev/next/first/last are `li.v-pagination__prev/next/first/last` (V2 `.v-pagination__navigation`).
+
+$-navigation: '.v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last';
+
+.v-pagination {
+  li:not(.v-pagination__item--is-active) > .v-btn {
+    background: unset !important;
+    color: var(--v-text-darken2) !important;
+  }
+
+  li {
+    &:is(#{$-navigation}) .v-btn--disabled {
+      .v-icon {
+        color: var(--v-gray-lighten2) !important;
+      }
+    }
+  }
+
+  li:not(.v-pagination__item--is-active):not(#{$-navigation}) > .v-btn {
+    &:hover {
+      background-color: map.get(v.$gray, lighten5) !important;
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--v-secondary-lighten5) !important;
+    }
+  }
+}
+
+.data-iterator-page-number > span {
+  color: var(--v-text-darken2) !important;
+}

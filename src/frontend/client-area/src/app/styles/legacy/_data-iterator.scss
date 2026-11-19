@@ -1,0 +1,97 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// V2 checkbox internals (`.v-input__slot`,
+// `.v-input--selection-controls__input`) -> `.v-selection-control` / `.v-selection-control__wrapper`.
+
+.data-iterator-card {
+  position: relative;
+  height: 100%;
+
+  .v-card {
+    border-radius: 8px !important;
+    height: 100%;
+  }
+
+  .v-divider {
+    border-color: map.get(v.$gray, lighten5);
+  }
+  &__title {
+    transition: color 0.24s ease;
+    &--link {
+      &:hover {
+        color: map.get(v.$primary, darken1);
+      }
+    }
+  }
+  &__checkbox-container {
+    right: 0;
+    top: 0;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-start;
+    opacity: 0;
+    z-index: 5;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+
+    &::before {
+      content: "";
+      width: 144px;
+      height: 144px;
+      position: absolute;
+      top: 0px;
+      pointer-events: none;
+      right: 0px;
+      border-radius: 8px;
+      background: var(--v-instance-card-checkbox-gradient);
+    }
+    // `.checkbox` is the project's checkbox wrapper (not the V2 palette class); the attribute form keeps the guard's palette check meaningful.
+    [class~='checkbox'] {
+      margin-top: 16px;
+      margin-right: 16px;
+      height: 22px;
+      .v-selection-control {
+        max-height: 22px;
+        min-height: 22px;
+      }
+      .v-selection-control__wrapper {
+        margin: 0px;
+      }
+    }
+  }
+
+  &:hover,
+  &.data-iterator-card--selected {
+    .data-iterator-card__checkbox-container {
+      opacity: 1;
+    }
+  }
+
+  &--selected {
+    .v-card {
+      &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px 1px map.get(v.$primary, base);
+      }
+
+      &:not(:hover)::before {
+        z-index: 2;
+      }
+    }
+  }
+  &--active {
+    .v-card {
+      outline: 1px solid map.get(v.$primary, base);
+    }
+  }
+}

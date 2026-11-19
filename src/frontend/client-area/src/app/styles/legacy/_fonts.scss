@@ -1,0 +1,201 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// The Google Fonts @import is omitted (Nunito Sans comes from
+// @fontsource through unfonts, see vite.config.ts) and so is the dead `.v-icon` colour rule.
+
+.h1,
+h1,
+h1[role="button"] {
+  font-size: map.get(v.$headings, h1, font-size);
+  line-height: map.get(v.$headings, h1, line-height);
+  font-weight: map.get(v.$headings, h1, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+
+  @media (max-width: map.get(v.$grid-breakpoints, md)) {
+    font-size: map.get(v.$headings, h1-mobile, font-size);
+    line-height: map.get(v.$headings, h1-mobile, line-height);
+    font-weight: map.get(v.$headings, h1-mobile, font-weight);
+    font-style: normal;
+  }
+}
+
+.h2,
+h2 {
+  font-size: map.get(v.$headings, h2, font-size);
+  line-height: map.get(v.$headings, h2, line-height);
+  font-weight: map.get(v.$headings, h2, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+}
+
+.h3,
+h3 {
+  font-size: map.get(v.$headings, h3, font-size);
+  line-height: map.get(v.$headings, h3, line-height);
+  font-weight: map.get(v.$headings, h3, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+}
+
+.h4,
+h4 {
+  font-size: map.get(v.$headings, h4, font-size);
+  line-height: map.get(v.$headings, h4, line-height);
+  font-weight: map.get(v.$headings, h4, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+}
+
+.h5,
+h5 {
+  font-size: map.get(v.$headings, h5, font-size);
+  line-height: map.get(v.$headings, h5, line-height);
+  font-weight: map.get(v.$headings, h5, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+}
+
+.h6,
+h6 {
+  font-size: map.get(v.$headings, h6, font-size);
+  line-height: map.get(v.$headings, h6, line-height);
+  font-weight: map.get(v.$headings, h6, font-weight);
+  font-style: normal;
+  color: map.get(v.$text, headings);
+}
+
+.p-xlg {
+  font-size: map.get(v.$paragraphs, xlg, font-size);
+  line-height: map.get(v.$paragraphs, xlg, line-height);
+  font-weight: map.get(v.$paragraphs, xlg, font-weight);
+}
+
+.p-lg,
+.p-1 {
+  font-size: map.get(v.$paragraphs, lg, font-size);
+  line-height: map.get(v.$paragraphs, lg, line-height);
+  font-weight: map.get(v.$paragraphs, lg, font-weight);
+}
+
+.p-d,
+.p-2 {
+  font-size: map.get(v.$paragraphs, base, font-size);
+  line-height: map.get(v.$paragraphs, base, line-height);
+  font-weight: map.get(v.$paragraphs, base, font-weight);
+}
+
+.p-sm,
+.p-3 {
+  font-size: map.get(v.$paragraphs, sm, font-size);
+  line-height: map.get(v.$paragraphs, sm, line-height);
+  font-weight: map.get(v.$paragraphs, sm, font-weight);
+}
+
+.p-xs,
+.p-4 {
+  font-size: map.get(v.$paragraphs, xs, font-size);
+  line-height: map.get(v.$paragraphs, xs, line-height);
+  font-weight: map.get(v.$paragraphs, xs, font-weight);
+}
+
+.p-xxs,
+.p-5 {
+  font-size: map.get(v.$paragraphs, xxs, font-size);
+  line-height: map.get(v.$paragraphs, xxs, line-height);
+  font-weight: map.get(v.$paragraphs, xxs, font-weight);
+}
+
+a {
+  text-decoration: none;
+  // V2 `.v-application a { cursor: pointer }` (vuetify 2 `VApp.sass`); V4 has no such rule, so an `<a @click>` without `href` (Read More,
+  // "Learn more" links) showed the text caret instead of a hand.
+  cursor: pointer;
+}
+
+.dotted-underscore {
+  position: relative;
+  height: 20px;
+  font-weight: v.$font-weight-semibold;
+
+  &:hover {
+    color: map.get(v.$primary, darken1) !important;
+
+    &::after {
+      border-color: map.get(v.$primary, darken1) !important;
+      color: map.get(v.$primary, darken1) !important;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    border-bottom: 1px dashed #E5E5F0;
+    bottom: -3px;
+    transition: border-color 0.3s ease;
+  }
+
+  &--info {
+    &::after {
+      border-color: map.get(v.$info, base);
+    }
+  }
+
+  &--primary {
+    &::after {
+      border-color: map.get(v.$primary, base);
+    }
+  }
+}
+
+.font-weight-300 {
+  font-weight: v.$font-weight-light !important;
+}
+
+.font-weight-400 {
+  font-weight: v.$font-weight-normal !important;
+}
+
+.font-weight-600 {
+  font-weight: v.$font-weight-semibold !important;
+}
+
+.font-weight-800 {
+  font-weight: v.$font-weight-extrabold !important;
+}
+
+.base--text {
+  color: map.get(v.$text, base) !important;
+}
+
+.heading--text {
+  color: map.get(v.$text, headings) !important;
+}
+
+// V2 vendor typography classes (vuetify 2 `styles/generic/_typography.sass`).
+// V4 has `.text-*` only, so `class="caption"` had no effect.
+// Size and letter-spacing are `!important` in the vendor sheet, the weight and line-height are not.
+.caption {
+  font-size: 0.75rem !important;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.0333333333em !important;
+}
+
+.body-1 {
+  font-size: 1rem !important;
+  font-weight: 400;
+  line-height: 1.5rem;
+  letter-spacing: 0.03125em !important;
+}
+
+.body-2 {
+  font-size: 0.875rem !important;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.0178571429em !important;
+}

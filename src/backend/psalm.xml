@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorLevel="1"
+    findUnusedCode="false"
+    ensureOverrideAttribute="false"
+>
+    <projectFiles>
+        <!-- The same roots as phpstan.neon, so neither analyser can be narrowed
+             silently. -->
+        <directory name="app"/>
+        <!-- The Engine client and the Client Area core (with the Community single-user defaults) live in
+             ../packages. -->
+        <directory name="../packages/engine-client/src"/>
+        <directory name="../packages/hub/src"/>
+        <directory name="../packages/client-area/src"/>
+        <directory name="../packages/community/src"/>
+        <directory name="bootstrap"/>
+        <directory name="config"/>
+        <directory name="database"/>
+        <directory name="routes"/>
+        <file name="public/index.php"/>
+        <file name="artisan"/>
+        <ignoreFiles allowMissingFiles="true">
+            <directory name="bootstrap/cache"/>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <plugins>
+        <!-- All Psalm Laravel options: https://psalm.github.io/psalm-plugin-laravel/config/ -->
+        <pluginClass class="Psalm\LaravelPlugin\Plugin">
+            <resolveDynamicWhereClauses value="true" />
+            <findMissingTranslations value="false" />
+            <findMissingViews value="false" />
+        </pluginClass>
+    </plugins>
+
+    <issueHandlers>
+        <ClassMustBeFinal errorLevel="info"/>
+        <ImplicitToStringCast errorLevel="info"/>
+        <MissingClosureReturnType errorLevel="info"/>
+        <MissingImmutableAnnotation errorLevel="info"/>
+        <MissingOverrideAttribute errorLevel="info"/>
+        <RedundantCast errorLevel="info"/>
+        <RedundantCondition errorLevel="info"/>
+        <UnnecessaryVarAnnotation errorLevel="suppress"/>
+    </issueHandlers>
+
+    <forbiddenFunctions>
+        <function name="var_dump" />
+        <function name="dd" />
+    </forbiddenFunctions>
+</psalm>

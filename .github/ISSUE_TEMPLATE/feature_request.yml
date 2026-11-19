@@ -1,0 +1,54 @@
+name: "Request a feature"
+description: "Suggest an idea that would make the panel more useful."
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping shape the panel.
+
+        > Not sure yet, or want to talk it through first?
+        > Bring it to [Discord](https://discord.gg/9twHWR7xGX) or the
+        > [community forum](https://community.panelalpha.com/) before you open an issue.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      options:
+        - label: I searched the existing issues and this has not been requested yet.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the problem you want solved, not only the solution. What are you trying to do?
+      placeholder: "I cannot currently ... in the panel. / Each time I ..., I have to ... ."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: What would you like to happen, and where in the panel?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered
+      description: Other approaches, workarounds, or how other panels handle this.
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Mockups, examples, links or other context.
+    validations:
+      required: false

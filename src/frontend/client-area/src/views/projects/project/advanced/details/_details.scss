@@ -1,0 +1,42 @@
+// Shared `.details` rows and skeleton of the Details cards. Legacy keeps the same copy in each card; both cards are the only
+// consumers, so the block lives in the feature, not the kit.
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+.details {
+  display: flex;
+  flex-direction: column;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  &-value {
+    font-weight: v.$font-weight-bold;
+    margin-top: 4px;
+    font-size: v.$font-size-base;
+    line-height: v.$line-height-base;
+  }
+}
+
+.v-skeleton-loader {
+  // V2 skeleton is a block formatting context, so the 10px / 7px margins of its two bones collapse inside it (41px per loader); V4 is a flex column (48px).
+  display: flow-root;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  :deep(.v-skeleton-loader__text) {
+    &:first-child {
+      height: 8px;
+      width: 62px;
+      margin: 6px 0 10px 0;
+    }
+
+    &:nth-child(2) {
+      height: 10px;
+      width: 148px;
+      margin: 7px 0;
+    }
+  }
+}

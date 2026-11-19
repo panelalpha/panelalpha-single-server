@@ -1,0 +1,565 @@
+.v-theme--light,
+.v-theme--dark {
+  // Horizontal padding of every button (V2 vendor `16px`, `legacy/_buttons.scss`); a screen sets a wider one on its own buttons.
+  --v-btn-padding-x: 16px;
+  --v-success-base: #07C07E;
+  --v-link-base: #0C9EF1;
+  --v-sand-base: #FFCD51;
+  --v-sand-darken1: #FFB600;
+  --v-sand-darken2: #DB9C00;
+  --v-sand-lighten5: #FFF7E5;
+  // 15% sand fill of the Admin Area outlined button (legacy `.v-btn--outlined` background); the same in both themes.
+  --v-sand-alpha-15: rgba(255, 205, 81, 0.15);
+  // Connect AI tab label gradient; the same in both themes.
+  --v-connect-ai-gradient: linear-gradient(
+    90deg,
+    #E23AB8 0%,
+    #B94BE3 18%,
+    #8E5DF4 35%,
+    #6C6EF4 45%,
+    #4781F3 55%,
+    #3A96CB 66%,
+    #2EAE9B 74%,
+    #2ABA83 81%,
+    #7FAD4D 90%,
+    #7FAD4D 100%
+  );
+  --v-info-lighten4: #CCDFFB;
+  --v-anchor-base: #07C07E;
+  // `.back-button .v-icon` of the project page top bar: a static grey, the same in both themes.
+  --v-back-icon-color: #B0B0B0;
+  // `map-get($gray, darken1)` as a static colour (the search item link), not themed like `--v-gray-darken1`.
+  --v-gray-darken1-static: #797997;
+  // Invoice status chip text for an error status (the same `#E71D1D` in both themes;
+  // not `--v-error-base`, which is darker in dark).
+  --v-status-error-text: #E71D1D;
+  // Skeleton row divider of the invoice table (`#E5E5F0` in both themes;
+  // not `--v-gray-lighten2`, which is a different colour in dark).
+  --v-skeleton-row-border: #E5E5F0;
+
+  // V2 material colours (the legacy theme does not override them) used by the Free tasks status chip:
+  // (`orange` / `blue` / `green` with `lighten-5`). Same value in light and dark, as in V2.
+  --v-orange-base: #FF9800;
+  --v-orange-lighten5: #FFF3E0;
+  // V2 `pink.base`: the Usage rings and the disk stat; the same in both themes.
+  --v-pink-base: #E91E63;
+  --v-blue-base: #2196F3;
+  --v-blue-lighten5: #E3F2FD;
+  --v-green-base: #4CAF50;
+  --v-green-lighten5: #E8F5E9;
+
+  --v-warning-lighten5: #FF7A2F26;
+  --v-success-lighten5: #07C07E26;
+  --v-color-indicator-base: 1px solid rgba(0, 0, 0, 0.10);
+  --v-black-base: #000000;
+  --v-white-base: #FFFFFF;
+  --v-primary-darken1: #0AAA71;
+  // Style Manager drawer `::before` shadow. Static: app-lite has no dark override.
+  --v-style-drawer-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06), 0px 16px 72px 8px rgba(0, 0, 0, 0.08);
+  --v-primary-lighten1: #1FD895;
+  --v-icon-lighten5: #FFFFFF;
+  --v-secondary-darken2: #171717;
+  --v-secondary-lighten5: #C1C1C1;
+  --v-role1-bg: #DB9C0026;
+  --v-role1-text: #DB9C00;
+  --v-role2-bg: #07C07E26;
+  --v-role2-text: #07C07E;
+  --v-role3-bg: #FE33B926;
+  --v-role3-text: #FE33B9;
+  --v-role4-bg: #FF7A2F26;
+  --v-role4-text: #FF7A2F;
+
+  // Table row hover of legacy `_tables.scss` and the instance table; legacy has no dark variant.
+  --v-table-row-hover: #EEEEEE;
+
+  // V2 material `red` (legacy `color="red"`, the same in both themes): the failed installation and import bars.
+  --v-red-base: #F44336;
+  // V2 material `red lighten-4` and `grey` shades of the Logs page (the DELETE chip and the role chip): the V2
+  // theme does not override `red`/`grey` backgrounds, so they are the material values in both themes.
+  --v-red-lighten4: #FFCDD2;
+  --v-grey-lighten4: #F5F5F5;
+  // V2 material `grey lighten-2` = the default V2 chip fill (the plain port chip, no `color`); the same in both themes.
+  --v-grey-lighten2-material: #E0E0E0;
+  // V2 material `grey` (`grey--text`, #9E9E9E): the grey hint text of the containers view (no-data, URL preview); the same in both themes.
+  --v-grey-base-material: #9E9E9E;
+  // V2 material `grey darken-2` (`text--darken-2`), the same in both themes.
+  --v-grey-darken2-material: #616161;
+  // Text colour of the plain port chip: V2 `.theme--light.v-chip` .87 black.
+  --v-port-chip-plain-text: rgba(0, 0, 0, 0.87);
+
+  // `.alert::before` fill and `.v-theme--light &.v-card` fill: white in both themes.
+  --v-alert-surface: #FFFFFF;
+  // Success and error gradient: RGB channels for
+  // rgba(var(--v-alert-*-tint), a). Static, not the brand colour, the same in both themes.
+  --v-alert-success-tint: 111, 198, 108;
+  --v-alert-error-tint: 241, 40, 40;
+  // `.alert--info-bg`: static blue tint, not the brand colour, the same in both themes.
+  --v-alert-info-bg: rgba(0, 94, 234, 0.08);
+
+  // Services chips: literal colours, the same in both themes. Background is the text colour at
+  // 20 % (`33`) or 15 % (`26`) alpha, as in legacy. Consumed by `services/CustomLabel.vue`.
+  --v-custom-label-purple-bg: #6A32E033;
+  --v-custom-label-purple-text: #6A32E0;
+  --v-custom-label-blue-bg: #005EEA33;
+  --v-custom-label-blue-text: #005EEA;
+  --v-custom-label-green-bg: #07C07E33;
+  --v-custom-label-green-text: #07C07E;
+  --v-custom-label-orange-bg: #FF7A2F26;
+  --v-custom-label-orange-text: #FF7A2F;
+  --v-custom-label-gray-bg: #F2F2F7;
+  --v-custom-label-gray-text: #797997;
+}
+
+.v-theme--light {
+  // Disabled/loading buttons follow the app host. Values are the Vuetify 2 vendor
+  // `.v-btn--disabled` colours the app stylesheet gives; consumed by legacy/_buttons.scss.
+  --v-btn-disabled-border: rgba(118, 118, 118, 0.3);
+  --v-btn-text-border: #000000; // V2 vendor: border colour of a text button, black in both themes
+  --v-btn-white-bg: #FFFFFF; // `.v-btn--default` fill and the disabled outlined button fill (both themes)
+  --v-btn-disabled-text: rgba(0, 0, 0, 0.26); // Vuetify 2 `$material-light.buttons.disabled`
+  --v-btn-disabled-bg: var(--v-primary-lighten4); // mint chip of the disabled button
+  // Instance-count chip of the Reseller users table (`#6A32E033`, `#6A32E0`); same pair in
+  // legacy/_labels.scss (`.color-label-purple`).
+  --v-label-purple-bg: #6A32E033;
+  --v-label-purple-text: #6A32E0;
+  // Server configuration frame of the reseller email settings.
+  --v-form-section-bg: #FCFCFF;
+  // Vuetify 2 vendor `$material-light.text.primary` (`.theme--light.v-btn` colour).
+  --v-text-default: rgba(0, 0, 0, 0.87);
+  // V2 vendor `outlined` chip border (`$material-light.dividers`).
+  --v-chip-outlined-border: rgba(0, 0, 0, 0.12);
+  // Vuetify 2 vendor `.theme--light.v-data-table thead th` colour (`$material-light.text.secondary`); the Developer Settings modal table header.
+  --v-table-header-text: rgba(0, 0, 0, 0.6);
+  --shadowColor2: rgba(0, 0, 0, 0.1);
+  --shadowColor3: rgba(0, 0, 0, 0.06);
+  --shadowColor4: rgba(0, 0, 0, 0.05);
+  --shadowColor5: rgba(0, 0, 0, 0.12);
+  --shadowColor6: rgba(0, 0, 0, 0);
+  --shadowColor7: rgba(0, 0, 0, 0.04);
+  --shadowColor8: rgba(0, 0, 0, 0.12);
+  --v-secondary-darken1: #0000000F;
+  --v-panel-base: #FFFFFF;
+  // V2 theme variation `panel.lighten1` (white in light): share table header.
+  --v-panel-lighten1: #FFFFFF;
+  --v-panel-action-hover: rgba(255, 255, 255, 0.8);
+  --v-icon-lighten1: #CBCBDC;
+  --v-info-lighten5: #005EEA26;
+  --v-link-lighten5: #005EEA26;
+  --v-card-expires-bg: #ffebe0;
+  --v-card-expired-bg: #fcdfdf;
+  --v-backdrop-base: rgba(255, 255, 255, 0.24);
+  --v-link-hover: #5997f3;
+  --v-mass-action-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 25.52%);
+  --v-error-lighten5: #D14F4F26;
+  // `--v-heading-base` is not defined in the V2 theme, so the fallback #1b2420 rendered in both themes.
+  --v-deploy-log-text: #1b2420;
+  // Fixed literal rgba(7, 192, 126, a), not the brand colour. RGB channels for rgba(var(--v-deploy-accent), a).
+  --v-deploy-accent: 7, 192, 126;
+  // `.custom-info-label` chip "Used: X of Y": fixed #EBF2FD in both themes.
+  --v-custom-info-label-bg: #EBF2FD;
+  // Hit area of the card hover overlay.
+  --v-card-hit-overlay: rgba(255, 255, 255, 0.01);
+  // Import step icon stroke.
+  --v-import-step-stroke: #939EB3;
+  // Drop zone overlay.
+  --v-drop-zone-overlay: rgba(255, 255, 255, 0.72);
+  --v-instance-card-gradient: linear-gradient(180deg, rgba(231, 29, 29, 0.15) 0%, rgba(231, 29, 29, 0) 100%);
+  --v-instance-card-checkbox-gradient: linear-gradient(221.4deg, rgba(160, 160, 160, 0.7) 4.41%, rgba(160, 160, 160, 0.31) 26.95%, rgba(160, 160, 160, 0) 50.56%);
+  --v-skeleton-base: #F2F2F7;
+  // V2 `.theme--light.v-skeleton-loader` root text colour (`$material.text.secondary`).
+  --v-skeleton-text: rgba(0, 0, 0, 0.6);
+  --v-super-quick-installation-gradient: linear-gradient(180deg, rgba(219, 219, 219, 0.5) 0%, #C4C4C4 100%);
+  --v-illustrations-darken1: #B0B0D3;
+  --v-illustrations-darken2: #77849F;
+  --v-illustrations-darken3: #CCCCE2;
+  --v-illustrations-lighten1: #EEEEF4;
+  --v-illustrations-lighten2: #F9F9FB;
+  --v-illustrations-lighten3: #FFFFFF;
+  --v-role5-bg: #005EEA26;
+  --v-role5-text: #005EEA;
+  --v-role6-bg: #8E24AA26;
+  --v-role6-text: #8E24AA;
+  --v-scrollbar-bg: #F9F9FB;
+  --v-scrollbar-border: #F2F2F7;
+  --v-scrollbar-thumb-bg: #E5E5F0;
+  --v-scrollbar-hover: #CBCBDC;
+  --v-primary-base: #07C07E;
+  --v-primary-lighten2: #CDF2E5;
+  --v-primary-lighten4: #E6F9F2;
+  --v-gray-lighten2: #E5E5F0;
+  --v-gray-lighten3: #E5E5F0;
+  --v-gray-lighten4: #E5E5F0;
+  // Theme shade of gray lighten4 as Vuetify 2 paints it inside detached dialogs (see the dark block).
+  --v-gray-lighten4-shade: #E5E5F0;
+  --v-gray-lighten6: #F9F9FB;
+  --v-gray-base: #CBCBDC;
+  --v-gray-darken1: #797997;
+  --v-success-base: #07C07E;
+  --v-link-base: #005EEA;
+  --v-sand-darken1: #FFB600;
+  --v-sand-darken2: #DB9C00;
+  --v-body-base: #FFFFFF;
+  --v-nav-base: #FFFFFF;
+  --v-tooltip-base: #FFFFFF;
+  --v-darkicon-base: #21212B;
+  --v-icon-base: #797997;
+  --v-error-base: #E71D1D;
+  --v-info-base: #005EEA;
+  --v-text-base: #49495F;
+  --v-text-darken1: #333342;
+  --v-text-darken2: #21212B;
+  --v-gray-lighten1: #9494AD;
+  --v-gray-lighten5: #F2F2F7;
+  --v-gray-darken2: #49495F;
+  --v-massaction-base: #21212B;
+  --v-warning-base: #FF7A2F;
+
+  // V2 vendor theme colours that legacy screens inherit: `.theme--light.v-btn.v-btn--icon`, the
+  // `.v-data-table__empty-wrapper` that holds the skeleton rows, and the `.v-sheet` surface.
+  --v-icon-btn-color: rgba(0, 0, 0, 0.54);
+  --v-icon-inactive-color: rgba(0, 0, 0, 0.54);
+  // Tokens (legacy literals repeated in the project modals).
+  // Status chip/badge backgrounds.
+  --v-status-warning-bg: rgba(255, 205, 81, 0.15);
+  --v-status-success-bg: rgba(7, 192, 126, 0.10);
+  --v-status-error-bg: rgba(231, 29, 29, 0.15);
+  --v-status-error-badge-bg: rgba(231, 29, 29, 0.12);
+  // Legacy `.v-chip-faded--gray-lighten`: the same `#F2F2F7` fill in both themes.
+  --v-status-neutral-bg: #F2F2F7;
+  // Light chip fills of the author, contributor, editor and subscriber roles; dark uses `--v-role*-bg`.
+  --v-role-author-light-bg: #E6F9F2;
+  --v-role-contributor-light-bg: #FFEFF9;
+  --v-role-editor-light-bg: #FFEBE0;
+  --v-role-subscriber-light-bg: #EBF2FD;
+  // Hover colour.
+  --v-preview-link-hover: #004FC7;
+  // `.box` border (a literal in both themes).
+  --v-preview-box-border: #CCCCCC;
+  // Stroke of the preview error icon (a literal in both themes, not the dark `--v-error-base`).
+  --v-preview-error-stroke: #E71D1D;
+  // V2 `.v-btn` surface.
+  --v-btn-surface: #F5F5F5;
+  // V2 vendor `.theme--light.v-btn-toggle .v-btn` border.
+  --v-btn-toggle-border: rgba(0, 0, 0, 0.12);
+  --v-table-loading-color: rgba(0, 0, 0, 0.38);
+  --v-sheet-surface: #FFFFFF;
+  // V2 `.theme--light.v-input--is-disabled` root text colour.
+  --v-input-disabled-color: rgba(0, 0, 0, 0.38);
+  // V2 `.theme--light .text--disabled`: V4 has no `text--disabled` class, `text-disabled` dims by the V4 opacity.
+  --v-text-disabled: rgba(0, 0, 0, 0.38);
+  // File manager: hover of the row, tile, tree, menu and playlist. The dark `--v-table-row-hover` (#EEEEEE) is unreadable under white text.
+  --v-row-hover: #EEEEEE;
+  // Background of a group row (the day header) and of the details row of an expanded kit `DataTable` row; light follows the gray palette.
+  --v-table-group-bg: var(--v-gray-lighten6);
+  // File manager: selection of the row, tile and active folder; it follows the brand colour (`primary-shades.ts` overrides `--v-primary-lighten4`).
+  --v-row-selected: var(--v-primary-lighten4);
+
+  // First-run wizard: the look of the app-lite admin area. The admin area palette sits under the wizard roles,
+  // because the same names have other values there than in the client area.
+  // The admin area has no dark mode, and the wizard is always light.
+  // Sidebar: `gray-lighten5`.
+  --v-wizard-sidebar-bg: #F9F9FB;
+  // Background of the page frame and the start page: `white`.
+  --v-wizard-bg: #FFFFFF;
+  // Step circle, upcoming: border `gray-lighten1`, number `gray-darken1`.
+  --v-wizard-step-border: #A9A9C5;
+  --v-wizard-step-text: #797997;
+  // Step name, finished: `gray-lighten1`.
+  --v-wizard-step-done-text: #A9A9C5;
+  // Accent (marks in the Hub card): colour `primary`, as `color="primary"` in the admin area.
+  --v-wizard-accent: rgb(var(--v-theme-primary));
+  // Step title: `gray-darken4`.
+  --v-wizard-title: #212121;
+  // Step description and field label: `gray-darken1`; the secondary part of the label is `gray-lighten1`.
+  --v-wizard-desc: #797997;
+  --v-wizard-label: #797997;
+  --v-wizard-label-muted: #A9A9C5;
+  // Password hint rows: `gray-darken2`.
+  --v-wizard-checker-text: #49495F;
+  // Field: border `gray-lighten3`, placeholder `gray-lighten1`.
+  --v-wizard-field-border: #E5E5F0;
+  --v-wizard-field-placeholder: #9494AD;
+  // Footer line: `gray-lighten4`.
+  --v-wizard-footer-line: #EFEFF6;
+  // Hub card: border `primary` like `.hub-status--ok` with the accent; the "Recommended" flag in `primary`.
+  --v-wizard-hub-card-border: rgb(var(--v-theme-primary));
+  --v-wizard-flag-bg: rgb(var(--v-theme-primary));
+  // `.hub-status` (neutral): border `gray-lighten2`, icon `gray-lighten4` + `gray-darken1`.
+  --v-wizard-hub-border: #CBCBDC;
+  --v-wizard-hub-icon-bg: #EFEFF6;
+  --v-wizard-hub-icon: #797997;
+  // Benefit icon tile and connection icon.
+  --v-wizard-benefit-bg: #EAFAF3;
+  --v-wizard-benefit-icon: #06A86E;
+  // `.hub-status--ok`.
+  --v-wizard-hub-ok-bg: #F4FCF8;
+  --v-wizard-hub-ok-border: #B9ECD6;
+  // Background under the `hub-diagram.gif` animation: `.preview-placeholder`.
+  --v-wizard-diagram-bg: #F7F8FA;
+  // Secondary button (Previous Step): border `gray-lighten3`, text `gray-darken1`.
+  --v-wizard-ghost-border: #E5E5F0;
+  --v-wizard-ghost-text: #797997;
+  // Radius: fields, buttons and the Summary frame 5px (`$border-radius`), cards 12px (`.preview-placeholder`).
+  --v-wizard-radius: 5px;
+  --v-wizard-radius-lg: 12px;
+}
+
+.v-theme--dark {
+  // Disabled/loading buttons follow the app host. Values are the Vuetify 2 vendor
+  // `.v-btn--disabled` colours the app stylesheet gives; consumed by legacy/_buttons.scss.
+  --v-btn-disabled-border: rgba(118, 118, 118, 0.3);
+  --v-btn-text-border: #000000; // V2 vendor: border colour of a text button, black in both themes
+  --v-btn-white-bg: #FFFFFF; // `.v-btn--default` fill and the disabled outlined button fill (both themes)
+  --v-btn-disabled-text: rgba(255, 255, 255, 0.3); // Vuetify 2 `$material-dark.buttons.disabled`
+  --v-btn-disabled-bg: rgba(255, 255, 255, 0.05); // dark `--v-primary-lighten4` (`#ffffff0d`): the disabled chip in dark
+  // Instance-count chip of the Reseller users table, dark text (`.theme--dark` chip). Background is the light value.
+  --v-label-purple-bg: #6A32E033;
+  --v-label-purple-text: #B59AFF;
+  // Server configuration frame of the reseller email settings (.theme--dark override).
+  --v-form-section-bg: var(--v-gray-lighten5);
+  // Vuetify 2 vendor `$material-dark.text.primary` (`.theme--dark.v-btn` colour).
+  --v-text-default: #FFFFFF;
+  // V2 dark default chip (`.theme--dark.v-chip:not(.v-chip--active)`): #555 fill, white text (plain port chip of Containers).
+  --v-grey-lighten2-material: #555555;
+  --v-port-chip-plain-text: #FFFFFF;
+  // V2 vendor `outlined` chip border (`$material-dark.dividers`).
+  --v-chip-outlined-border: hsla(0, 0%, 100%, 0.12);
+  // Vuetify 2 vendor `.theme--dark.v-data-table thead th` colour (`$material-dark.text.secondary`).
+  --v-table-header-text: hsla(0, 0%, 100%, 0.7);
+  --shadowColor2: rgba(0, 0, 0, 0.12);
+  --shadowColor3: rgba(0, 0, 0, 0.08);
+  --shadowColor4: rgba(0, 0, 0, 0.12);
+  --shadowColor5: rgba(0, 0, 0, 0.12);
+  --shadowColor6: rgba(0, 0, 0, 0.1);
+  --shadowColor7: rgba(0, 0, 0, 0.16);
+  --shadowColor8: rgba(97, 97, 119, 0.5);
+  --v-gray-lighten2: #49495FCC;
+  // Well (`.well`, `.well--gray`) dark colours: `.theme--dark .well`. Consumed by legacy/_collapse.scss.
+  --v-well-border: #404055;
+  --v-well-gray-bg: #343446;
+  --v-well-gray-text: #9593a8;
+  // WordPress MCP page dark colours (legacy global `body.is-dark`): the inline path of the step text and the step number. Used under `.v-theme--dark` only.
+  --v-mcp-path-bg: var(--v-well-gray-bg);
+  --v-mcp-path-border: var(--v-well-border);
+  --v-mcp-path-text: #C5C3D3;
+  --v-mcp-step-num-bg: rgba(0, 200, 83, 0.12);
+  --v-mcp-step-num-text: #00C853;
+  --v-gray-lighten5: #49495F73;
+  --v-primary-lighten4: #ffffff0d;
+  --v-primary-lighten5: #ffffff0d;
+  --v-info-lighten5: #0C9EF126;
+  --v-panel-base: #2F2F3D;
+  // V2 theme variation `panel.lighten1` (dark).
+  --v-panel-lighten1: #454554;
+  --v-panel-action-hover: rgba(47, 47, 61, 0.8);
+  --v-icon-lighten1: #797997;
+  --v-bar-base: #0E0D1066;
+  --v-secondary-darken1: #0E0D1066;
+  --v-card-expires-bg: #573422;
+  --v-card-expired-bg: #4B2528;
+  --v-backdrop-base: rgba(14, 13, 16, 0.24);
+  --v-gray-darken1: #9494AD;
+  --v-gray-darken2: #ffffff;
+  --v-gray-lighten1: #9494AD;
+  --v-link-hover: #3EB7FA;
+  --v-mass-action-gradient: linear-gradient(180deg, rgba(33, 33, 43, 0) 0%, #21212B 25.52%);
+  --v-error-lighten5: rgba(209, 79, 79, 0.15);
+  // `--v-heading-base` is not defined in the V2 theme, so the fallback #1b2420 rendered in both themes.
+  --v-deploy-log-text: #1b2420;
+  // Fixed literal rgba(7, 192, 126, a), not the brand colour. RGB channels for rgba(var(--v-deploy-accent), a).
+  --v-deploy-accent: 7, 192, 126;
+  // `.custom-info-label` chip "Used: X of Y": fixed #EBF2FD in both themes.
+  --v-custom-info-label-bg: #EBF2FD;
+  // Hit area of the card hover overlay.
+  --v-card-hit-overlay: rgba(255, 255, 255, 0.01);
+  // Import step icon stroke.
+  --v-import-step-stroke: #939EB3;
+  // Drop zone overlay (dark).
+  --v-drop-zone-overlay: rgba(0, 0, 0, 0.72);
+  --v-instance-card-gradient: linear-gradient(180deg, rgba(209, 79, 79, 0.15) 0%, rgba(209, 79, 79, 0) 100%);
+  --v-instance-card-checkbox-gradient: linear-gradient(221.4deg, rgba(33, 33, 43, 0.6) 4.41%, rgba(33, 33, 43, 0.31) 26.95%, rgba(33, 33, 43, 0) 50.56%);
+  --v-skeleton-base: #9494AD26;
+  // V2 `.theme--dark.v-skeleton-loader` root text colour.
+  --v-skeleton-text: rgba(255, 255, 255, 0.7);
+  --v-super-quick-installation-gradient: linear-gradient(180deg, rgba(47, 47, 61, 0.5) 0%, #2F2F3D 100%);
+  --v-illustrations-darken1: #575775;
+  --v-illustrations-darken2: #8888A7;
+  --v-illustrations-darken3: #4E4E69;
+  --v-illustrations-lighten1: #414158;
+  --v-illustrations-lighten2: #373748;
+  --v-illustrations-lighten3: #2F2F3D;
+  --v-role5-bg: #0C9EF126;
+  --v-role5-text: #0C9EF1;
+  --v-role6-bg: #B545F226;
+  --v-role6-text: #B545F2;
+  --v-scrollbar-bg: #1B1A22;
+  --v-scrollbar-border: #272430;
+  --v-scrollbar-thumb-bg: #333342;
+  --v-scrollbar-hover: #505068;
+  --v-primary-base: #07C07E;
+  --v-gray-lighten3: #7B7A8B;
+  --v-gray-lighten4: #49495F;
+  // The share item reads var(--v-gray-lighten4) in a detached dialog: V2 resolves it to the generated Vuetify shade of gray #333342, not the custom property above.
+  --v-gray-lighten4-shade: #9494A6;
+  --v-gray-darken4: #000000;
+  --v-gray-base: #333342;
+  --v-body-base: #21212B;
+  --v-nav-base: #21212B;
+  --v-tooltip-base: #131216;
+  --v-darkicon-base: #FFFFFF;
+  --v-icon-base: #FFFFFF;
+  --v-error-base: #D14F4F;
+  --v-info-base: #0C9EF1;
+  --v-text-base: #FFFFFF;
+  --v-text-darken1: #FFFFFF;
+  --v-text-darken2: #FFFFFF;
+  --v-massaction-base: #131216;
+  --v-warning-base: #FFC107;
+
+  // V2 vendor theme colours that legacy screens inherit: icon button, the skeleton rows of a loading table and the
+  // `.v-sheet` surface (card border, menu list border).
+  --v-icon-btn-color: #FFFFFF;
+  // V2 `.theme--dark.v-icon` of the PHP tab info icon: 60% white on the deployed legacy; light is `--v-icon-btn-color` (.54 black).
+  --v-icon-inactive-color: rgba(255, 255, 255, 0.6);
+  // Tokens (legacy literals repeated in the project modals).
+  // Status chip/badge backgrounds.
+  --v-status-warning-bg: rgba(255, 205, 81, 0.15);
+  --v-status-success-bg: rgba(7, 192, 126, 0.10);
+  --v-status-error-bg: rgba(231, 29, 29, 0.15);
+  --v-status-error-badge-bg: rgba(231, 29, 29, 0.12);
+  // Legacy `.v-chip-faded--gray-lighten`: the same `#F2F2F7` fill in both themes.
+  --v-status-neutral-bg: #F2F2F7;
+  // Light chip fills of the author, contributor, editor and subscriber roles; dark uses `--v-role*-bg`.
+  --v-role-author-light-bg: #E6F9F2;
+  --v-role-contributor-light-bg: #FFEFF9;
+  --v-role-editor-light-bg: #FFEBE0;
+  --v-role-subscriber-light-bg: #EBF2FD;
+  // Hover colour.
+  --v-preview-link-hover: #004FC7;
+  // `.box` border (a literal in both themes).
+  --v-preview-box-border: #CCCCCC;
+  // Stroke of the preview error icon (a literal in both themes, not the dark `--v-error-base`).
+  --v-preview-error-stroke: #E71D1D;
+  // V2 dark `.v-btn` surface.
+  --v-btn-surface: #272727;
+  // V2 vendor `.theme--dark.v-btn-toggle .v-btn` border (`hsla(0, 0%, 100%, .12)`).
+  --v-btn-toggle-border: rgba(255, 255, 255, 0.12);
+  --v-table-loading-color: rgba(255, 255, 255, 0.5);
+  --v-sheet-surface: #1E1E1E;
+  // V2 `.theme--dark.v-input--is-disabled` root text colour.
+  --v-input-disabled-color: rgba(255, 255, 255, 0.5);
+  // V2 `.theme--dark .text--disabled`.
+  --v-text-disabled: rgba(255, 255, 255, 0.5);
+  // File manager: see the light block.
+  --v-row-hover: #FFFFFF0D;
+  // Background of a group row and of the details row of the kit `DataTable`; dark follows the row hover colour.
+  --v-table-group-bg: var(--v-row-hover);
+  --v-row-selected: rgba(var(--v-theme-primary), 0.15);
+
+}
+
+// Series colours of the project analytics charts (General InstanceAnalyticsCard* and Monitoring): static, the same in both themes.
+// Apex needs a resolved value, so `shared/ui/charts/chart-colors.ts` reads them from the document root.
+:root {
+  // Step number chip background in dark: a fixed green, not the brand colour.
+  --v-mcp-step-num-dark-bg: rgba(0, 200, 83, 0.12);
+  // UA border colour of the native input in the create-token modal (V2 stayed at #767676; V4 dark `color-scheme` turns it #858585).
+  --v-native-input-border: #767676;
+  // "Featured" ribbon of the plugin catalogue: fixed in both themes, not `--v-warning-*`.
+  // `--v-featured-border`: card border and table row bar.
+  --v-featured-border: #fadd77;
+  // `--v-featured-corner`: corner triangles of the ribbon.
+  --v-featured-corner: #f2ce98;
+  // `--v-featured-text`: ribbon label and table "Featured" chip text.
+  --v-featured-text: #ec7b13;
+  // `--v-featured-bg`: ribbon band and table "Featured" chip background.
+  --v-featured-bg: #fff2d3;
+  // Row bar of the plugin table, red = update available. Fixed in both themes. The green bar(
+  // #07C07E) uses `rgb(var(--v-deploy-accent))`: the same 7, 192, 126 channels, already static in both themes.
+  --v-row-bar-red: #E71D1D;
+  // Checkbox container shadow of a plugin / theme card. Static: app-lite has no dark override.
+  --v-card-checkbox-shadow: 0px 0px 1px rgba(0, 0, 0, 0.12), 0px 8px 24px 6px rgba(0, 0, 0, 0.02), 0px 8px 32px rgba(0, 0, 0, 0.08);
+  // Star icon (kit `icons/star.vue`): filled outline, mask outline and empty fill. Fixed in both themes.
+  --v-star-filled: #EED000;
+  --v-star-mask: #FADD77;
+  --v-star-empty: #EEEEF4;
+  --v-chart-bandwidth: #005EEA;
+  --v-chart-visitors: #07C07E;
+  // Monitoring pie / doughnut palette (legacy `pieChartColors`, by list position), the doughnut stroke (legacy `#fff`)
+  // and the slice past the five colours (legacy `PieChartCard` fallback, chart.js 2 default). Static in both themes.
+  --v-chart-pie-1: #83CC80;
+  --v-chart-pie-2: #44AA92;
+  --v-chart-pie-3: #D45858;
+  --v-chart-pie-4: #EF9840;
+  --v-chart-pie-5: #CA7699;
+  --v-chart-pie-stroke: #FFFFFF;
+  --v-chart-pie-fallback: rgba(0, 0, 0, 0.1);
+  // Pie / doughnut tooltip (legacy chart.js 2 defaults, drawn on the canvas the same in both themes): `tooltips.backgroundColor`,
+  // `bodyFontColor` and `multiKeyBackground` (the white frame of the colour box). Static in both themes.
+  --v-chart-tooltip-bg: rgba(0, 0, 0, 0.8);
+  --v-chart-tooltip-text: #FFFFFF;
+  --v-chart-tooltip-box-frame: #FFFFFF;
+  // Track of the `ProgressChart` kit bar (legacy `#E5E5F0`). Static in both themes: the `--v-gray-lighten*` tokens differ in dark.
+  --v-chart-progress-track: #E5E5F0;
+  // Axis labels and grid of the Usage graphs (Apex options: label `#797997`, grid `#DEDEF1`). Static in both themes.
+  --v-chart-axis-label: #797997;
+  --v-chart-grid: #DEDEF1;
+  // Inset outline of a country / region flag in the Monitoring shares cards (legacy `box-shadow` 1px `rgb(0 0 0 / 10%)`).
+  // Global, not `--shadowColor2`: that one is 0.12 in dark and the legacy outline is 0.1 in both themes.
+  --v-flag-outline: rgba(0, 0, 0, 0.1);
+  // Loading overlay text of the template modal, static per theme (`#1565c0` light, `#e0e0e0` dark).
+  --v-onboarding-loading-light: #1565C0;
+  --v-onboarding-loading-dark: #E0E0E0;
+  // Progress cards of the onboarding installation, super-quick, sync and import modals (static: app-lite paints them in light only, the same in both themes).
+  // Card shadow (the import setup-complete card has no literal of its own).
+  --v-progress-card-shadow: 0 12px 32px 6px rgba(0, 0, 0, 0.06), 0 16px 72px 8px rgba(0, 0, 0, 0.1);
+  // Failed bar fill.
+  --v-progress-error-gradient: linear-gradient(180deg, rgba(241, 40, 40, 0.35) 0%, rgba(241, 40, 40, 0.7) 100%);
+  // Success bar fill.
+  --v-progress-success-gradient: linear-gradient(180deg, rgba(111, 198, 108, 0.5) 0%, #07C07E 100%);
+  // Working (in-progress) bar fill (`:before` / `:after`, light grey, no dark override in app-lite).
+  // Static, not `--v-super-quick-installation-gradient`: that one turns dark in dark mode, app-lite paints this grey in both themes.
+  --v-progress-working-gradient: linear-gradient(180deg, rgba(219, 219, 219, 0.5) 0%, #C4C4C4 100%);
+  // Loader and partial-logo colour on the progress card: `color="#ffffff"` (both themes).
+  --v-progress-loader-color: #FFFFFF;
+  // Force-HTTPS modal list of the other instances: text and bullet colour. Static in both themes
+  // (app-lite has no dark override); `--v-text-darken1` (#FFFFFF in dark) and `--v-warning-base` (#FFC107 in dark) would change the list in dark.
+  --v-security-modal-list-text: #333342;
+  --v-security-modal-list-bullet: #FF7A2F;
+  // Code editor surface: legacy CodeMirror 5 `default` theme in both themes (`theme: 'default'`, `codemirror ^5.65.1`).
+  // Values from the deployed legacy `/fm/` chunk: `.CodeMirror{color:#000}`, `.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7}`, `.CodeMirror-linenumber{color:#999}`. Static: legacy has no dark override.
+  --v-fm-editor-bg: #FFFFFF;
+  --v-fm-editor-text: #000000;
+  --v-fm-editor-gutter-bg: #F7F7F7;
+  --v-fm-editor-gutter-border: #DDDDDD;
+  --v-fm-editor-line-number: #999999;
+}
+
+// Working bar fill in brand colour: `&:before` / `&:after`
+// (`--v-primary-lighten1` → `--v-primary-base`, brand in both themes). On the theme classes, not `:root`: a custom property resolves its `var()`
+// where it is declared, and `--v-primary-lighten1` / `--v-theme-primary` exist only on `.v-theme--*`, so on `:root` the gradient was invalid (no fill).
+.v-theme--light,
+.v-theme--dark {
+  // Frame of the flagged card `FeatureCard` (PanelAlpha Hub card in Settings). The dark variant comes from the base tokens, so one block
+  // serves both themes.
+  --v-feature-card-border: rgb(var(--v-theme-primary));
+  --v-feature-card-bg: var(--v-panel-base);
+  --v-feature-card-ring: var(--v-body-base);
+  --v-feature-card-title: var(--v-text-darken2);
+  --v-feature-card-lead: var(--v-gray-darken1);
+  --v-feature-card-checks-text: var(--v-text-base);
+  --v-feature-card-accent: rgb(var(--v-theme-primary));
+  --v-feature-card-flag-bg: rgb(var(--v-theme-primary));
+  // Connected card: the constant green of `--v-deploy-accent`, not the brand colour.
+  --v-feature-card-ok-border: rgba(var(--v-deploy-accent), 0.45);
+  --v-feature-card-ok-bg: rgba(var(--v-deploy-accent), 0.08);
+  --v-feature-card-busy-border: var(--v-gray-lighten2);
+  // The diagram GIF has a light background burnt in, so its box stays light in dark too.
+  --v-feature-card-diagram-bg: #F7F8FA;
+  // The connected card's diagram (`hub-diagram-ok.gif`): `--v-feature-card-ok-bg` over white, the colour the GIF has burnt in.
+  --v-feature-card-ok-diagram-bg: #EBFAF5;
+  --v-feature-card-diagram-radius: 5px;
+  --v-feature-card-radius: 12px;
+
+  --v-progress-brand-gradient: linear-gradient(180deg, var(--v-primary-lighten1) 0%, rgb(var(--v-theme-primary)) 100%);
+}

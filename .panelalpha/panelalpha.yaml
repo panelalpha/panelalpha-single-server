@@ -1,0 +1,88 @@
+# The PanelAlpha Single Server panel as a PanelAlpha Engine `dockerfile` app.
+#
+# The Engine reads this from the repository root. It builds `Dockerfile`
+# with the repository root as the build context and routes the project's main
+# domain to port 80 (templates/dind/virtualHost-nginx-proxy.blade.php:29-34,
+# 122-151). The image is self-contained and state lives only in `/app/data`;
+# the compose override beside this file keeps one copy at a time.
+#
+# The dev container mounts only `src/`, so src/docker-compose.yml mounts this
+# directory read-only for the tests that validate it.
+#
+# Per-install `env_vars` (CLI `pae project:create --env-var`), never committed
+# here and never baked into an image:
+#   PANELALPHA_ENGINE_URL     Engine API base URL the panel talks to (hairpin)
+#   PANELALPHA_ENGINE_TOKEN   Engine API token; written to the settings table at every start when it differs, never logged
+#   PANELALPHA_ENGINE_CA      Engine/hairpin PEM certificate or a path under /app/data; followed into engine-api-ca
+#   PANELALPHA_USER_EMAIL     first Community user; ignored once a user exists
+#   PANELALPHA_USER_PASSWORD  first Community user's password; never logged
+#   PANELALPHA_HUB_CODE       the installer's PanelAlpha Hub code: claimed once at the first boot for
+#                             PANELALPHA_USER_EMAIL, which then becomes the paired admin; never logged
+#   PANELALPHA_SELF_PROJECT   optional override of the panel's own Engine project username; otherwise the panel asks the Engine
+extends: dockerfile
+id: panelalpha-single-server
+strategy: dockerfile
+label: PanelAlpha
+port: 80
+# The panel starts on the server's own name (the Engine's `cert_domain`) with the certificate the Engine holds for it.
+# The file only asks: the operator allows it with `pae system:public-routing:allow <panel-project>
+# --host-domain`; until then, or on an Engine with no `cert_domain`, the panel keeps the domain it was created with.
+# The Engine applies it once, so the owner can move the panel to another address in Settings and no
+# update moves it back. An Engine older than 2.3.0 refuses this key ("unknown key(s) domain").
+domain: host
+extra:
+  # The root Dockerfile, stated as element-web states its own for a run that
+  # skips the probes (core/resources/sources/github.com/element-hq/element-web/panelalpha.yaml:23-38).
+  dockerfile: Dockerfile
+  port_hint: 80
+git:
+  # The image builds the Client Area from its submodule (Dockerfile), so the
+  # deploy fetches only that one. The Engine clones with redirects off, so its
+  # .gitmodules URL ends in .git: the forge answers the other form with a 301.
+  submodules: [src/frontend/client-area]
+env:
+  # The values the panel needs at runtime. `environment:` outranks `env_file:`,
+  # so these win over files/.env beside this file, which the Engine copies to
+  # the project's `.env`.
+  APP_ENV: production
+  # A string: Compose hands booleans to the container as "false", which `(bool)`
+  # reads as true. "0" is what Laravel's `env('APP_DEBUG')` casts to false.
+  APP_DEBUG: '0'
+  APP_URL: '${PA_PUBLIC_URL}'
+  SESSION_DRIVER: database
+  SESSION_SAME_SITE: lax
+  # The panel is only served over https (APP_URL is
+  # the https PA_PUBLIC_URL), but the Engine's app-lite host proxy does not send
+  # X-Forwarded-Proto (templates/virtualHost-nginx-proxy-app-lite.blade.php:44-46),
+  # so the request-scheme path cannot mark the cookies Secure. Pin the flag here.
+  SESSION_SECURE_COOKIE: 'true'
+  SANCTUM_PREFIX: api
+  # The public SPA origin; the Engine proxy forwards the account's Host.
+  SANCTUM_STATEFUL_DOMAINS: '${PA_PUBLIC_HOST}'
+  QUEUE_CONNECTION: database
+  CACHE_STORE: database
+  BROADCAST_CONNECTION: reverb
+  # Php-fpm discarded worker output, so a web-request failure
+  # was invisible. The `stack` channel writes to the container's stderr (caught
+  # by the generated FPM pools) *and* to a daily file on the /app/data volume.
+  LOG_CHANNEL: stack
+  LOG_STACK: 'stderr,daily'
+  # Only the Engine's proxy can open a connection into the account, so trust its
+  # forwarded headers from the private ranges; an invalid list fails closed.
+  TRUSTED_FRONT_PROXIES: '127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16'
+  # REVERB_APP_ID and REVERB_APP_SECRET are generated once per install into
+  # /app/data and rendered into backend/.env by entrypoint.sh.
+  # REVERB_APP_KEY is the public compatibility key the unchanged Client Area
+  # hard-codes (packages/client-area/src/apis/Auth.js:340), so it stays one
+  # constant on every install. Only the container-local Reverb endpoints are
+  # configuration.
+  REVERB_HOST: 127.0.0.1
+  REVERB_PORT: 8080
+  REVERB_SCHEME: http
+  REVERB_SERVER_HOST: 0.0.0.0
+  REVERB_SERVER_PORT: 8080
+health:
+  # Migrations and the first boot of the queue workers can take a while on a
+  # small account; the default 300 s is the Engine's own default, stated so a
+  # reviewer sees the choice.
+  start_period: 300

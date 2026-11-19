@@ -1,0 +1,53 @@
+// Not scoped, as in legacy: the
+// elements sit inside kit components (`UserItem`, `LogItem`) and the cell. Every selector stays under `.logs-table`, the class of this
+// table only, so nothing leaks into the instance logs. `var(--v-primary-base)` is `rgb(var(--v-theme-primary))`.
+
+.logs-table {
+  .logs-table__instance {
+    display: inline-block;
+    max-width: 150px;
+    color: var(--v-text-darken2);
+    font-weight: 700;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: rgb(var(--v-theme-primary));
+    }
+  }
+
+  .logs-table__log-item {
+    max-width: 480px;
+
+    .information {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // The `!important` is kept from legacy. It beats the Vuetify `d-flex` class that `LogItem.vue`
+      // puts on this span (a `!important` utility), so the ellipsis works as in legacy.
+      display: inline-block !important;
+
+      br {
+        display: none;
+      }
+
+      b {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .user-item__name {
+    white-space: nowrap;
+  }
+
+  .log-table_action {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .actions-row {
+    white-space: nowrap;
+  }
+}

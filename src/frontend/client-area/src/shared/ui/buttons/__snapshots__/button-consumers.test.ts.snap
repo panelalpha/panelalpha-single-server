@@ -1,0 +1,944 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/NewInstanceFloatingButton.vue 1`] = `
+[
+  "@click="startInstallationProcess" class="p-2 font-weight-bold" data-testid="shell-fab" | button.instance.add",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/navbar/AddNewInstanceButton.vue 1`] = `
+[
+  ":loading="loadingServices" @click="loadServices" class="p-2 font-weight-bold" data-testid="shell-add-new" | button.addNew",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/navbar/AdminAreaDropdown.vue 1`] = `
+[
+  ":class="mdAndDown ? 'admin-area-btn-sm' : ''" :href="adminActivatorHref(session.home, mdAndDown)" class="admin-area-btn ml-2" data-testid="shell-admin-activator" target="_blank" v-bind="activatorProps" | appSingleServer.adminAreaDropdown.goTo",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/navbar/UserInfoDropdown.vue 1`] = `
+[
+  ":aria-label="t('button.userMenu')" :class="mobile ? 'button-activator--mobile pl-0 ml-2' : 'button-activator--desktop pl-2 ml-4'" class="button-activator pr-0" data-testid="shell-user-activator" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/notifications/NotificationsDropdown.vue 1`] = `
+[
+  ":aria-label="t('button.notifications')" :class="mobile ? 'ml-2' : 'ml-4'" @click="store.readAll()" class="notifications-activator" data-testid="shell-bell" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/notifications/NotificationsManager.vue 1`] = `
+[
+  ":aria-label="t('button.dismiss')" @click="emit('remove-notification', item)" v-bind="tooltipProps"",
+  "@click="emit('clear-all')" block | button.notification.clear",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/app/shell/trial/TrialInfoBox.vue 1`] = `
+[
+  ":href="upgradeUrl" class="ml-4" target="_blank" v-if="upgradeUrl" | general.upgradeNow",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/domain/ui/DomainsNameserverChecker.vue 1`] = `
+[
+  ":aria-label="t('button.checkNameservers')" class="ml-1" data-testid="ns-checker-activator" v-bind="activatorProps"",
+  "@click="toggleDialog" class="v-btn--fix-dns ns-checker__fix ml-7 px-3" data-testid="ns-checker-fix" | heading.instance.dnsTooltip.button",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/label/ui/AddNewLabel.vue 1`] = `
+[
+  "@click="submit()" | button.label.add",
+  "@click="emit('change-view')" class="ml-2 gray--text" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/label/ui/AssignExistingLabel.vue 1`] = `
+[
+  "@click="emit('change-view')" class="custom-button" | button.addNew",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/CancelInstallationDialog.vue 1`] = `
+[
+  ":disabled="!confirmed || loading" :loading="loading" @click="confirm" block class="cancel-submit" data-testid="cancel-install-submit" | button.import.cancel, button.installation.cancel",
+  ":disabled="loading" @click="close" block class="mt-2" data-testid="cancel-install-resume" | button.import.resume, button.installation.resume",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/CreateStagingModal.vue 1`] = `
+[
+  ":disabled="loadingUsage" :loading="submitting" @click="submit()" block data-testid="staging-submit" | button.createStaging",
+  ":disabled="submitting" @click="opened = false" block data-testid="staging-cancel" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/DnsSslIndicator.vue 1`] = `
+[
+  "@click="openFixDns" class="v-btn--fix-dns ml-7 px-3" | heading.instance.dnsTooltip.button",
+  ":loading="togglingDnsAlerts" @click="toggleDnsAlerts(false)" class="v-btn--fix-dns ml-7 px-3" | button.ignore",
+  ":loading="togglingDnsAlerts" @click="toggleDnsAlerts(true)" class="v-btn--fix-dns ml-7 px-3 mt-7" v-else | button.restoreAlerts",
+  "@click="openPreviewSite" | heading.instance.modal.setDomain.generateUrl",
+  "@click="fixDnsOpen = false" block class="dns-fix-close" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/ImportInstanceDetailsModal.vue 1`] = `
+[
+  "@click="retryImport" block data-testid="import-details-retry" | button.try",
+  "@click="close" block class="import-details__close mt-4" data-testid="import-details-close-button" | button.close",
+  "@click="close" block data-testid="import-details-close-button" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/InstanceAvatar.vue 1`] = `
+[
+  "@click="emit('show-import-details')" class="mr-2 px-2" | button.import.details",
+  "@click="emit('restart-installation')" class="px-2" | button.try",
+  "@click="emit('show-import-details')" class="mr-2 px-2" | button.import.details",
+  "@click="emit('cancel-installation')" class="px-2" | button.import.cancel",
+  "@click="emit('restart-installation')" class="mr-2 px-2" | button.try",
+  "@click="emit('cancel-installation')" class="px-2" | button.installation.cancel",
+  "class="px-2" | button.action.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/PreviewSiteModal.vue 1`] = `
+[
+  "class="ml-auto success-lighten-button" | button.copyUrl",
+  ":href="temporaryUrlComputed" class="w-100 mb-8" target="_blank" | button.visitSite",
+  ":loading="submitting" @click="getPreviewSite" block | button.temporaryUrl.get",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/ShareAccessTable.vue 1`] = `
+[
+  ":aria-label="t('tooltip.sharedAccess.removeAccess')" @click.stop="emit('user-remove-access', asRow(row).user!)" data-testid="share-remove-access" v-if="!asRow(row).owner"",
+  ":aria-label="t('tooltip.sharedAccess.removeAccess')" @click.stop="emit('user-remove-access', asRow(row).user!)" data-testid="share-remove-access" v-if="!asRow(row).owner"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/ShareInviteForm.vue 1`] = `
+[
+  ":loading="inviteLoading" @click="emit('invite')" class="share-invite__button" data-testid="share-invite"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/SharePersonCell.vue 1`] = `
+[
+  ":aria-label="resendTooltip" :class="{ 'share-person__resend--pending': hasPendingChanges }" :disabled="!resendAvailable" :loading="resending" @click="emit('resend', user)" class="share-person__resend" data-testid="share-resend"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/WpAdminSsoModal.vue 1`] = `
+[
+  ":loading="submitting" @click="!submitting && generateSsoPreviewUrl()" block data-testid="sso-preview" | button.loginWithTempUrl",
+  ":loading="submitting" @click="!submitting && submit()" block data-testid="sso-direct" | button.loginDirectly",
+  ":loading="submitting" @click="!submitting && submit()" block data-testid="sso-generate" | button.generateSsoLink",
+  ":loading="submitting" @click="loginFromFallback" block data-testid="sso-login" | button.ssoLogin",
+  "@click="!submitting && close()" block class="normal" data-testid="sso-cancel" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/backups/AutomaticBackupsConfirmation.vue 1`] = `
+[
+  ":loading="submitting" @click="disableAutobackup" block | button.disableAutomaticBackups",
+  "@click="emit('card-close')" block | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/backups/AutomaticBackupsModal.vue 1`] = `
+[
+  "@click="emit('modal-close')" v-if="!submitting"",
+  ":loading="submitting" @click="submitSettings" block | button.automaticBackup.edit, button.automaticBackup.enable",
+  "@click="emit('modal-close')" block class="normal mt-2" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/backups/BackupAutomaticSwitcher.vue 1`] = `
+[
+  "@click="handleSwitchChange" class="mt-0 pt-0" v-bind="activatorProps" v-if="editable" | button.disable, button.activate",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/deploy/DeployKeyPanel.vue 1`] = `
+[
+  ":disabled="loading" :loading="loading" @click="emit('connect')" v-if="!hideConnect"",
+  ":disabled="loading" @click="emit('regenerate')" class="btn-default-color" v-if="showRegenerate" | button.onboarding.gitDeploy.regenerateDeployKey",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/deploy/DeployLogsModal.vue 1`] = `
+[
+  "@click="close" data-testid="deploy-logs-close-icon"",
+  ":disabled="cancelling" @click="confirmingCancel = true" data-testid="deploy-logs-cancel" v-if="!confirmingCancel" | deployLogs.cancelDeploy",
+  ":loading="cancelling" @click="emit('cancel-deploy')" data-testid="deploy-logs-cancel-confirm" | button.confirm",
+  ":disabled="cancelling" @click="confirmingCancel = false" | button.cancel",
+  ":loading="downloading" @click="emit('download')" data-testid="deploy-logs-download" v-if="downloadLogId" | deployLogs.downloadLog",
+  "@click="close" data-testid="deploy-logs-close" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/status-issues/IssueResolveModal.vue 1`] = `
+[
+  ":disabled="submitting" @click="onCancel" | button.cancel",
+  ":disabled="!canResolve || submitting" :loading="submitting" @click="onResolve" class="issue-resolve-modal__resolve" data-testid="issue-resolve-submit" | button.statusIndicator.resolve",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/project/ui/status-issues/StatusIndicator.vue 1`] = `
+[
+  "@click="onIssueAction(issue)" class="status-list__issue-action mt-2" v-if="issue.showAction"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/ssl/ui/PendingSslIndicator.vue 1`] = `
+[
+  ":aria-label="statusText" v-bind="activatorProps" v-if="isFailed"",
+  ":aria-label="statusText" v-bind="activatorProps" v-else",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/ssl/ui/SslEditModal.vue 1`] = `
+[
+  ":loading="submitting" @click="onRemove" block data-testid="ssl-remove-confirm" | button.remove",
+  ":disabled="submitting" @click="cancelRemove" block class="normal" | button.cancel",
+  ":disabled="isOrderBlocking" :loading="submitting" @click="onSubmit" block data-testid="ssl-edit-submit"",
+  ":disabled="submitting" @click="startRemove" block data-testid="ssl-edit-remove" | heading.instance.editSsl.modal.remove.title",
+  ":disabled="submitting" @click="close" block class="normal" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/entities/sso/ui/PhpMyAdminSsoModal.vue 1`] = `
+[
+  "@click="close()" v-if="!submitting"",
+  ":disabled="submitting" :loading="submitting && submittingAction === 'preview'" @click="login('preview')" block data-testid="phpmyadmin-sso-preview" | button.loginWithTempUrl",
+  ":disabled="submitting" :loading="submitting && submittingAction === 'default'" @click="login('default')" block data-testid="phpmyadmin-sso-direct" | button.loginDirectly",
+  "@click="loginFromFallback" block data-testid="phpmyadmin-sso-login" | button.ssoLogin",
+  ":disabled="submitting" @click="close()" block class="normal" data-testid="phpmyadmin-sso-cancel" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/alerts/ErrorAlert.vue 1`] = `
+[
+  ":aria-label="t('button.dismiss')" @click="removeAlert"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/alerts/SuccessAlert.vue 1`] = `
+[
+  ":aria-label="t('button.dismiss')" @click="removeAlert"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/auth-frame/AuthSocialButtons.vue 1`] = `
+[
+  ":data-testid="\`auth-social-\${provider}\`" :loading="loading" @click.prevent="emit('select', provider)" block class="social-login-btn"",
+  ":data-testid="\`auth-social-\${provider}\`" :key="provider" :loading="loading" @click.prevent="emit('select', provider)" block class="social-login-btn" v-for="provider in providers"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/data-iterator/DataIteratorFilter.vue 1`] = `
+[
+  "@click="applyLabels" class="mr-2" | button.apply",
+  "@click="closeMenu" | button.cancel",
+  "@click="removeAllLabels" class="clear-filter-btn" | button.clearFilter",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/data-iterator/DataIteratorFooter.vue 1`] = `
+[
+  ":class="pageNumberIsActive(item) ? 'active' : ''" :key="index" @click="updateItemsPerPage(item)" v-for="(item, index) in possibleItemsPerPage[listStyle]"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/data-iterator/DataIteratorNoResultsContainer.vue 1`] = `
+[
+  "@click="emit('clear-all-filters')" class="px-3" | button.clearFilter",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/labels/LabelChip.vue 1`] = `
+[
+  ":aria-label="t('button.remove')" @click.stop="emit('unassign-label', item)" class="ml-1" v-if="removable"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/labels/LongValueBox.vue 1`] = `
+[
+  "@click="expanded = true" class="ml-2" v-if="canExpand" | button.more",
+  "@click="expanded = false" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/modal/BasicModalField.vue 1`] = `
+[
+  ":aria-label="showPassword ? t('button.secret.hide') : t('button.secret.show')" @click="showPassword = !showPassword" class="password-toggle mr-4 ml-4" v-show="!field.hidden"",
+  "@click.prevent="model = generatePassword()" v-show="!field.hidden" | button.password.generate",
+  ":aria-label="showPassword ? t('button.secret.hide') : t('button.secret.show')" @click="showPassword = !showPassword" class="password-toggle mr-0 ml-4" v-show="!field.hidden"",
+  "@click.prevent="emit('button-click')" class="ml-4" v-show="!field.hidden" | button.password.setNew",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/shared/ui/selection/SelectSnackbar.vue 1`] = `
+[
+  ":aria-label="t('table.snackbar.deselect')" @click="selectAll(false)" class="snackbar-button mr-3"",
+  ":aria-label="t('button.more')" class="ml-auto" data-testid="select-snackbar-more" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/billing/BillingView.vue 1`] = `
+[
+  ":href="upgradeUrl" block class="mt-2" target="_blank" v-if="upgradeUrl" | button.upgradeNow",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/billing/InvoicesTable.vue 1`] = `
+[
+  ":loading="payInvoiceUrlLoading" @click="getPayInvoiceUrl(asInvoice(row).id)" class="px-2" data-testid="billing-pay-now" v-if="asInvoice(row).status == 'Unpaid'" | button.billing.pay_now",
+  ":aria-label="t('Download')" @click="downloadInvoice(asInvoice(row).id)" class="btn-icon invoice-download px-2" data-testid="billing-download" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/billing/NoAvailableInvoicesView.vue 1`] = `
+[
+  ":to="preferredSpaBase(session.home)" data-testid="billing-empty-back" | button.dashboard.back",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/profile/DevicesSnackbar.vue 1`] = `
+[
+  "@click="emit('mass-action-forget')" data-testid="account-snackbar-forget" | button.forget",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/profile/MyAccountModal.vue 1`] = `
+[
+  ":aria-label="shownPasswords[field.name] ? t('button.secret.hide') : t('button.secret.show')" :data-testid="\`account-modal-toggle-\${field.name}\`" @click="shownPasswords[field.name] = !shownPasswords[field.name]" class="password-toggle ml-4"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/profile/MyAccountView.vue 1`] = `
+[
+  ":class="smAndDown ? 'mt-0' : ''" @click="showChangeEmailModal" block class="v-input--btn" data-testid="account-change-email" | button.emailAddress.change",
+  "@click="showChangePasswordModal" block class="v-input--lg" data-testid="account-change-password"",
+  "@click="saveChanges" data-testid="account-save" | button.saveChanges",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/services/CancelServiceButton.vue 1`] = `
+[
+  "@click.prevent="opened = true" data-testid="services-cancel-open" | button.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/services/ServicesTable.vue 1`] = `
+[
+  ":href="asRow(row).plan_upgrade_link!" data-testid="services-upgrade" target="_blank" v-if="billingEnabled && asRow(row).plan_upgrade_link" | button.upgrade",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/settings/SettingsView.vue 1`] = `
+[
+  "@click="loadSettings" class="settings-retry" data-testid="settings-retry" type="button" | button.retry",
+  ":href="\`\${movedTo}/\`" data-testid="settings-url-moved-open" | settings.urlMoved.open",
+  ":aria-label="translate('button.copyUrl')" @click="copy(callback)" class="oauth-copy"",
+  "@click="loadSitesBaseDomain" class="settings-sites-base-domain-retry mb-4" data-testid="settings-sites-base-domain-retry" type="button" v-if="sitesBaseDomain.errors.length > 0" | button.retry",
+  ":disabled="loading || !changed" :loading="savingGeneral" data-testid="settings-save" type="submit" | button.saveChanges",
+  ":disabled="!backups.loaded || !backupsChanged || !backups.store" :loading="savingBackups" type="submit" | button.saveChanges",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/settings/backups/BackupStorage.vue 1`] = `
+[
+  "@click="emit('retry')" class="backup-retry" type="button" | button.retry",
+  "@click="modalOpen = true" block class="backup-store-button" type="button" | settings.backups.changeStore, settings.backups.configureStore",
+  "@click="removeModalOpen = true" block class="backup-store-remove mt-2" type="button" v-if="store && storeSelected" | settings.backups.removeStore",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/account/settings/hub/HubConnection.vue 1`] = `
+[
+  ":block="!lgAndUp" @click="disconnectModalOpen = true" class="hub-disconnect" data-testid="hub-disconnect" | settings.hub.disconnect",
+  ":block="!lgAndUp" :loading="checking" @click="checkAgain" class="hub-retry" data-testid="hub-check-again" type="button" v-if="retry" | settings.hub.checkAgain, settings.hub.checking",
+  ":block="!lgAndUp" :loading="connecting || completing" @click="connect" class="hub-connect" data-testid="hub-connect" type="button" v-else | settings.panelalphaHub.connect",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/AcceptInviteView.vue 1`] = `
+[
+  ":loading="loading" @click="register" block class="mt-6" data-testid="auth-submit" type="button" | button.register",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/ForgotPasswordView.vue 1`] = `
+[
+  "@click="sendPasswordResetLink" block class="forgot-password-btn mt-6" data-testid="auth-submit" type="button" | button.resetPasswordSend",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/HubLoginView.vue 1`] = `
+[
+  "block data-testid="auth-submit" to="/login" | button.logIn",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/LoginView.vue 1`] = `
+[
+  ":loading="loading" @click.prevent="submitTwoFactor" block data-testid="auth-submit" | button.verify",
+  "@click="goBackFromTwoFactor" block class="mt-4" data-testid="auth-secondary" | button.back",
+  ":disabled="!recoveryConfirmed" :loading="loading" @click.prevent="finishAfterRecovery" block class="mt-4" data-testid="auth-submit" | button.continue",
+  ":loading="loading" block data-testid="auth-submit" type="submit" | button.logIn",
+  "@click="goBackToEmail" block class="mt-4" data-testid="auth-secondary" v-if="step === 'password'" | button.back",
+  ":loading="hubLoading" @click.prevent="hubLogin" block class="social-login-btn" data-testid="auth-hub-login" v-if="hubLoginEnabled" | button.signInWithPanelAlpha",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/RegisterView.vue 1`] = `
+[
+  ":loading="loading" block class="mt-6" data-testid="auth-submit" type="submit" | button.register",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/ResetPasswordView.vue 1`] = `
+[
+  "@click="resetPasswordClick" block class="mt-6" data-testid="auth-submit" type="button" | button.resetPassword",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/auth/VerifyEmail.vue 1`] = `
+[
+  ":disabled="!codeComplete" :loading="loading" @click.prevent="submitVerify" block data-testid="auth-submit" | heading.loginPage.emailVerification.confirmEmailAddress",
+  ":disabled="resendWait" :loading="loading" @click.prevent="resendCode" block class="mt-4" data-testid="auth-secondary"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/connect-ai/McpToolPanel.vue 1`] = `
+[
+  "@click="emit('go-claude-code')" class="mt-4" data-testid="connect-ai-claude-code-instead" | heading.connectAi.instructions.claude.setUpCodeInstead",
+  "@click="emit('create-token')" data-testid="connect-ai-create-token" | heading.connectAi.createToken",
+  "class="ml-auto" data-testid="connect-ai-copy" | button.copy",
+  ":href="tool.docs" class="pl-0" data-testid="connect-ai-docs" rel="noopener" target="_blank" | heading.connectAi.tool.readDocs",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/HostingView.vue 1`] = `
+[
+  ":href="adminServerUrl" class="p-2 font-weight-bold ml-auto" data-testid="usage-admin-button" rel="noopener noreferrer" target="_blank" | button.fullServerManagement",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/NoAvailableHostingView.vue 1`] = `
+[
+  ":href="suspendedService.plan_upgrade_link" class="hosting-suspended-upgrade" data-testid="hosting-suspended-upgrade" target="_blank" v-if="suspendedService.plan_upgrade_link"",
+  ":href="supportUrl" data-testid="hosting-suspended-support" target="_blank" v-if="supportUrl"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/containers/ContainersView.vue 1`] = `
+[
+  ":aria-label="t('heading.hosting.containers.action.up')" :disabled="!!actionLoading[group.account.id] || group.containers.length === 0" :loading="actionLoading[group.account.id] === 'up'" @click="doProjectAction(group, 'up')" class="mr-1 containers-group-btn" v-bind="activatorProps" | heading.hosting.containers.action.up",
+  ":aria-label="t('heading.hosting.containers.action.restart')" :disabled="!!actionLoading[group.account.id] || group.containers.length === 0" :loading="actionLoading[group.account.id] === 'restart'" @click="confirmProjectAction(group, 'restart')" class="mr-1 containers-group-btn" v-bind="activatorProps" | heading.hosting.containers.action.restart",
+  ":aria-label="t('heading.hosting.containers.action.stop')" :disabled="!!actionLoading[group.account.id] || group.containers.length === 0" :loading="actionLoading[group.account.id] === 'stop'" @click="confirmProjectAction(group, 'stop')" class="mr-1 containers-group-btn" v-bind="activatorProps" | heading.hosting.containers.action.stop",
+  ":aria-label="t('heading.hosting.containers.action.pull')" :disabled="!!actionLoading[group.account.id] || group.containers.length === 0" :loading="actionLoading[group.account.id] === 'pull'" @click="confirmProjectAction(group, 'pull')" v-bind="activatorProps" | heading.hosting.containers.action.pull",
+  ":aria-label="toggleLabel(asContainer(container).State)" :disabled="rowBusy(group, asContainer(container)) && !rowActing(group, asContainer(container), toggleAction(asContainer(container).State))" :loading="rowActing(group, asContainer(container), toggleAction(asContainer(container).State))" @click="requestServiceAction(group, asContainer(container).Service, toggleAction(asContainer(container).State))"",
+  ":aria-label="t('heading.hosting.containers.service.restart')" :disabled="(rowBusy(group, asContainer(container)) && !rowActing(group, asContainer(container), 'restart')) || !canStop(asContainer(container).State)" :loading="rowActing(group, asContainer(container), 'restart')" @click="requestServiceAction(group, asContainer(container).Service, 'restart')"",
+  ":aria-label="copy.publicUrls" :disabled="rowBusy(group, asContainer(container)) || parseHostPorts(asContainer(container).Ports).length === 0" @click="openManageUrls(group, asContainer(container))" data-testid="containers-public-urls" v-if="canManageUrls"",
+  ":aria-label="t('heading.hosting.containers.logs.title')" :disabled="rowBusy(group, asContainer(container))" @click="openLogs(group, asContainer(container).Service)"",
+  ":aria-label="t('button.remove')" :loading="urlsDialog.deletingId === rule.id" @click="confirmRemoveUrl(rule)" class="urls-rule-remove"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/cron/CronView.vue 1`] = `
+[
+  ":aria-label="t('button.cron.update')" @click="openEdit(row as unknown as CronRow)" data-testid="cron-row-edit"",
+  ":aria-label="t('button.cron.delete')" @click="openDelete(row as unknown as CronRow)" data-testid="cron-row-delete"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/databases/DatabasesView.vue 1`] = `
+[
+  ":aria-label="t('button.database.edit')" @click="showRenameDatabaseModal(slotRow(row))" data-testid="databases-row-edit" v-if="row.can_rename && !mobile"",
+  ":aria-label="t('button.database.delete')" @click="showDeleteDatabaseModal(slotRow(row))" data-testid="databases-row-delete"",
+  "@click="loadDbPrivilegesModal(slotUserRow(row), db)" data-testid="users-row-database" v-bind="activatorProps"",
+  ":aria-label="t('button.database.managePrivileges')" @click="loadUserPrivilegesModal(slotUserRow(row))" data-testid="users-row-privileges" v-if="usersMeta.privilegesSupported"",
+  ":aria-label="t('button.user.edit')" @click="showEditUserModal(slotUserRow(row))" data-testid="users-row-edit"",
+  ":aria-label="t('button.showAccessDetails')" @click="loadInfoModal(slotUserRow(row))" data-testid="users-row-info"",
+  ":aria-label="t('button.user.delete')" @click="showDeleteUserModal(slotUserRow(row))" data-testid="users-row-delete"",
+  ":href="'#'" :loading="phpmyadminSso.state.loading" :target="'_blank'" @click.prevent="onPhpmyadminLogin" block data-testid="phpmyadmin-login" | button.login.phpmyadmin",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/dns/DnsView.vue 1`] = `
+[
+  ":aria-label="t('button.click.disable')" @click="toggleProxyStatus(listRow(item))" class="btn-proxy-status" data-testid="dns-proxy-on" v-bind="activatorProps"",
+  ":aria-label="t('button.click.enable')" @click="toggleProxyStatus(listRow(item))" class="btn-proxy-status btn-proxy-status--off" data-testid="dns-proxy-off" v-bind="activatorProps"",
+  ":aria-label="t('button.dns.edit')" @click="openEditModal(listRow(row))" data-testid="dns-row-edit"",
+  ":aria-label="t('button.dns.delete')" @click="openDeleteModal(listRow(row))" data-testid="dns-row-delete"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/domains/DomainsView.vue 1`] = `[]`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/domains/TransferDomainModal.vue 1`] = `
+[
+  ":disabled="submitting" :loading="submitting" @click="handleTransferDomain" block data-testid="transfer-now" | button.transferNow",
+  ":disabled="submitting" @click="closeModal" block class="mx-0 mt-2" | button.back",
+  ":disabled="submitting" @click="closeModal" block | button.back",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/email-addresses/EmailAddressesView.vue 1`] = `
+[
+  ":aria-label="t('button.emailAddress.update')" @click="openEditModal(slotRow(row))"",
+  ":aria-label="t('button.emailAddress.show')" :loading="listRow(slotRow(row)).detailsButtonLoading" @click="loadDetailsModal(slotRow(row))"",
+  ":aria-label="t('button.emailAddress.delete')" @click="openDeleteModal(slotRow(row))"",
+  ":aria-label="t('button.emailAddress.logIn')" :loading="listRow(slotRow(row)).webmailButtonLoading" @click="webmailSso(slotRow(row))"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/email-forwarders/EmailForwardersView.vue 1`] = `
+[
+  ":aria-label="t('button.emailForwarder.delete')" @click="openDeleteModal(slotRow(row))" data-testid="email-forwarders-delete"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/components/FmBreadcrumb.vue 1`] = `
+[
+  ":aria-label="t('heading.hosting.fileManager.title')" @click="open(ROOT_PATH)" class="fm-breadcrumb__item"",
+  "@click="open(segment.path)" class="fm-breadcrumb__item" v-else",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/components/FmInfoBlock.vue 1`] = `
+[
+  ":aria-label="t('heading.hosting.fileManager.clipboard.title')" @click="emit('open-clipboard')" data-testid="fm-info-clipboard" v-if="store.clipboard !== null"",
+  ":aria-label="t('heading.hosting.fileManager.status.title')" @click="emit('open-status')" data-testid="fm-info-status"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/components/FmNavbar.vue 1`] = `
+[
+  ":aria-label="t(item.label, { defaultValue: item.defaultValue })" :disabled="item.disabled" :key="item.key" @click="item.run" v-for="item in group"",
+  ":aria-label="t('button.fileManager.hiddenFiles')" @click="store.toggleHidden()"",
+  ":aria-label="t('button.fileManager.fullScreen')" @click="toggleFullScreen"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/modals/FmAudioPlayerModal.vue 1`] = `
+[
+  ":data-testid="\`fm-audio-speed-\${speed}\`" :key="speed" :value="speed" v-for="speed in SPEEDS"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/modals/FmClipboardModal.vue 1`] = `
+[
+  ":aria-label="t('button.delete')" @click="store.removeFromClipboard(row.type, row.path)" data-testid="fm-clipboard-remove"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/modals/FmCropModule.vue 1`] = `
+[
+  ":aria-label="t('button.apply')" :disabled="!canApply" :title="t('button.apply')" @click="apply" block data-testid="fm-crop-apply"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.move')" :disabled="!canUse" @click="moveImage(-10, 0)" data-testid="fm-crop-move-left"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.move')" :disabled="!canUse" @click="moveImage(10, 0)" data-testid="fm-crop-move-right"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.move')" :disabled="!canUse" @click="moveImage(0, -10)" data-testid="fm-crop-move-up"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.move')" :disabled="!canUse" @click="moveImage(0, 10)" data-testid="fm-crop-move-down"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.flip')" :disabled="!canUse" @click="flip('x')" data-testid="fm-crop-flip-x"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.flip')" :disabled="!canUse" @click="flip('y')" data-testid="fm-crop-flip-y"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.rotate')" :disabled="!canUse" @click="rotate(-45)" data-testid="fm-crop-rotate-left"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.rotate')" :disabled="!canUse" @click="rotate(45)" data-testid="fm-crop-rotate-right"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.zoom')" :disabled="!canUse" @click="zoom(0.1)" data-testid="fm-crop-zoom-in"",
+  ":aria-label="t('message.fileManager.cropper.toolbar.zoom')" :disabled="!canUse" @click="zoom(-0.1)" data-testid="fm-crop-zoom-out"",
+  ":aria-label="t('button.fileManager.reset')" :disabled="!canUse" :title="t('button.fileManager.reset')" @click="reset" data-testid="fm-crop-reset"",
+  ":aria-label="t('button.save')" :disabled="!canUse" :title="t('button.save')" @click="save" data-testid="fm-crop-save"",
+  ":disabled="saving" @click="emit('close')" data-testid="fm-crop-back" | button.back",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/file-manager/modals/FmUploadModal.vue 1`] = `
+[
+  ":disabled="submitting" @click="openPicker" data-testid="fm-upload-select" | button.fileManager.selectFiles",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/ftp/FtpView.vue 1`] = `[]`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/sftp/SftpView.vue 1`] = `[]`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/summary/HostingInstancesCard.vue 1`] = `
+[
+  ":loading="loadingServices" @click="reloadInstances(99)" block class="load-more-btn" data-testid="summary-load-more" | button.loadMore",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/summary/HostingSummaryCard.vue 1`] = `
+[
+  "class="px-2" | button.manage",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/hosting/summary/SummaryView.vue 1`] = `
+[
+  ":loading="sso.loading.value" @click.prevent="sso.open(selectedAccount!.id)" class="p-2 font-weight-bold ml-auto" data-testid="summary-sso" href="#" target="_blank" v-if="!loading && hasPrivilege(service, HOSTING_PRIVILEGES.CONTROL_PANEL_SSO)" | button.login.controlPanel",
+  ":href="\`\${service.plan_upgrade_link}?paupgradeserviceid=\${service.id}\`" class="summary-upgrade" data-testid="summary-plan-upgrade" target="_blank" v-if="service.plan_upgrade_link" | button.upgrade",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/not-found/PageNotFoundView.vue 1`] = `
+[
+  ":to="{ name: 'home' }" data-testid="not-found-home"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/InstanceActionSnackbar.vue 1`] = `
+[
+  "@click="emit('mass-action-share')" class="mr-3" data-testid="instances-snackbar-share" v-if="canShare" | button.share",
+  "@click="emit('mass-action-remove')" data-testid="instances-snackbar-remove" | button.remove",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/InstanceItemActions.vue 1`] = `
+[
+  ":loading="manageSiteLoading" @click.stop.prevent="manageSite" data-testid="instance-manage-site" | button.manage, button.site.manage",
+  "@click.stop.prevent="onOpenLogin" class="mt-4 link-hover" data-testid="instance-wp-admin" | button.openProject, button.wpAdmin",
+  "@click.stop.prevent="emit('show-deploy-logs', instance)" class="flex-grow-1" data-testid="instance-show-logs" | deployLogs.showLogs",
+  ":title="t('deployLogs.downloadLog')" @click.stop.prevent="emit('download-deploy-logs', instance)" class="instance-actions__icon-btn flex-shrink-0" data-testid="instance-download-logs"",
+  "@click.stop.prevent="emit('import-details', instance)" class="mt-4" data-testid="instance-import-details" v-if="isImport" | button.import.details",
+  "@click.stop.prevent="emit('retry-install', instance)" class="mt-4" data-testid="instance-retry-install" v-if="!isImport" | button.try",
+  "@click.stop.prevent="emit('cancel-install', instance)" class="cancel-installation-btn mt-4" data-testid="instance-cancel-install" | button.import.cancel, button.installation.cancel",
+  "@click.stop.prevent="emit('show-deploy-logs', instance)" block data-testid="instance-show-logs" | deployLogs.showLogs",
+  "@click.stop.prevent="emit('cancel-deploy', instance)" block class="cancel-installation-btn" data-testid="instance-cancel-deploy" | deployLogs.cancelDeploy",
+  "@click.stop.prevent="emit('import-details', instance)" data-testid="instance-import-details" v-if="isImport" | button.import.details",
+  "@click.stop.prevent="emit('cancel-install', instance)" class="cancel-installation-btn mt-4" data-testid="instance-cancel-install" | button.import.cancel, button.installation.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/InstanceItemMenu.vue 1`] = `
+[
+  ":aria-label="t('button.actions')" :data-testid="main ? 'instance-table-menu' : undefined" :id="\`instance-item-\${id}\`" class="instance-item__more-button" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/InstanceNoData.vue 1`] = `
+[
+  ":loading="loadingServices" @click="loadServices" data-testid="instances-no-data-create" | button.instance.create",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/InstanceSubinstanceIndicator.vue 1`] = `
+[
+  "@click="emit('restart-installation')" class="mr-2 px-2" | button.try",
+  "@click="emit('cancel-installation')" class="px-2" | button.installation.cancel",
+  "class="px-2" | button.action.cancel",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/details/SiteDetailsCard.vue 1`] = `
+[
+  ":href="upgradeHref" target="_blank" v-if="upgradeHref" | button.upgrade",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/developer-settings/PhpSettingsModal.vue 1`] = `
+[
+  ":aria-label="t('button.edit')" @click="item.editing = true" v-bind="activatorProps"",
+  ":aria-label="t('button.cancel')" @click="item.editing = false" v-bind="activatorProps"",
+  ":aria-label="t('button.delete')" @click="removeRecord(index)" v-bind="activatorProps"",
+  "@click="addDirective" class="btn-default-color" | button.addDirective",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/env-file/EnvFileView.vue 1`] = `
+[
+  "@click="showImportModal" class="p-2 mr-2 page-title__add-button" data-testid="env-import" v-if="items.length > 0" | heading.instance.advanced.envFile.import",
+  "@click="showImportModal" class="p-2" data-testid="env-empty-import" | heading.instance.advanced.envFile.import",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/git/GitView.vue 1`] = `
+[
+  ":disabled="syncActionsDisabled" :loading="submitting.push" @click="pushFromCard" v-if="!remoteAhead" | heading.instance.advanced.git.drift.push",
+  ":disabled="syncActionsDisabled" :loading="submitting.pull" @click="pullFromCard" v-else | heading.instance.advanced.git.drift.pullFirst",
+  ":disabled="syncActionsDisabled" :loading="submitting.revert" @click="revertFromDrift" | heading.instance.advanced.git.drift.revert",
+  ":disabled="actionsDisabled" :loading="submitting.ignoreDrift" @click="ignoreDrift" class="git-text-btn git-btn-32" | heading.instance.advanced.git.drift.ignore",
+  ":disabled="actionsDisabled" :loading="submitting.repair" @click="repairLocalRepository" | heading.instance.advanced.git.localRepoMissing.repair",
+  ":disabled="syncActionsDisabled" @click="showBranchModal" class="px-1 ml-1 git-btn-32" v-if="canManageGit" | heading.instance.advanced.git.setupBanner.changeBranch",
+  ":disabled="syncActionsDisabled" :loading="submitting.pull" @click="pullFromCard" class="mr-2" v-if="setupAction !== 'push'"",
+  ":disabled="syncActionsDisabled" :loading="submitting.push" @click="pushFromCard" v-else | heading.instance.advanced.git.setupBanner.push",
+  ":disabled="actionsDisabled" :loading="submitting.connect" @click="showDisconnectModal" v-if="showDisconnect" | button.disconnect.default",
+  ":disabled="hostingUnsupported || actionsDisabled" :loading="submitting.connect" @click="connectRepository" v-else-if="!connected && canManageGit && !isSshConnectForm" | heading.instance.advanced.git.connect.button",
+  ":disabled="actionsDisabled" @click="showTokenModal" class="px-0 git-text-btn git-btn-32" v-if="connectionHealthIsError && connectionHealthReason === 'token' && canManageGit" | heading.instance.advanced.git.connection.updateToken",
+  ":disabled="actionsDisabled" :value="false" | heading.instance.advanced.git.repoMode.useRelated",
+  ":disabled="actionsDisabled" :value="true" | heading.instance.advanced.git.repoMode.useDifferent",
+  ":aria-label="showConnectToken ? t('button.secret.hide') : t('button.secret.show')" :disabled="actionsDisabled" @click="showConnectToken = !showConnectToken"",
+  ":disabled="actionsDisabled || sshKeyLoading" :loading="sshKeyLoading" @click="generateDeployKeyForForm" v-if="!sshDeployKey" | button.onboarding.gitDeploy.generateDeployKey",
+  ":disabled="actionsDisabled" @click="showRotateKeyModal" | button.onboarding.gitDeploy.regenerateDeployKey",
+  ":disabled="actionsDisabled" @click="showDeleteKeyModal" | button.onboarding.gitDeploy.deleteDeployKey",
+  "@click="loadConnectedKey" | button.retry",
+  ":disabled="actionsDisabled || connectedKeySubmitting" :loading="connectedKeySubmitting" @click="generateConnectedKey" | button.onboarding.gitDeploy.generateDeployKey",
+  ":disabled="syncActionsDisabled" :loading="branchModalLoading" @click="showBranchModal" v-if="canManageGit" | button.manage",
+  ":disabled="actionsDisabled" :loading="submitting.credentials" @click="showTokenModal" v-if="canManageGit" | button.manage",
+  ":disabled="actionsDisabled" :loading="submitting.check" @click="checkUpdates" v-if="canManageGit" | heading.instance.advanced.git.lastCommit.checkUpdates",
+  ":disabled="syncActionsDisabled" :loading="submitting.pull" @click="pullFromCard" v-if="canManageGit" | button.git.pull",
+  ":disabled="syncActionsDisabled || remoteAhead" :loading="submitting.push" @click="pushFromCard" v-if="canManageGit" | button.git.push",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/logs/LogsNoData.vue 1`] = `
+[
+  "@click="emit('download')" v-if="btnDownload" | button.download",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/logs/LogsView.vue 1`] = `
+[
+  ":aria-label="t('button.download')" @click="downloadWebserverLogsFile(item.name)" class="ml-4"",
+  ":loading="itemsLoading" @click="loadInstanceLogs" data-testid="instance-logs-retry" type="button" | button.retry",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/security/SslCertificateCard.vue 1`] = `
+[
+  ":disabled="isBlocking" :loading="isBlocking || sslButtonLoading" @click="openSslDialog" class="security-ssl-manage mt-0 pt-0" data-testid="security-ssl-manage" | button.manage",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/themes/NewThemeTable.vue 1`] = `
+[
+  ":aria-label="previewAriaLabel(asCatalogEntry(row))" :href="previewHref(asCatalogEntry(row))" class="catalog-action-button" rel="noopener noreferrer" target="_blank" v-bind="activatorProps"",
+  ":aria-label="installAriaLabel(asCatalogEntry(row))" @click="emit('action-button-install', asCatalogEntry(row))" class="ml-3 catalog-action-button" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/themes/ThemeSelectSnackbar.vue 1`] = `
+[
+  "@click="emit('mass-action-remove')" class="ml-2" | button.remove",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/advanced/themes/ThemesView.vue 1`] = `
+[
+  ":aria-label="t('button.back')" @click="closeAddNew" class="mr-2"",
+  "@click="closeAddNew" block | button.back",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/backups/BackupsSelectSnackbar.vue 1`] = `
+[
+  "@click="emit('mass-action-remove')" data-testid="backups-snackbar-remove" | button.remove",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/backups/BackupsTable.vue 1`] = `
+[
+  ":aria-label="t('button.backup.convertToFull')" @click="emit('action-button-convert-to-full', asRow(row))" v-if="asRow(row).mode === 'incremental'"",
+  ":aria-label="t('button.backup.download')" @click="emit('action-button-download', asRow(row))"",
+  ":aria-label="t('button.restoreBackup')" @click="emit('action-button-restore', asRow(row))"",
+  ":aria-label="t('button.deleteBackup')" @click="emit('action-button-delete', asRow(row))" v-if="!(usesOwnBackupSystem && asRow(row).type !== 'Manual')"",
+  ":aria-label="t('button.backup.download')" @click="emit('action-button-download', asRow(row))" data-testid="backups-mobile-download"",
+  ":aria-label="t('button.restoreBackup')" @click="emit('action-button-restore', asRow(row))" data-testid="backups-mobile-restore"",
+  ":aria-label="t('button.deleteBackup')" @click="emit('action-button-delete', asRow(row))" data-testid="backups-mobile-delete"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/cards/FilesSourceInfoCard.vue 1`] = `
+[
+  "@click="emit('action-upload-version', instance)" block class="font-weight-bold text-white" v-if="instance.hasRedeployPrivilege()" | button.uploadNewVersion",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/cards/GitSourceInfoCard.vue 1`] = `
+[
+  "@click="goToGitPage" block class="font-weight-bold text-white" v-if="action === 'manage'" | button.manageGit",
+  ":disabled="openingRedeploy" :loading="openingRedeploy" @click="openRedeploy" block class="font-weight-bold text-white" v-else | button.redeploy",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/cards/InstallationInfoCard.vue 1`] = `
+[
+  "@click="emit('action-button-retry', instance)" data-testid="installation-retry" | button.try",
+  ":loading="instance.hasUpdateInProgress()" block class="font-weight-bold current-button" disabled key="current" v-if="!wordpress.updateAvailable && !woocommerce.updateAvailable && wordpress.version" | heading.instance.siteDetails.installation.current.system, heading.instance.siteDetails.installation.current.wordpress",
+  ":loading="instance.hasUpdateInProgress()" @click="onUpdateClick" block class="font-weight-bold text-white" key="update" v-else-if="(wordpress.updateAvailable || woocommerce.updateAvailable) && instance.hasWordPressUpdatePrivilege()" | button.wordpress.update, button.woocommerce.update",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/cards/SecurityInfoCard.vue 1`] = `
+[
+  ":disabled="isBlocking" :loading="isBlocking || sslButtonLoading" @click="openSslDialog" class="mt-0 pt-0 security-manage" data-testid="security-ssl-manage" | button.manage",
+  ":disabled="storeMissing" @click="createBackupOpen = true" block class="font-weight-bold" data-testid="security-create-backup" | button.createBackup",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/cards/SiteDetailsInfoCard.vue 1`] = `
+[
+  "@click.prevent="openProject" class="action-button visit-button" | button.openProject",
+  ":loading="thumbnailLoading" @click="refreshThumbnail" class="action-button mt-4 refresh-button" v-if="instance.hasRefreshThumbnailPrivilege() && speedEnabled" | button.refresh.thumbnail",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/modals/FilesUploadVersionModal.vue 1`] = `
+[
+  ":disabled="logs.cancelling.value" @click="confirmingCancel = true" data-testid="files-upload-cancel-deploy" v-if="!confirmingCancel" | deployLogs.cancelDeploy",
+  ":loading="logs.cancelling.value" @click="cancelDeploy" | button.confirm",
+  ":disabled="logs.cancelling.value" @click="confirmingCancel = false" | button.cancel",
+  ":loading="logs.downloading.value" @click="logs.download" v-if="viewerDownloadLogId" | deployLogs.downloadLog",
+  ":disabled="!logsTerminal" @click="close" data-testid="files-upload-close" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/general/modals/GitRedeployModal.vue 1`] = `
+[
+  ":disabled="logs.cancelling.value" @click="confirmingCancel = true" data-testid="git-redeploy-cancel-deploy" v-if="!confirmingCancel" | deployLogs.cancelDeploy",
+  ":loading="logs.cancelling.value" @click="cancelDeploy" | button.confirm",
+  ":disabled="logs.cancelling.value" @click="confirmingCancel = false" | button.cancel",
+  ":loading="logs.downloading.value" @click="logs.download" v-if="viewerDownloadLogId" | deployLogs.downloadLog",
+  ":disabled="!logsTerminal" @click="close" data-testid="git-redeploy-close" | button.close",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/plugins/NewPluginTable.vue 1`] = `
+[
+  ":aria-label="installAriaLabel(asCatalogEntry(row))" @click="emit('action-button-install', asCatalogEntry(row))" class="ml-auto install-button" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/plugins/PluginsSelectSnackbar.vue 1`] = `
+[
+  "@click="emit('mass-action-remove')" | button.remove",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/plugins/PluginsView.vue 1`] = `
+[
+  ":aria-label="t('button.back')" @click="closeAddNew" class="mr-2"",
+  "@click="closeAddNew" block | button.back",
+  ":aria-label="t('button.back')" @click="closeAddNew" class="mr-2"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/topbar/InstanceStatusTabAlert.vue 1`] = `
+[
+  "@click="onIssueAction(issue)" class="status-list__issue-action mt-2" v-if="issue.showAction"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/topbar/ReportProviderTrackingCodeModal.vue 1`] = `
+[
+  "@click="open = false"",
+  "@click="open = false" block | button.back",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/topbar/SetYourDomainModal.vue 1`] = `
+[
+  ":loading="loading" @click="loadModal" class="mr-4 change-domain-btn dns-propagation-btn" data-testid="instance-dns-propagation" v-if="dnsMismatch" | message.dnsPropagationInProgress",
+  ":loading="loading" @click="loadModal" class="mr-4 change-domain-btn" data-testid="instance-change-domain" v-else-if="instance.hasChangeDomainPrivilege()" | button.setDomain.changeDomain",
+  ":loading="submitting" @click="submitForm" block class="set-domain-submit" data-testid="set-domain-use" | button.setDomain.useThisDomain",
+  "@click="isOpen = false" block class="mt-2" data-testid="set-domain-cancel" | button.cancel",
+  "@click="step = 0" class="set-domain-change" data-testid="set-domain-change" v-if="instance.hasChangeDomainPrivilege()" | button.change",
+  "@click="openPreview" class="set-domain-preview-button" data-testid="set-domain-preview-button" | heading.instance.modal.setDomain.generateUrl",
+  "@click="isOpen = false" block class="set-domain-close-action" data-testid="set-domain-close-action" | button.close",
+  ":loading="submitting" @click="nextStep" block class="set-domain-submit" data-testid="set-domain-transfer-now" | button.transferNow",
+  "@click="isOpen = false" block class="mt-2" data-testid="set-domain-transfer-cancel" | button.cancel",
+  "@click="isOpen = false" block class="set-domain-close-action" data-testid="set-domain-transfer-cancel" | button.cancel",
+  ":loading="submitting" @click="verifyDnsPropagation()" block class="set-domain-submit" data-testid="set-domain-verify-button" v-if="!verification.isVerificationSuccessful" | button.verifyDomain",
+  ":loading="submitting" @click="nextStep" block class="set-domain-submit" data-testid="set-domain-change-confirm" v-else | button.setDomain.changeDomain",
+  "@click="changeDomain" block class="mt-2" data-testid="set-domain-skip" v-if="!verification.isVerificationSuccessful" | button.skip",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/topbar/TopBarEditableTitle.vue 1`] = `
+[
+  ":aria-label="t('button.edit')" :disabled="frame.savingName" @click="openEditor" data-testid="instance-title-edit"",
+  ":aria-label="t('button.save')" :disabled="frame.savingName" @click="updateSiteName" data-testid="instance-title-save"",
+  ":aria-label="t('button.cancel')" :disabled="frame.savingName" @click="editing = false" data-testid="instance-title-cancel"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/projects/project/topbar/TopBarSubinstanceBar.vue 1`] = `
+[
+  ":class="[ item.hasActionInProgress() ? 'subinstance-bar__in-progress' : '', item.colorScheme ? \`subinstance-bar__item--\${item.colorScheme}\` : '', tabState(item) === 'in_progress' ? 'subinstance-bar__in-progress' : '', tabState(item) === 'error' ? 'subinstance-bar__error' : '', activeTab === String(item.id) ? 'v-btn--active' : '', isLive(item) ? '' : 'ml-2', ]" @click="switchTo(item)" class="subinstance-bar__item" v-bind="activatorProps"",
+  "class="px-2" | button.cancelClone",
+  "class="px-2" | button.try",
+  "class="ml-2 px-2" | button.cancel",
+  ":aria-label="t('notification.topBar.subInstance.newStaging')" @click="requestStaging" class="subinstance-bar__add"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/reseller/branding/BrandingView.vue 1`] = `
+[
+  "@click="emitAppEvent('style-manager-open')" class="ml-auto mt-4" data-testid="branding-manage-styles" | button.branding.manage",
+  ":loading="submitting" @click="submit" class="ml-auto mt-4" data-testid="branding-save" | button.saveChanges",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/reseller/email-settings/EmailSettingsView.vue 1`] = `
+[
+  ":loading="testingConnection" @click="testConnection" | button.testConnection",
+  "@click="testEmailModal?.open()" | button.sendTestEmail",
+  ":loading="submitting" @click="submit" | button.saveChanges",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/reseller/users/UserInstancesTooltip.vue 1`] = `
+[
+  ":to="instancesListPath" class="py-0 px-3" data-testid="user-instances-full-list" | reseller.user.fullList",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/style-manager/StyleManagerChangeFavicon.vue 1`] = `
+[
+  "@click="clearFile" data-testid="style-manager-favicon-remove" | button.remove",
+  "@click="replaceFile" data-testid="style-manager-favicon-replace" | button.replace",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/style-manager/StyleManagerEditor.vue 1`] = `
+[
+  "block class="text-left justify-start font-weight-regular text--body" v-bind="activatorProps"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/style-manager/StyleManagerLogoBox.vue 1`] = `
+[
+  ":aria-label="t('button.replace')" :data-testid="\`style-manager-logo-replace-\${type}\`" @click="replaceFile"",
+  ":aria-label="t('button.remove')" :data-testid="\`style-manager-logo-remove-\${type}\`" @click="clearFile"",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/style-manager/StyleManagerMenu.vue 1`] = `
+[
+  ":loading="submitting" @click="saveColorsTheme" class="mb-2" data-testid="style-manager-save" | button.saveChanges",
+  "@click="restoreDefault" class="style-drawer__restore" data-testid="style-manager-restore" | button.restoreDefault",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/wizard/WizardFooter.vue 1`] = `
+[
+  ":data-testid="previousTestid ?? 'wizard-previous'" @click="emit('previous')" class="wizard-footer__previous" v-if="!hidePrevious" | setup.wizard.footer.previous",
+  ":disabled="disabled" :form="form" :loading="loading" :type="form ? 'submit' : 'button'" @click="onNext" class="wizard-footer__next" data-testid="wizard-next" v-if="!hideNext" | setup.wizard.footer.next",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/wizard/WizardHubCard.vue 1`] = `
+[
+  ":disabled="disabled" :loading="loading" @click="emit('connect')" block class="hub-card__button" data-testid="wizard-connect-button" | setup.wizard.connect.card.button",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/wizard/WizardStartPage.vue 1`] = `
+[
+  "@click="start" class="wizard-start__button" data-testid="wizard-start-button" | setup.wizard.start.button",
+]
+`;
+
+exports[`button consumers keep their wiring (kit-button-rest) > src/views/wizard/steps/PanelAlphaConnectStep.vue 1`] = `
+[
+  ":disabled="busy" @click="mainAction" class="hub-alert__button" data-testid="wizard-connect-retry" | setup.wizard.connect.checkAgain, setup.wizard.connect.tryAgain",
+]
+`;

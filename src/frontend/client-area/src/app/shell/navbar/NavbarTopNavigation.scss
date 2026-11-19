@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+// Same as legacy. `.v-tabs-slider-wrapper` -> `.v-tab__slider`,
+// `.v-tab--active` -> `.v-tab--selected`, `.v-tabs-bar__content` -> `.v-slide-group__content`.
+
+.navbar-tabs.v-tabs {
+  :deep(.v-tab.v-tab.v-tab--selected) {
+    color: map.get(v.$primary, darken1);
+  }
+
+  :deep(.v-tab.v-tab.v-tab:hover) {
+    // Kept: tab hover has no parity state (only Add new and the bell are measured), so neutrality of dropping it cannot be confirmed; the global button layer may win over specificity alone.
+    color: var(--v-primary-base) !important;
+  }
+
+  // V2 `.v-tabs-slider-wrapper` sat next to the tabs, so it had `color: primary` and the typography of the surrounding row
+  // (set by `AppNavbar`); V4 puts `.v-tab__slider` inside the tab, so the typography is pinned to V2's (weight 400).
+  :deep(.v-tab__slider) {
+    height: 3px;
+    background: map.get(v.$primary, base);
+    color: map.get(v.$primary, base);
+    font-weight: 400;
+  }
+
+  // V2 `<a class="v-tab">` has no border (`border-color` follows the text); V4 `.v-btn` carries a black/theme one.
+  :deep(.v-tab) {
+    border-color: currentcolor;
+  }
+
+  &.tabs-none-active :deep(.v-tab__slider) {
+    opacity: 0;
+  }
+}
+
+@media (max-width: map.get(v.$grid-breakpoints, md)) {
+  .navbar-tabs.v-tabs {
+    :deep(.v-slide-group__container) {
+      align-items: flex-end;
+    }
+
+    :deep(.v-slide-group__content) {
+      height: 37px;
+    }
+
+    :deep(.v-tab) {
+      height: 37px;
+      font-size: v.$font-size-base;
+      line-height: v.$line-height-base;
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+}
+
+@media (max-width: map.get(v.$grid-breakpoints, sm)) {
+  .v-tabs {
+    margin-bottom: -5px;
+  }
+}

@@ -1,0 +1,5 @@
+/* The diagram of step 1 is an animated GIF (`src/entities/hub/ui/assets/hub-diagram.gif`): screenshots hide it, keep its box. */
+[data-testid="wizard-hub-diagram"] img,
+[data-testid="hub-diagram"] img {
+  visibility: hidden;
+}

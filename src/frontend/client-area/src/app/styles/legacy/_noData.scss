@@ -1,0 +1,46 @@
+// Framework-independent.
+// Omitted: `.border-gray-darken6 { border-top: 1px solid var(--v-gray-darken6) }` and `.intro-page__media-title` `font-size: var(--font-size-larger)` /
+// `line-height: var(--line-height-medium)`: the variables are defined nowhere in legacy, so legacy rendered no property.
+
+.intro-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 42px;
+  text-align: center;
+  min-height: 400px;
+  &__close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  &__title {
+    max-width: 880px;
+    margin-top: 42px;
+    font-weight: 700;
+  }
+  &__desc {
+    max-width: 880px;
+    margin-top: 24px;
+    color: var(--v-gray-darken1);
+  }
+  &__actions {
+    display: flex;
+    margin-top: 24px;
+    gap: 24px;
+  }
+  &__media {
+    margin-top: 42px;
+    &-title {
+      font-weight: 700;
+    }
+    &-video {
+      width: 400px;
+      margin-top: 16px;
+      border: 1px solid var(--v-gray-lighten3);
+      border-radius: 6px;
+      height: 237px;
+    }
+  }
+}

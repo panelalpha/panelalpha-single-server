@@ -1,0 +1,136 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-snack*` -> `.v-snackbar*`
+// (`.v-snack__wrapper` -> `.v-snackbar__wrapper`, `.v-snack--active` -> `.v-snackbar--active`).
+// Omitted: the `.disable-shadows` rule (plural, never set in legacy).
+
+// Legacy applied this to every snackbar, but all of them were selection bars with class `snackbar`.
+// Scoped to `.snackbar` / `.mass-action-bar` (NEXT bar class) so plain V4 toasts keep their stock geometry.
+.v-snackbar:is(.snackbar, .mass-action-bar) {
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 112px;
+    background: var(--v-mass-action-gradient);
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.24s ease;
+  }
+
+  &.v-snackbar--active {
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .v-snackbar__wrapper {
+    margin: 24px 0px;
+    max-width: 90vw;
+    width: 1344px;
+    background-color: white;
+    box-shadow: 0px 12px 32px 6px rgba(0, 0, 0, 0.06),
+      0px 16px 72px 8px rgba(0, 0, 0, 0.08);
+    color: map.get(v.$text, base);
+    border-radius: 8px;
+    max-height: 62px;
+    height: 62px;
+
+    padding: 0 24px;
+  }
+
+  .v-snackbar__content {
+    padding: 0px;
+    height: 100%;
+    align-items: center;
+  }
+}
+
+.snackbar {
+  // V4 `.v-snackbar` keeps an 8px margin around the box; the V2 bar sat 24px (the wrapper margin above) from the viewport edge.
+  &.v-snackbar {
+    margin: 0;
+  }
+
+  .v-snackbar__wrapper {
+    background: var(--v-massaction-base) !important;
+    // V2 `elevation=4` on the snackbar is `!important` and beats the geometry rule above; V4 puts no elevation class on the wrapper.
+    box-shadow: v.$box-shadow-elevation-4 !important;
+    // V2 `.v-snack__wrapper` text is 14px / 22px (`.875rem` / `1.375rem`); V4 inherits 16px / 24px.
+    font-size: v.$font-size-sm;
+    line-height: 22px;
+  }
+
+  // V2 always rendered an (empty) `.v-snack__action` with an 8px end margin, which narrowed the content; V4 renders no actions element.
+  &.v-snackbar .v-snackbar__content {
+    padding-right: 8px;
+  }
+
+  .btn-icon-horizontal {
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    padding: 4px 16px;
+    align-items: center;
+    color: white;
+    transition: color 0.24s ease;
+    position: relative;
+
+    .v-icon {
+      color: inherit;
+      margin-right: 10px;
+    }
+
+    + .btn-icon-horizontal {
+      margin-left: 8px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.24s ease;
+    }
+
+    &:hover {
+      color: map.get(v.$primary, base);
+
+      &::after {
+        opacity: 0.1;
+        background-color: map.get(v.$primary, base);
+      }
+    }
+  }
+
+  &__row {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    color: white;
+  }
+
+  &__item-number {
+    height: 32px;
+    width: 32px;
+    background-color: map.get(v.$primary, base);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: v.$font-size-sm;
+    line-height: v.$line-height-sm;
+    margin-right: 10px;
+  }
+}

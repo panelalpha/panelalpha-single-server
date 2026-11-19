@@ -1,0 +1,56 @@
+{
+  "app": {
+    "name": "MG",
+    "default_language": "en",
+    "default_date_format": "YYYY-MM-DD",
+    "support_link": "",
+    "documentation_link": "",
+    "order_custom_ssl_certificate_link": "",
+    "page_speed_enabled": true,
+    "languages": [
+      "en"
+    ],
+    "language_flags": {
+      "en": "GB"
+    },
+    "custom_js_header": "",
+    "custom_js_footer": "",
+    "custom_css": "",
+    "billing_enabled": true,
+    "registration_enabled": true,
+    "registration_tos": "",
+    "recaptcha_site_key": "",
+    "from_control_panel_registration": {
+      "tos": ""
+    },
+    "integrations": {
+      "report_provider_enabled": true,
+      "preview_site_provider_enabled": true,
+      "atarim_enabled": false,
+      "auth": []
+    },
+    "single_server": {
+      "active": false,
+      "show_feedback_button": true,
+      "server_id": null,
+      "has_running_tasks": false,
+      "has_uncompleted_imports": false
+    },
+    "theme": {
+      "colors": {
+        "base": "#07C07E",
+        "darken1": "#0AAA71",
+        "lighten1": "#1FD895",
+        "lighten2": "#CDF2E5",
+        "lighten4": "#E6F9F2"
+      },
+      "style": {
+        "disableShadows": false,
+        "darkMode": false,
+        "allowToChangeMode": true
+      },
+      "logo": null,
+      "darkLogo": null
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.vscode
+.env
+
+# Local editor and agent state
+.aider*
+.idea/
+.junie/

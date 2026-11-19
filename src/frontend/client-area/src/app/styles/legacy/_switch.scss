@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// V2 `.v-input--switch` is the V4 `.v-input.v-switch`; `.v-input--selection-controls__input` (the 45x28 box)
+// is `.v-selection-control__wrapper`; `__track` / `__thumb` are `.v-switch__track` / `.v-switch__thumb`; `.v-input--is-dirty` / `--is-label-active` is `.v-selection-control--dirty`.
+// The legacy thumb `translate(19px)` is dropped: V4 moves the thumb itself.
+
+.v-input.v-switch {
+  .v-label {
+    margin-left: 8px;
+  }
+
+  .v-selection-control__wrapper {
+    height: 28px;
+    width: 45px;
+  }
+
+  .v-switch__track {
+    border-radius: 14px;
+    height: 28px;
+    width: 45px;
+    opacity: 1;
+  }
+
+  // Off state only: when dirty, V4 paints the track with the `bg-<color>` class of the `color` prop (V2 used `currentColor`).
+  .v-selection-control:not(.v-selection-control--dirty) .v-switch__track {
+    background-color: map.get(v.$gray, lighten2);
+    color: map.get(v.$gray, lighten2);
+  }
+
+  .v-switch__thumb {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+}

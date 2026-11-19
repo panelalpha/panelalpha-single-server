@@ -1,0 +1,185 @@
+// The V2 reset that V4 does not have (ress.css 2.0.4 and the V2 element styles).
+// Components, screens and the legacy layer rely on it, so they do not restate `margin: 0` or `padding: 0` themselves.
+// Not in `src/app/styles/legacy/`: the legacy layer is unlayered by decision, and this reset must lose to everything.
+// Left out as dead: IE/Edge-only rules (`::-ms-expand`, `::-ms-value`, `-ms-*`).
+
+// V2 `* { margin: 0; padding: 0 }` is unlayered with specificity (0,0,0), so only UA styles lose to it. In V4 the same
+// outcome needs a layer below the components, the utilities and the unlayered rules: `vuetify-core.reset`.
+@layer vuetify-core.reset {
+  html {
+    overflow-y: scroll;
+    word-break: normal;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  hr {
+    overflow: visible;
+    height: 0;
+  }
+
+  details,
+  main {
+    display: block;
+  }
+
+  summary {
+    display: list-item;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+  }
+
+  a {
+    background-color: transparent;
+  }
+
+  a:active,
+  a:hover {
+    outline-width: 0;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: monospace, monospace;
+  }
+
+  pre {
+    font-size: 1em;
+  }
+
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  textarea {
+    overflow: auto;
+    resize: vertical;
+  }
+
+  button {
+    overflow: visible;
+  }
+
+  button,
+  select {
+    text-transform: none;
+  }
+
+  button::-moz-focus-inner,
+  [type='button']::-moz-focus-inner,
+  [type='reset']::-moz-focus-inner,
+  [type='submit']::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+
+  button:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+
+  button,
+  html [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    -webkit-appearance: button;
+    appearance: button;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    border-style: none;
+  }
+
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  legend {
+    border: 0;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    color: inherit;
+    font: inherit;
+  }
+
+  img {
+    border-style: none;
+  }
+
+  progress {
+    vertical-align: baseline;
+  }
+
+  @media screen {
+    [hidden~='screen'] {
+      display: inherit;
+    }
+
+    [hidden~='screen']:not(:active):not(:focus):not(:target) {
+      position: absolute !important;
+      clip: rect(0 0 0 0) !important;
+    }
+  }
+}
+
+// V2 elements are unlayered `.v-application p` (0,1,1) rules, so they
+// beat component and `p` rules in SFCs but lose to utilities (`mb-*`, `pl-*`, which are `!important` now, see build/vuetify-v2-utilities.ts).
+// V4 teleports overlays out of `.v-application`, V2 dialogs were inside it, hence `.v-overlay-container` as well.
+:is(.v-application, .v-overlay-container) p {
+  margin-bottom: 16px;
+}
+
+:is(.v-application, .v-overlay-container) :is(ul, ol) {
+  padding-left: 24px;
+}
+
+// V4 `VPagination` renders `ul.v-pagination__list` with a layered `padding: 0` that loses to the `ul` rule above.
+// V2 had `.v-pagination.v-pagination { padding-left: 0 }`.
+:is(.v-application, .v-overlay-container) .v-pagination__list {
+  padding-left: 0;
+}

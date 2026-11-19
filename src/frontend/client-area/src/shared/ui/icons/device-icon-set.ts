@@ -1,0 +1,12 @@
+// The browser and operating-system logos of the devices table (`/my-account`), as one chunk (`lazy-devices.ts`).
+export { default as Android } from './android.vue'
+export { default as BrowserOther } from './browser-other.vue'
+export { default as Chrome } from './chrome.vue'
+export { default as DeviceOther } from './device-other.vue'
+export { default as Edge } from './edge.vue'
+export { default as Firefox } from './firefox.vue'
+export { default as Linux } from './linux.vue'
+export { default as Mac } from './mac.vue'
+export { default as Opera } from './opera.vue'
+export { default as Safari } from './safari.vue'
+export { default as Windows } from './windows.vue'

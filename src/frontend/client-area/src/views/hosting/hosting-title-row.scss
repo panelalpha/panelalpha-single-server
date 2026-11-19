@@ -1,0 +1,30 @@
+// Title-row chrome shared by the hosting list screens (Domains, Cron): heading on the left, account selector, search and Add on the
+// right (legacy `.title-row` of each view). Each screen pulls it into its scoped styles:
+// `<style lang="scss" scoped src="@/views/hosting/hosting-title-row.scss"></style>`. Screen-only deltas stay in the screen.
+
+// Legacy `.title-row { height: 70px }` above 1400px.
+.title-row {
+  @media (min-width: 1401px) {
+    height: 70px;
+  }
+}
+
+// Legacy `.page-title__filter-controls` pads 16px on both sides; the 12px of `.title-row > .v-col` (`hosting-screen.scss`, Domains) would
+// win over it and put the group 4px too far right.
+.title-row > .v-col.page-title__filter-controls {
+  padding-inline: 16px;
+}
+
+// The selector sits in the filter column, where the V2 select measures 48px with a 4px radius on the input (in the Summary column it is
+// 51px, the kit's `.dns-zone` padding): the 3px below it are not there and the title row keeps the legacy height.
+.page-title__filter-controls :deep(.acc-select-group .dns-zone) {
+  padding-bottom: 0;
+  border-radius: 4px;
+}
+
+// V2 `.v-btn.v-size--default { font-size: 14px }` (0,2,0) beat `.p-2` (16px); the V4 size rule is layered and loses to the unlayered
+// `.p-2`, so the Add button below `smAndDown` keeps 14px.
+.page-title__add-button.v-btn--size-default {
+  font-size: 14px;
+  line-height: 24px;
+}

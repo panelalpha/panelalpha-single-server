@@ -1,0 +1,103 @@
+// Shared styles of the Pie and Doughnut cards: chart box, data container and the coloured-dot list. Rendered through the
+// `chart-list` mixin, so every rule is scoped by the including component's `<style scoped>`. Dark theme stays theme-aware through
+// the tokens below; no global dark-theme selector here.
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+@mixin chart-list {
+  // Legacy `.v-card__text:last-child` keeps the 24px bottom padding of the last block. V4 ends the card with `.v-card__overlay`, so the
+  // port's `:last-child` never matches; the last text block of each card takes the padding explicitly.
+  .v-card-text {
+    padding-bottom: 24px;
+  }
+
+  .chart {
+    // Not in legacy: ApexCharts sizes itself from its container, while the legacy chart.js canvas brought its own size, so the flex
+    // child needs an explicit width.
+    width: 100%;
+    max-height: 180px;
+    max-width: 180px;
+  }
+
+  .data-container {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+  }
+
+  .data-list {
+    padding-left: 48px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .list-item {
+    list-style: none;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 16px;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    span {
+      color: map.get(v.$text, headings);
+      display: block;
+      font-weight: v.$font-weight-medium;
+      font-size: v.$font-size-base;
+      line-height: v.$line-height-base;
+    }
+
+    // Row colour = slice colour of the same index (`sliceClass`), so the dot and the Apex slice share the token.
+    &.slice-0 {
+      color: var(--v-chart-pie-1);
+    }
+
+    &.slice-1 {
+      color: var(--v-chart-pie-2);
+    }
+
+    &.slice-2 {
+      color: var(--v-chart-pie-3);
+    }
+
+    &.slice-3 {
+      color: var(--v-chart-pie-4);
+    }
+
+    &.slice-4 {
+      color: var(--v-chart-pie-5);
+    }
+
+    &.slice-fallback {
+      color: var(--v-chart-pie-fallback);
+    }
+
+    // Legacy coloured dot: `currentColor` is the row colour from the class above.
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: calc(50% - 4px);
+      width: 8px;
+      height: 8px;
+      background-color: currentColor;
+      border-radius: 50%;
+    }
+  }
+
+  // Legacy `map-get($grid-breakpoints, xs)` is `0`, so this query never matches (same in legacy). Kept for parity with the legacy file.
+  @media (max-width: map.get(v.$grid-breakpoints, xs)) {
+    .data-container {
+      flex-direction: column;
+    }
+
+    .data-list {
+      padding-left: 0;
+      padding-top: 40px;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-expansion-panel-header/-content` -> `.v-expansion-panel-title/-text`,
+// `-content__wrap` -> `-text__wrapper`, the V2 header `::before/::after` hover layers -> `.v-expansion-panel-title__overlay`,
+// `.v-icon__component > svg` -> `.v-icon > svg`, `.theme--dark/.is-dark` -> `.v-theme--dark`.
+
+.v-expansion-panels {
+  &.v-expansion-panels--dns {
+    color: inherit;
+    .v-expansion-panel {
+      border-color: map.get(v.$gray, lighten2);
+      background-color: map.get(v.$gray, lighten6);
+      border-radius: 6px 6px 6px 6px;
+      color: inherit;
+      + .v-expansion-panel {
+        margin-top: 16px;
+      }
+      .v-expansion-panel {
+        &-title {
+          padding: 8px 12px;
+          min-height: 40px;
+          transition: color 0.3s;
+          color: map.get(v.$text, headings);
+          .v-expansion-panel-title__overlay {
+            display: none !important;
+          }
+
+          .v-icon {
+            > svg {
+              path:first-child {
+                transition: transform 0.1s;
+                transform-origin: center;
+              }
+              path {
+                stroke: map.get(v.$gray, darken1);
+              }
+            }
+          }
+        }
+        &-text {
+          color: inherit;
+          .v-expansion-panel-text {
+            &__wrapper {
+              padding: 6px 24px 12px 24px;
+            }
+          }
+          li {
+            &:not(:first-child) {
+              margin-top: 4px;
+            }
+            .well {
+              &:last-child {
+                margin-bottom: 6px;
+              }
+            }
+          }
+        }
+      }
+      &--active {
+        &:not(:only-child) {
+          border-color: map.get(v.$primary, base);
+          border-radius: 6px 6px 6px 6px !important;
+          .v-expansion-panel {
+            &-title {
+              color: map.get(v.$primary, base);
+              .v-icon {
+                > svg {
+                  path:first-child {
+                    transform: rotate(90deg);
+                  }
+                  path {
+                    stroke: map.get(v.$primary, base);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &:only-child {
+        pointer-events: none;
+        .v-icon > svg {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.well {
+  border: 1px solid map.get(v.$gray, lighten3);
+  border-radius: 3px;
+  &.well--gray {
+    background-color: map.get(v.$gray, lighten6);
+    border-radius: 8px;
+    color: map.get(v.$gray, darken1);
+  }
+}
+.v-theme--dark {
+  .well {
+    border: 1px solid var(--v-well-border);
+    border-radius: 3px;
+    &.well--gray {
+      background-color: var(--v-well-gray-bg);
+      border-radius: 8px;
+      color: var(--v-well-gray-text);
+    }
+  }
+}

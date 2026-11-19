@@ -1,0 +1,183 @@
+// Rewritten for V4.
+// `.v-card__title/text/actions` are `.v-card-title/text/actions`, `.v-text-field__details` is
+// `.v-input__details`, `.checkbox::v-deep .v-input--checkbox .v-input__slot` is the V4 `.v-selection-control`.
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+.v-dialog {
+  .v-card {
+    // V4 `.v-card-actions` spaces its (wrapped) children with `gap: 0.5rem`, V2 had none.
+    // V2 `.v-card > *:last-child` inherits the card's radius, so the actions row has the 8px bottom corners (V4's is square).
+    .v-card-actions {
+      gap: 0;
+      padding-top: 16px;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    // V2 `.v-card__title` centres its children; V4's is a plain block that `d-flex` stretches (the heading grew to the 32px close button).
+    .v-card-title {
+      align-items: center;
+      min-height: 76px;
+      padding: 24px;
+      border-bottom: 1px solid var(--v-gray-lighten5);
+    }
+
+    .v-card-text {
+      -webkit-line-clamp: initial;
+      padding: 24px 32px 8px 32px;
+      color: var(--v-gray-lighten1);
+    }
+  }
+}
+
+.checkbox {
+  :deep(.v-selection-control) {
+    max-height: 24px;
+    min-height: unset;
+
+    // The V2 label was `overflow: visible`, so a multi-line label overflowed the 24px slot (centred); V4 clips it.
+    .v-label {
+      overflow: visible;
+    }
+  }
+
+  // Legacy `_inputs.scss` `.v-input__slot input` (`color: --v-text-darken2 !important; font-weight: semibold`) reached the native checkbox input
+  // (opacity 0) of the V2 slot; the V4 checkbox has no `.v-field`, so the global rule misses it. Invisible, but measured by parity.
+  :deep(.v-selection-control input) {
+    color: var(--v-text-darken2);
+    font-weight: v.$font-weight-semibold;
+  }
+}
+
+// Legacy fields are `outlined dense`: with a message, the V2 dense slot has a 4px bottom margin (not the 8px the global input styles restate) and
+// the details sit 4px over it, so the message starts right under the 48px slot (field + message 68px). V4 details add 6px padding-top,
+// so 4 - 4 - 6 = -6 between field and details: 4px on the field, -10px on the details (measured).
+.v-input {
+  :deep(.v-input__details) {
+    margin-top: -10px;
+    margin-bottom: 0px;
+  }
+
+  &:has(.v-messages__message) > :deep(.v-input__control > .v-field) {
+    margin-bottom: 4px;
+  }
+}
+
+b {
+  font-weight: v.$font-weight-semibold;
+}
+
+// V2 vendor `.theme--light.v-icon` / `.theme--dark.v-icon`: the close icon is 54% black (white in dark); the global `.v-icon` colour would
+// make it the text colour.
+.v-card-title .v-btn .v-icon {
+  color: var(--v-icon-btn-color);
+}
+
+// Legacy `custom` slot box (`.target-item-box`): 8px under the box; its top margin (16px, from the box) closes the gap to the message.
+.basic-modal-target {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: v.$font-size-base;
+  line-height: v.$line-height-base;
+
+  // Legacy `.target-item-box + form { margin-top: 16px }`: the fields form that follows the box (delete confirm).
+  + form {
+    margin-top: 16px;
+  }
+}
+
+// The item box with a rating, rendered by the template (the inline-style box of `target-item-box.ts` is `v-html`). Same look as that box;
+// `--flat` is the themes variant (`0 0 8px`), `--border-darker` its `gray-lighten2` border.
+.target-item-box--rated {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  border: 1px solid var(--v-gray-lighten3);
+  border-radius: 6px;
+  background: var(--v-gray-lighten5);
+  padding: 16px;
+  font-weight: 600;
+
+  // Legacy `<span class="gray--text text--darken-1">` around the name; the rating next to it keeps the text colour.
+  .target-item-name {
+    color: var(--v-gray-darken1);
+  }
+
+  &.target-item-box--flat {
+    margin: 0 0 8px;
+  }
+
+  &.target-item-box--border-darker {
+    border-color: var(--v-gray-lighten2);
+  }
+}
+
+// Legacy `<span class="ml-auto" style="min-width: 48px">` with the 20px star and `b.p-4`.
+.target-item-rating {
+  min-width: 48px;
+
+  // The scoped `b { font-weight: semibold }` above (legacy: scoped to BasicModal, so it never reached the slot's `b`) would beat `.p-4` (400).
+  b {
+    font-weight: v.$font-weight-normal;
+  }
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.input-group {
+  .v-input + .v-input {
+    margin-left: 16px;
+  }
+}
+
+.v-form .last-child {
+  .v-input {
+    &.v-text-field {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.v-form .v-input.v-text-field {
+  margin-bottom: 16px;
+}
+
+.v-card {
+  :deep(.v-card-title) {
+    flex-wrap: nowrap;
+    // Inside a word only when the word is longer than the line.
+    word-break: normal;
+    overflow-wrap: anywhere;
+
+    // A name in the title (domain, account, e-mail address) stays on one line while it fits and breaks anywhere only when it is
+    // longer than the line; the `text-no-wrap` it had let a long domain run out of the dialog.
+    // `inline-block` makes the name one box: when it does not fit after the label it moves whole to the next line (legacy
+    // `text-no-wrap`), a plain inline span broke at the first hyphen (`preview.10-10-|25.…`).
+    .text-break-long {
+      display: inline-block;
+      max-width: 100%;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .v-btn {
+      align-self: flex-start;
+    }
+  }
+}
+
+.v-dialog {
+  .basic-modal {
+    &.hide-cancel {
+      .v-card-actions {
+        // `customClass: 'cancel-btn'` sits on the button wrapper (legacy `display: none !important`)
+        .cancel-btn {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+// V2 `v-skeleton-loader` bone metrics for the Summary cards (measured on the deployed legacy). V4 bones carry a 16px margin on every
+// side (heading and text) or `8px 16px` (avatar), so a loader is 32px taller and wider than the same V2 one; V2 bones had none, only
+// a bottom margin that kept the rows apart. A mixin used inside a scoped block: `@include summary-skeleton;`.
+@mixin summary-skeleton {
+  :deep(.v-skeleton-loader__heading) {
+    margin: 0;
+  }
+
+  :deep(.v-skeleton-loader__text) {
+    margin: 0 0 6px;
+  }
+
+  :deep(.v-skeleton-loader__avatar) {
+    margin: 0 0 10px;
+  }
+}

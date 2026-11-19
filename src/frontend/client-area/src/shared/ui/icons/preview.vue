@@ -1,0 +1,25 @@
+<template>
+  <svg
+    :height="height"
+    viewBox="0 0 1024 1024"
+    :width="width"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M844.032 112H179.968c-37.504 0-67.968 30.464-67.968 68.032v663.936c0 37.568 30.464 68.032 68.032 68.032h323.968A8 8 0 0 0 512 904v-56a8 8 0 0 0-8-8h-320V184h656v320c0 4.416 3.584 8 8 8h56a8 8 0 0 0 8-8V179.968c0-37.504-30.464-67.968-68.032-67.968zM736 512a223.936 223.936 0 1 0-89.856 179.392l195.392 195.392a8 8 0 0 0 11.264 0l33.92-33.92a8 8 0 0 0 0-11.328l-195.328-195.392c29.12-38.656 44.8-85.76 44.608-134.144zM512 672a160 160 0 1 1 0-320 160 160 0 0 1 0 320z"
+      :stroke="iconColor"
+    />
+  </svg>
+</template>
+
+<script lang="ts" setup>
+  withDefaults(defineProps<{
+    width?: number | string
+    height?: number | string
+    iconColor?: string
+  }>(), {
+    width: 24,
+    height: 24,
+    iconColor: 'currentColor',
+  })
+</script>

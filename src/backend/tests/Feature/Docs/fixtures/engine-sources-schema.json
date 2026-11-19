@@ -1,0 +1,880 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://panelalpha.com/schemas/app-config.json",
+  "title": "PanelAlpha app config",
+  "description": "How one specific application is hosted: the same keys as a platform manifest (resources/apps/<id>/panelalpha.yaml), plus what only one application can say — its hooks, its compose file, its user-management script. Read from a project's own .panelalpha/panelalpha.yaml and from the engine's resources/sources/<host>/<owner>/<repo>/panelalpha.yaml alike. Every key is optional, and one written with no value says nothing rather than unsetting what an extended recipe declared.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "description": {
+      "description": "What this application is and what it needs, for whoever reads the file next.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "extends": {
+      "description": "Id of the shipped recipe this application is an instance of, under resources/apps/ or resources/platforms/. Every other manifest key here overrides that recipe, top level by top level. Without it, the manifest keys are the whole manifest and `id` is required.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "id": {
+      "description": "Unique manifest id; also the filename. Required when the file describes a manifest of its own rather than extending one.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "strategy": {
+      "description": "Strategy id the rest of the pipeline switches on. Defaults to `id`. Two manifests may share one strategy when a stack has two deployment shapes (astro / astro-ssr).",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "label": {
+      "description": "Human-readable name shown in deploy logs.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "priority": {
+      "description": "Detection order, highest first. This is where ordering constraints live: Laravel must outrank PHP, Django must outrank Python, Next must outrank Vite.",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "runtime": {
+      "anyOf": [
+        {
+          "enum": [
+            "node",
+            "nginx",
+            "command",
+            "php",
+            "compose",
+            "dockerfile"
+          ],
+          "default": "command"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "app_root": {
+      "description": "The application's own root inside the repository, when they are not the same directory — phpBB ships its application in phpBB/ and keeps only build tooling at the top level. `detect` rules stay relative to the repository root (they run before this is known); everything after detection — the runtime version read from the project's manifests, the deployability check, the files copied into the image, and the document root — is resolved inside it. Must be a relative path that does not escape the repository.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/].*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "docroot": {
+      "description": "Apache's document root, relative to the application root — `public` for Laravel and Flarum, `pub` for Magento, `upload` for OpenCart, `.` for an application served from its own root. Only meaningful for `runtime: php`, where the shared base image reads it as PA_DOCROOT. Omit it and the image looks for a `public/` directory and falls back to the application root, which is right for most PHP applications. Must be a relative path that does not escape the application.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/].*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "port": {
+      "description": "The port the application listens on. Under the compose strategy it is the port the site is routed to, ahead of the port the engine reads from the compose file: that scan never routes an image-named datastore, so a recipe whose application is one (Qdrant, MinIO, CouchDB, Meilisearch) states its port here. The compose file must publish it.",
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "port_scheme": {
+      "description": "What the application's published port speaks. `https` for an app that serves only TLS on its port (UniFi's 8443, self-signed): the account's generated :80 and :443 proxy rules then reach it over https, without verifying its certificate. Omit it (or `http`) for everything else. Applies to the port the engine routes the domain to, whatever the strategy; kept on the project, so a rename or a later rule sync keeps it, and re-read on every deploy.",
+      "anyOf": [
+        {
+          "enum": [
+            "http",
+            "https"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "build_args": {
+      "description": "Dockerfile ARG values the repository's own build needs in order to produce a deployable variant of itself — `BASE: apache` for a Dockerfile whose `FROM ${BASE}-base` picks between an FPM image and an Apache one. Only the `dockerfile` strategy reads it, and it is the only way to reach a stage behind an ARG: `--target` stops the build at that stage rather than selecting a variant of the whole thing.",
+      "anyOf": [
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "type": ["string", "integer"]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "system_packages": {
+      "description": "Debian packages to add to this application's PHP base image, for a binary the app execs that no PHP extension supplies — `ffmpeg` for a video site. Allowlisted (`PhpBaseImage::SYSTEM_PACKAGES`): each distinct set is a separate ~1.1 GB variant image the host builds once and only accounts deploying such an app load. The first deploy of a new set waits for that build, and fails rather than deploying without the packages. `runtime: php` only.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ffmpeg",
+              "mediainfo"
+            ]
+          },
+          "uniqueItems": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "frontend_build": {
+      "description": "The host frontend pass of a PHP application (HostCompile::runForPhp). Omit it and the engine runs package.json's `build` script when there is one, and nothing when there is not. `false` never runs the pass: for a repository that commits its compiled assets (Crater's public/build) and whose lockfiles no longer install. A command runs in place of the `build` script, after the engine's usual install, even when package.json declares no scripts; it runs on every deploy, including a node_modules cache hit. `yarn install` for grocy, whose CSS and JS are its yarn dependencies. `runtime: php` only.",
+      "anyOf": [
+        {
+          "const": false
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "credentials": {
+      "description": "The login the application is seeded with (an admin username and password). The engine generates the values once, keeps them on the project (encrypted), writes them to ~/.panelalpha/app-credentials.env (0600) before the recipe's prepare hook on every deploy, and returns them from GET /projects/{name}/app-credentials. A compose service reads them with `env_file: ../.panelalpha/app-credentials.env`; a hook with `. ~/.panelalpha/app-credentials.env`. Stored values are kept across deploys, a newly declared field is generated once, a field the project's own env_vars set takes that value, and a field no longer declared is dropped. Passwords are masked in the deploy log.",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/credentials"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "image": {
+      "description": "Literal base image. Omit and use `requires` when the version comes from the project.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "requires": {
+      "description": "Toolchains this platform needs. Names only — never versions: a manifest describes every project of its kind, and the version is a property of one project. A Runtime class reads the project and answers. `role: build` means the toolchain builds the app and is absent from the runtime image, which is why a Laravel app that compiles assets needs no image containing both PHP and Node.",
+      "anyOf": [
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "enum": [
+                  "runtime",
+                  "build"
+                ]
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "role": {
+                    "enum": [
+                      "runtime",
+                      "build"
+                    ],
+                    "default": "runtime"
+                  },
+                  "optional": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Absent toolchain is not an error — a Laravel app with no package.json does not need Node."
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_directory": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "output_from": {
+      "description": "Resolver for an output path the project declares itself (angular.json) or that depends on a workspace.",
+      "anyOf": [
+        {
+          "enum": [
+            "angular",
+            "next-workspace"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "commands_from": {
+      "description": "Command id => resolver, for commands whose text is derived from the project.",
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "python.install",
+              "python.start",
+              "rust.packages",
+              "rust.build",
+              "rust.start",
+              "go.build",
+              "java.build-gradle",
+              "java.start",
+              "java.start-gradle"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "env": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "integer",
+              "boolean"
+            ]
+          },
+          "propertyNames": {
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "database": {
+      "description": "The platform needs a relational database and does not ship one. The engine provisions a database and user on the account's own MySQL server — visible in the panel, manageable in phpMyAdmin, and surviving a redeploy — and hands the app its credentials as DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME and DB_PASSWORD. Omit it for a platform whose project points itself at a database (Laravel reads its .env) or ships one in its own compose file.",
+      "anyOf": [
+        {
+          "enum": [
+            "mysql"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "check": {
+      "description": "Health checks this manifest adds to the ones its runtime already brings — `laravel/app-key-set`, not `php`. A whole group is `<group>`, one check is `<group>/<id>`. Never list your own runtime's group: `runtime: php` already brings `checks/php/`, and repeating it in fifteen manifests is the duplication the groups exist to remove. To skip a check a group brings, put a `when` guard on the check itself; a manifest whose application answers a shipped check wrongly by design lists it under `check_skip`.",
+      "anyOf": [
+        {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z0-9_][a-z0-9_-]*(/[a-z0-9][a-z0-9-]*)?$"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_][a-z0-9_-]*(/[a-z0-9][a-z0-9-]*)?$"
+              }
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "check_skip": {
+      "description": "Shipped checks this application answers wrongly by design, each reported as skipped with its reason instead of run — Apaxy's product is the directory listing `_baseline/no-directory-listing` exists to fail. Name one check as `<group>/<id>`; it must be one this manifest is asked. A check of severity `error` can only be skipped with `covered_by` naming another `error` check this manifest is asked, which asks the question instead: a skip must not be able to hide an outage.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "check",
+              "reason"
+            ],
+            "properties": {
+              "check": {
+                "type": "string",
+                "pattern": "^[a-z0-9_][a-z0-9_-]*/[a-z0-9][a-z0-9-]*$"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Why the check does not apply. Shown in the health report."
+              },
+              "covered_by": {
+                "type": "string",
+                "pattern": "^[a-z0-9_][a-z0-9_-]*/[a-z0-9][a-z0-9-]*$",
+                "description": "The check that asks the question instead. Required when the skipped check has severity error."
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "detect": {
+      "not": {},
+      "description": "Not valid here: an app config is found by its path, not by detection."
+    },
+    "extra": {
+      "description": "Extra decision fields merged into the detection result.",
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "commands": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/command"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "runtime_image": {
+      "description": "Base image for the final stage when building and running want different images. {version} is substituted from the resolved runtime requirement. Requires output_directory: what the build stage produced is what gets copied in.",
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "precheck": {
+      "description": "Script to run on the account before the clone. `hooks/precheck.sh` beside this file is the same thing as a file, and wins.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prepare": {
+      "description": "Script to run on the account after the clone, before the build. `hooks/prepare.sh` beside this file is the same thing as a file, and wins.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "entrypoint": {
+      "description": "Replaces the generated entrypoint outright. `overrides/entrypoint.sh` beside this file is the same thing as a file, and wins.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "app": {
+      "description": "The user-management and SSO script. `overrides/app.sh` beside this file is the same thing as a file, and wins.",
+      "anyOf": [
+        {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "script"
+              ],
+              "properties": {
+                "script": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "files": {
+      "description": "path => contents, copied into the project. The files/ directory beside this file is the same thing.",
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "compose": {
+      "description": "A compose file for the project. overrides/docker-compose.yml and overrides/docker-compose.override.yml are the same thing as files, and win.",
+      "anyOf": [
+        {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "content"
+              ],
+              "properties": {
+                "content": {
+                  "type": "string"
+                },
+                "mode": {
+                  "enum": [
+                    "replace",
+                    "override"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "git": {
+      "description": "How the deploy clones the repository. The default is a depth-1 clone of one branch, with no history and no tags, and every submodule the repository declares, fetched after the clone and again on every redeploy. `history: full` fetches the whole history and every tag after the clone, for a build that derives its version from them (`git describe --tags`, goreleaser, setuptools-scm); it costs the size of the history on every deploy, so set it only for a repository that needs it. `submodules` lists the only submodules to fetch, by path, each with its own; `[]` fetches none. A submodule that cannot be fetched fails the deploy.",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "history": {
+              "enum": [
+                "full",
+                "shallow"
+              ]
+            },
+            "submodules": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "not": {
+                  "pattern": "^(/|-)|(^|/)\\.\\.(/|$)"
+                }
+              },
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "health": {
+      "description": "How the deploy waits for the application. `start_period` is how many seconds an application whose container is running but listens on no port yet may take to bind it, after the deploy's own probe (about 105 s) gave up. The default is 300; set it for an application that installs itself on first start (Magento's setup:install and di:compile). 0 turns the wait off.",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "start_period": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          "required": [
+            "start_period"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "credentials": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fields"
+      ],
+      "properties": {
+        "login_path": {
+          "description": "Where the application's login form is; the API answers the public URL plus this path as `login_url`.",
+          "type": "string",
+          "pattern": "^/\\S*$"
+        },
+        "adopt_from": {
+          "description": "A dotenv file relative to the account home, read when a field is first generated: a value it sets for that field's name is adopted instead, so an account a recipe seeded before the engine owned its login keeps the password it already has. e.g. `.panelalpha/sonarr/admin.env`.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(^|/)\\.\\.?(/|$)).+$"
+        },
+        "fields": {
+          "description": "Environment variable name => what the engine puts there.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "description": "`username` (default value `admin`), `email` (default `admin@example.com`) or `password` (24 random letters and digits with at least one upper, one lower and one digit).",
+                "enum": [
+                  "username",
+                  "email",
+                  "password"
+                ]
+              },
+              "value": {
+                "description": "The username or email to use instead of the default; {random} (8 hex characters), {host} (the account's domain) and {email} (the project's email, or admin-{random}@{host} without one) are filled once, when the value is first stored. Not allowed for a password, which is always generated.",
+                "type": "string",
+                "pattern": "^([A-Za-z0-9@._+\\-]|\\{random\\}|\\{host\\}|\\{email\\})+$"
+              },
+              "symbol": {
+                "description": "Password only: add one of -_! for applications whose password policy demands a symbol.",
+                "type": "boolean"
+              }
+            },
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "password"
+                }
+              }
+            },
+            "then": {
+              "not": {
+                "required": [
+                  "value"
+                ]
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "symbol"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "description": "Every key present must hold. An empty object matches nothing.",
+      "properties": {
+        "all": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/condition"
+          }
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/condition"
+          }
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/condition"
+          },
+          "description": "Negative rule: not one of these may match. This is how Static says 'an index.html and none of the manifests that would make this an application'."
+        },
+        "not": {
+          "$ref": "#/definitions/condition"
+        },
+        "file": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "Root-level basename, lowercase."
+        },
+        "path": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "File at a path relative to the project root."
+        },
+        "dir": {
+          "$ref": "#/definitions/stringOrList"
+        },
+        "glob": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "Root file starting '<stem>.' — next.config.js|mjs|ts."
+        },
+        "dep": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "package.json dependency or devDependency."
+        },
+        "script": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "package.json scripts entry."
+        },
+        "composer": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "composer.json require or require-dev key."
+        },
+        "probe": {
+          "$ref": "#/definitions/stringOrList",
+          "description": "Named platform probe, for detection JSON cannot express. Discovered by class name under Platform/Probes."
+        },
+        "contains": {
+          "type": "object",
+          "required": [
+            "pattern"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "glob": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "string"
+            },
+            "regex": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "stringOrList": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "run"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable name shown in deploy logs. Derived from `run` when omitted."
+        },
+        "stage": {
+          "description": "build = image build. install = first deploy only. upgrade = redeploy over existing data. start = every boot. A list means every listed stage — ['install','upgrade'] is how a migration says 'whenever the code changed, never on a restart'.",
+          "oneOf": [
+            {
+              "enum": [
+                "build",
+                "install",
+                "upgrade",
+                "start"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "build",
+                  "install",
+                  "upgrade",
+                  "start"
+                ]
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "build",
+              "install",
+              "upgrade",
+              "start"
+            ]
+          },
+          "minItems": 1
+        },
+        "run": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "dependencies",
+            "assets"
+          ],
+          "description": "Build-stage only. `dependencies` runs before the source is copied so BuildKit can cache it across deploys that did not touch the lockfile."
+        },
+        "serve": {
+          "type": "boolean",
+          "default": false,
+          "description": "The long-running process. Exactly one per manifest, start stage only, exec'd as the final line of the entrypoint."
+        },
+        "optional": {
+          "type": "boolean",
+          "default": false,
+          "description": "A failure is logged and the boot continues."
+        },
+        "before": {
+          "type": "boolean",
+          "description": "Run this command ahead of the platform's own for the stage, rather than after."
+        },
+        "when": {
+          "$ref": "#/definitions/condition",
+          "description": "Guard: the command applies only to projects matching this."
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Seconds."
+        },
+        "workdir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Why this command exists. Emitted as a comment in the entrypoint."
+        }
+      }
+    }
+  }
+}

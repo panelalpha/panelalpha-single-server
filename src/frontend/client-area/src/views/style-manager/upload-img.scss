@@ -1,0 +1,45 @@
+// Shared rules of the logo and favicon tile (`.upload-img`). Imported with `@use` in the scoped `<style>`
+// of both components, so they get the same scoped attribute as the rest of the block.
+// Rules that differ between the tiles (element frame, button order, `__icon`, logo `min-width`) stay in the components.
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+.upload-img {
+  .file-input {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    cursor: pointer;
+    margin: 0 !important;
+    padding: 0;
+  }
+
+  &__preview-img {
+    max-height: 75px;
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  // Base of the Replace/Remove buttons in the `--done` state.
+  &.upload-img--done .v-btn {
+    padding: 0 !important;
+    // V2 x-small text button is 32px high (V4 24px), `_buttons.scss` fixes only the icon variant.
+    height: 32px;
+    width: 50%;
+    border-top: 1px solid map.get(v.$gray, lighten3);
+    border-radius: 0;
+
+    &::before {
+      background: var(--v-white-base) !important;
+    }
+
+    &:first-child:hover {
+      color: map.get(v.$error, base);
+    }
+
+    &:nth-child(2):hover {
+      color: map.get(v.$success, base);
+    }
+  }
+}

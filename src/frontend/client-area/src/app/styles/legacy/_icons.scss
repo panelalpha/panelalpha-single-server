@@ -1,0 +1,126 @@
+// V2 `.v-icon__component` is the svg itself, so it becomes `.v-icon > svg`.
+// `.v-btn--has-bg` becomes the elevated/flat variants; V2 `.error` chip class becomes `.bg-error`.
+// Legacy `$…` icon components wrap an inline svg in a `div`. The baseline gap under the svg makes that div taller than the icon box
+// and the V4 `inline-flex` `.v-icon` centres it, lifting the glyph ~2px; V2 top-aligned the wrapper.
+.v-icon > div > svg {
+  display: block;
+}
+
+div:not(.status-indicator) {
+  .v-icon {
+    transition: color 0.24s ease;
+    color: var(--v-darkicon-base);
+
+    // `.icon` is a project class, but also a V2 palette key the layer guard rejects as a bare color class.
+    [class~='icon'] {
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.editor__controls {
+  .v-btn:hover {
+    color: var(--v-success-base) !important;
+  }
+}
+
+.navbar__menu-items {
+  :is(.v-btn--variant-elevated, .v-btn--variant-flat) {
+    .v-btn__content {
+      .v-icon > svg {
+        color: var(--v-white-base) !important;
+      }
+    }
+  }
+}
+
+.custom-dropdown-select {
+  .v-list-item {
+    .input-dropdown-item {
+      // V4 `.v-icon` wraps the svg in a div (V2: direct child), so a descendant selector.
+      .v-icon svg {
+        color: var(--v-primary-base);
+      }
+    }
+  }
+}
+
+.v-table__wrapper {
+  // Only the neutral buttons (icon / text without a colour): a filled, outlined or `text-<color>` button keeps its label colour on the icon.
+  .v-btn:not(.v-btn--variant-elevated, .v-btn--variant-flat, .v-btn--variant-outlined, [class*='text-']) {
+    .v-icon > svg {
+      color: var(--v-text-darken1);
+    }
+  }
+
+  .table-item {
+    .item {
+      .instance-item__more-button {
+        .v-btn__content {
+          .v-icon > svg:hover {
+            color: var(--v-primary-base);
+          }
+        }
+      }
+    }
+  }
+}
+
+.v-slide-group__content {
+  .v-icon > svg {
+    color: var(--v-success-base) !important;
+  }
+}
+
+.v-slide-group {
+  .bg-error {
+    .v-chip__content {
+      .v-icon > svg {
+        color: var(--v-error-base) !important;
+      }
+    }
+  }
+}
+
+.top-bar {
+  .top-bar-title {
+    .back-button {
+      .v-icon > svg {
+        color: var(--v-text-darken2);
+      }
+    }
+  }
+
+  .top-bar-title__button {
+    .v-icon > svg {
+      color: var(--v-text-darken2);
+    }
+  }
+}
+
+// V2 `.v-pagination__navigation` is prev/next only; V4 puts the disabled state on the inner button.
+:is(.v-pagination__prev, .v-pagination__next) .v-btn:not(.v-btn--disabled) {
+  .v-icon > svg {
+    color: var(--v-gray-darken1);
+  }
+
+  .v-icon:hover > svg {
+    color: var(--v-primary-base);
+  }
+}
+
+// `v-chip--dot` is a project class (labels/LabelsList), not a Vuetify one.
+.v-chip.v-chip--dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  margin-right: 4px;
+
+  .v-chip__content {
+    display: none;
+  }
+}
+

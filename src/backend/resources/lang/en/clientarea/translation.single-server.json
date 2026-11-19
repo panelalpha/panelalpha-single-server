@@ -1,0 +1,50 @@
+{
+    "button": {
+        "website.create": "Create Project"
+    },
+    "heading": {
+        "instance": {
+            "tab.siteDetails": "Project Details",
+            "advanced.siteDetails.card.title": "Project Details",
+            "advanced.siteDetails.card.site.siteName": "Project Name",
+            "advanced.git.connect.subtitle": "Link this project to a Git repository (GitHub, GitLab, or Bitbucket)."
+        },
+        "onboarding": {
+            "instanceSource": {
+                "go": {
+                    "title": "PanelAlpha GO!"
+                }
+            },
+            "zipDeploy": {
+                "title": "Upload your project",
+                "subtitle": "Upload one .zip or .tar.gz archive with your project files.",
+                "dropZone": {
+                    "title": "Drop your project archive here",
+                    "hint": "or click to browse (.zip or .tar.gz), up to {{size}}"
+                }
+            },
+            "noInstallationType.info": "You cannot install a project at this time. Please contact support for more details.",
+            "gitDeploy": {
+                "subtitle": "Connect a repository to create a project"
+            }
+        }
+    },
+    "notification": {
+        "instance": {
+            "editSsl.edit.success": "The SSL certificate has been installed.",
+            "editSsl.order.success": "The SSL certificate is being generated."
+        }
+    },
+    "form": {
+        "label": {
+            "image": {
+                "subtitle": ".jpg, .png, .svg files allowed"
+            }
+        }
+    },
+    "message": {
+        "emptyTable": {
+            "instances.subtitle": "No projects available. Please create a project to start building your website."
+        }
+    }
+}

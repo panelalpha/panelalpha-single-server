@@ -1,0 +1,21 @@
+// The table rules (columns, rows, buttons, mobile card) are the kit `DataTable` look;
+// this file keeps the note cell and the empty state of the table.
+
+.item-notes {
+  max-width: 180px;
+  width: 180px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.try-again {
+  cursor: pointer;
+  color: var(--v-error-base);
+  transition: color 0.24s ease;
+
+  &:hover {
+    color: var(--v-primary-base);
+  }
+}

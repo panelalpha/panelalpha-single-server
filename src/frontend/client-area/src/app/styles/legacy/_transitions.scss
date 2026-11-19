@@ -1,0 +1,87 @@
+// Vue 3 transition classes: `-enter` -> `-enter-from`, `-leave` -> `-leave-from`.
+// Legacy read `$transition` (a Vuetify 2 framework map) with keys `fast-in-slow-out` and `ease`, which are not keys of that map, so `map-get` returned null
+// and the deployed legacy CSS emits only the duration (`transition: .25s !important`). Ported exactly; no timing curve is invented.
+// The commented-out `.custom-tooltip-*` block of the legacy file is not carried over.
+
+@mixin transition-default() {
+  &-enter-active {
+    transition: 0.25s !important;
+  }
+  &-leave-active {
+    transition: 0.1s !important;
+  }
+
+  &-move {
+    transition: transform 0.3s;
+  }
+}
+
+.custom-fade {
+  @include transition-default();
+
+  &-enter-active {
+    transition: 0.25s !important;
+  }
+
+  &-leave-active {
+    transition: 0.25s !important;
+  }
+
+  &-enter-to {
+    opacity: 1;
+  }
+
+  &-enter-from,
+  &-leave-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.custom-tooltip {
+  @include transition-default();
+
+  // Only opacity and scale animate. Legacy `transition: .25s` means `all`; V4 sets the overlay content `left` / `top` after mount,
+  // so with `all` every tooltip slid in from the top-left corner of the viewport (V2 positioned it before showing).
+  &-enter-active,
+  &-leave-active {
+    transition-property: opacity, transform !important;
+  }
+
+  &-enter-from,
+  &-leave-from,
+  &-leave-to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.tab-slide {
+  &-leave-active {
+    position: absolute;
+  }
+  &-enter-active,
+  &-leave-from,
+  &-leave-to {
+    transition: transform 0.24s ease;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translate(100vw);
+  }
+}
+
+.tab-slide-reverse {
+  &-leave-active {
+    position: absolute;
+  }
+  &-enter-active,
+  &-leave-from,
+  &-leave-to {
+    transition: transform 0.24s ease;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translate(-100vw);
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "panelalpha/client-area",
+    "description": "Client Area core: applications (Engine projects) seen through the eyes of a user. Edition-agnostic; editions bind the contracts.",
+    "type": "library",
+    "license": "Apache-2.0",
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0",
+        "panelalpha/engine-client": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PanelAlpha\\ClientArea\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PanelAlpha\\ClientArea\\ClientAreaServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

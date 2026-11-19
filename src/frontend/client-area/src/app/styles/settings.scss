@@ -1,0 +1,30 @@
+/**
+ * Vuetify SASS variable overrides.
+ * https://vuetifyjs.com/features/sass-variables/
+ *
+ * Body font: Nunito Sans (loaded via unplugin-fonts / @fontsource/nunito-sans).
+ * Grid breakpoints and container widths: as in legacy
+ * (SCSS map differs from the JS thresholds in display-options.ts). No `xxl` key.
+ */
+@use 'vuetify/settings' with (
+  $body-font-family: ('Nunito Sans', sans-serif),
+  $grid-breakpoints: (
+    'xs': 0,
+    'sm': 768px,
+    'md': 976px,
+    'lg': 1200px,
+    'xl': 1400px,
+  ),
+  $container-max-widths: (
+    'md': 100%,
+    'lg': 100%,
+    'xl': 1344px,
+  ),
+  $input-control-height: 46px,
+  $field-control-height: 46px,
+  $field-control-underlined-height: 46px,
+  $button-height: 40px,
+  $button-font-weight: 700,
+  $card-text-padding: 24px,
+  $card-subtitle-padding: 24px
+);

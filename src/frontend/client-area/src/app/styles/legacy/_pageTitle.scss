@@ -1,0 +1,122 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `> .row` -> `> .v-row`. The empty `md` / `sm` media blocks are omitted.
+
+.page-title {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 36px;
+  min-height: 46px;
+
+  > .v-row {
+    margin-bottom: 0px;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  &__title-box {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  &__title {
+    font-weight: v.$font-weight-light;
+  }
+  &__filter-controls {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  &__add-button {
+    margin-left: 16px;
+    font-weight: v.$font-weight-bold;
+  }
+  + .v-container {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    .v-row {
+      margin-top: 0px;
+    }
+  }
+  .data-iterator-filter-controls {
+    margin-top: 0px;
+  }
+  &--advanced {
+    margin-top: 0px;
+    .page-title {
+      > .v-row {
+        padding-top: 16px;
+      }
+      &__title-box {
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      &__filter-controls {
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+    }
+  }
+}
+
+@media (max-width: map.get(v.$grid-breakpoints, lg)) {
+  .page-title {
+    margin-top: 12px;
+    > .v-row {
+      flex-direction: column;
+    }
+    &__title-box {
+      padding-bottom: 0px;
+    }
+    &__filter-controls {
+      padding-bottom: 0px;
+      justify-content: space-between;
+    }
+    &--advanced {
+      .page-title {
+        &__filter-controls {
+          padding-top: 16px;
+        }
+      }
+    }
+  }
+}
+
+// The Add button keeps its label on a phone. A filter column with a hosting account selector (260px) plus the search and the button no
+// longer fits in one row (the selector ran off the left edge of the right-aligned column, the search sat under the button), so below `sm` the
+// selector gets its own row and the search and the button share the next one.
+@media (max-width: #{map.get(v.$grid-breakpoints, sm) - 0.02}) {
+  .page-title__filter-controls:has(> .acc-select-group) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 12px;
+
+    > .acc-select-group {
+      flex: 1 1 100%;
+      margin-right: 0 !important;
+    }
+
+    > .data-iterator-filter-controls {
+      flex: 1 1 120px;
+      min-width: 120px;
+      width: auto !important;
+    }
+  }
+}
+
+// Not part of the generic page title rules: it comes from the legacy hosting styles, imported by the hosting frame and the reseller frame.
+// The `.top-title` height lives in the kit pattern `PageFrame`; the row highlight stays
+// here, under the frame modifier that only My server sets (`highlight-rows`), instead of matching every table of the app.
+.page-frame--highlight-rows {
+  tr {
+    transition: background-color 10s ease;
+  }
+
+  tr.highlight {
+    background-color: var(--v-primary-lighten2) !important;
+  }
+}

@@ -1,0 +1,97 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-list-item::before` -> `.v-list-item__overlay`.
+// `.label-autocomplete` is a menu content class, so the menu rules are not scoped to `.v-application`.
+
+.label-autocomplete {
+  width: 354px;
+  border-radius: 8px !important;
+  margin-top: 12px;
+  overflow-y: auto !important;
+
+  .v-list {
+    &-item {
+      max-height: 40px;
+      min-height: 40px;
+
+      .v-list-item__overlay {
+        background-color: map.get(v.$primary, lighten4);
+      }
+
+      &:hover {
+        .v-list-item__overlay {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.instance-label-list {
+  margin-right: 10px;
+  position: relative;
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-sm;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  &__remove {
+    line-height: 24px;
+    cursor: pointer;
+    color: map.get(v.$gray, darken1);
+
+    &:hover {
+      color: map.get(v.$error, base);
+    }
+
+    &--disabled {
+      cursor: auto;
+      opacity: 0.4;
+
+      &:hover {
+        color: map.get(v.$gray, darken1);
+      }
+    }
+  }
+
+  &__tooltip {
+    padding: 8px !important;
+    // V2 `.v-tooltip__content { line-height: 22px }`; V4 computes 22.4px.
+    line-height: 22px;
+    text-align: center;
+  }
+}
+
+.custom-info-label {
+  height: 24px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: v.$font-size-sm;
+  line-height: 21px;
+  font-weight: 700;
+  background: #EBF2FD;
+
+  .v-icon {
+    cursor: pointer;
+  }
+}
+
+.color-label {
+  &-purple {
+    color: #6A32E0;
+    background: #6A32E033;
+  }
+  &-blue {
+    color: #005EEA;
+    background: #005EEA33;
+  }
+  &-green {
+    color: #07C07E;
+    background: #07C07E33;
+  }
+}

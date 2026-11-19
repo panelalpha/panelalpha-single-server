@@ -1,0 +1,10 @@
+# Linux line endings in the repo and in every checkout (overrides core.autocrlf)
+* text=auto eol=lf
+
+*.png binary
+*.gif binary
+*.ico binary
+*.webm binary
+*.wav binary
+*.woff binary
+*.woff2 binary

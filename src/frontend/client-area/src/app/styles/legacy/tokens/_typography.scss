@@ -1,0 +1,125 @@
+
+$font-size-xlg:            19px;
+$font-size-lg:             18px;
+$font-size-base:           16px;
+$font-size-sm:             14px;
+$font-size-xs:             13px;
+$font-size-xxs:            12px;
+
+$line-height-xlg:          28px;
+$line-height-lg:           26px;
+$line-height-base:         24px;
+$line-height-sm:           20px;
+$line-height-xs:           18px;
+$line-height-xxs:          16px;
+
+$font-weight-black:        900;
+$font-weight-extrabold:    800;
+$font-weight-bold:         700;
+$font-weight-semibold:     600;
+$font-weight-medium:       500;
+$font-weight-normal:       400;
+$font-weight-light:        300;
+$font-weight-extra-light:  200;
+
+$font-size-h1: 36px; 
+$line-height-h1: 48px;
+$font-weight-h1: $font-weight-extrabold;
+
+$font-size-h1-mob: 26px;
+$line-height-h1-mob: 36px;
+$font-weight-h1-mob: $font-weight-bold;
+
+$font-size-h2: 32px;
+$line-height-h2: 44px;
+$font-weight-h2: $font-weight-bold;
+
+$font-size-h3: 26px;
+$line-height-h3: 32px;
+$font-weight-h3: $font-weight-bold;
+
+$font-size-h4: 24px;
+$line-height-h4: 32px;
+$font-weight-h4: $font-weight-bold;
+
+$font-size-h5: 22px;
+$line-height-h5: 28px;
+$font-weight-h5: $font-weight-bold;
+
+$font-size-h6: 20px;
+$line-height-h6: 28px;
+$font-weight-h6: $font-weight-bold;
+
+
+$paragraphs: (
+  xlg: (
+    font-size: $font-size-xlg,
+    line-height: $line-height-xlg,
+    font-weight: $font-weight-extra-light,
+  ),
+  lg: (
+    font-size: $font-size-lg,
+    line-height: $line-height-lg,
+    font-weight: $font-weight-light,
+  ),
+  base: (
+    font-size: $font-size-base,
+    line-height: $line-height-base,
+    font-weight: $font-weight-light,
+  ),
+  sm: (
+    font-size: $font-size-sm,
+    line-height: $line-height-sm,
+    font-weight: $font-weight-normal,
+  ),
+  xs: (
+    font-size: $font-size-xs,
+    line-height: $line-height-xs,
+    font-weight: $font-weight-normal,
+  ),
+  xxs: (
+    font-size: $font-size-xxs,
+    line-height: $line-height-xxs,
+    font-weight: $font-weight-normal,
+  ),
+  
+);
+
+$headings: (
+    h1: (
+        font-size: $font-size-h1,
+        line-height: $line-height-h1,
+        font-weight: $font-weight-h1,
+    ),
+    h1-mobile: (
+        font-size: $font-size-h1-mob,
+        line-height: $line-height-h1-mob,
+        font-weight: $font-weight-h1-mob,
+    ),
+    h2: (
+        font-size: $font-size-h2,
+        line-height: $line-height-h2,
+        font-weight: $font-weight-h2,
+    ),
+    h3: (
+        font-size: $font-size-h3,
+        line-height: $line-height-h3,
+        font-weight: $font-weight-h3,
+    ),
+    h4: (
+        font-size: $font-size-h4,
+        line-height: $line-height-h4,
+        font-weight: $font-weight-h4,
+    ),
+    h5: (
+        font-size: $font-size-h5,
+        line-height: $line-height-h5,
+        font-weight: $font-weight-h5,
+    ),
+    h6: (
+        font-size: $font-size-h6,
+        line-height: $line-height-h6,
+        font-weight: $font-weight-h6,
+    ),
+);
+

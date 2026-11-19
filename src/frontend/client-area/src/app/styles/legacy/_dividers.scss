@@ -1,0 +1,8 @@
+// The `.v-application` ancestor dropped so dividers in overlays match too.
+// V4 `.v-divider` carries `opacity: var(--v-border-opacity)` (.12); the V2 divider was opaque, so the colour renders as written.
+.v-divider {
+  border-color: var(--v-gray-lighten5);
+  opacity: 1;
+  // V2 left the user agent `hr { color: gray }` alone; V4's reset inherits the text colour. Only the computed value differs, the line paints `border-color`.
+  color: gray;
+}

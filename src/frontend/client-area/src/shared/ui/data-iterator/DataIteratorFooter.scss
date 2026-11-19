@@ -1,0 +1,139 @@
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+// V2 pagination DOM is rewritten per `_pagination.scss`.
+
+.v-data-table .data-iterator-footer {
+  margin: 0px 16px;
+}
+
+.data-iterator-footer {
+  margin-top: 32px;
+}
+
+.v-btn {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.data-iterator-footer {
+  :deep(.v-pagination) {
+    // V2 wrapped the inline-flex `ul` in a block `nav`, so its line box (24px line height around the 34px list) made the footer 36px
+    // high; V4's `nav` is as tall as the list (34px).
+    min-height: 36px;
+
+    // V2 `.v-pagination > li`: each item is a flex box centred in the list, so the 34px pages and the 32px arrows and dots share one middle line.
+    .v-pagination__list > li {
+      display: flex;
+      align-items: center;
+    }
+
+    // V2 `.v-pagination__navigation` is the prev/next button; V4 wraps it in `li.v-pagination__prev/next`.
+    :is(.v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last) .v-btn {
+      border: none !important;
+      box-shadow: none !important;
+      margin: 0;
+      margin-right: 2px;
+    }
+
+    // V2 pagination has no margin around the items: the 2px comes from the button (`margin-right` below).
+    :is(.v-pagination__item, .v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last) {
+      margin: 0;
+    }
+
+    // V2 arrows were 32px squares (4px radius, 0.6 opacity when disabled); V4's are 40px round icon buttons with 16px padding.
+    :is(.v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last) .v-btn {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      // `!important`: the global `_buttons.scss` `.v-btn` side padding (V2 pagination items were not `.v-btn`).
+      padding: 0 !important;
+      border-radius: 4px;
+      // V2 `button.v-pagination__navigation` inherited 400; the global `.v-btn` is 500.
+      font-weight: v.$font-weight-normal;
+
+      &.v-btn--disabled {
+        opacity: 0.6;
+      }
+    }
+
+    // V2 page buttons were 34px high with a 34px minimum width, 5px side padding and a 4px radius.
+    .v-pagination__item .v-btn {
+      width: auto;
+      min-width: 34px;
+      height: 34px;
+      padding: 0 5px !important;
+      border-radius: 4px;
+    }
+
+    // V2 `.v-pagination__item` is the page button; in V4 it is the `li` around a `.v-btn`. The digits are 16px / 300 (V2 `font-size`, `font-weight-light`);
+    // the global `.v-btn__content` is 14px / 700, so the font goes on the content, not on the button.
+    .v-pagination__item .v-btn {
+      box-shadow: none;
+      font-size: v.$font-size-base;
+      line-height: v.$line-height-base;
+      font-weight: v.$font-weight-light;
+      margin: 0;
+      margin-right: 2px;
+
+      .v-btn__content {
+        font-size: v.$font-size-base;
+        line-height: v.$line-height-base;
+        font-weight: v.$font-weight-light;
+      }
+    }
+
+    // The active page is the primary button with white digits (V2 `.v-pagination__item--active`).
+    .v-pagination__item--is-active .v-btn {
+      background: rgb(var(--v-theme-primary)) !important;
+      color: var(--v-white-base) !important;
+      opacity: 1;
+
+      // V4 lights the current page (`aria-current`) with a 0.12 white layer; the V2 page is the plain primary fill.
+      .v-btn__overlay {
+        opacity: 0 !important;
+      }
+    }
+
+    // V2 `.v-pagination__more`: the dots are a 32px box with 4.8px (.3rem) margin, text at the bottom, the theme text colour (not the button grey);
+    // the margin makes the footer 5.6px higher than without dots (`VPagination.sass`, `$pagination-more-*`).
+    .v-pagination__more {
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin: 0.3rem;
+      font-size: v.$font-size-base;
+      line-height: v.$line-height-base;
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
+    }
+  }
+
+  :deep(.data-iterator-page-number) {
+    > span {
+      margin-right: 10px;
+    }
+
+    .v-btn {
+      padding: 0;
+      min-width: 32px;
+      height: 34px;
+      box-shadow: none;
+      background: transparent;
+      margin-left: 2px;
+
+      .v-btn__content {
+        font-size: v.$font-size-sm;
+        line-height: v.$line-height-sm;
+        font-weight: v.$font-weight-normal;
+      }
+
+      &.active {
+        color: white;
+        background: map.get(v.$primary, base);
+        border-color: map.get(v.$primary, base);
+      }
+    }
+  }
+}

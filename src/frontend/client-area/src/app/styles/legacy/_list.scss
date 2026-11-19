@@ -1,0 +1,29 @@
+// `.v-list-item::before` -> `.v-list-item__overlay`.
+// Omitted: `.v-sheet .v-list-item-group { background }`.
+
+.v-list {
+  &--small {
+    .v-list-item {
+      min-height: 38px;
+    }
+
+    .v-divider {
+      margin: 8px 0px;
+    }
+  }
+
+  .v-list-item--active .v-list-item__overlay {
+    background: var(--v-panel-base) !important;
+  }
+}
+
+.v-list-item {
+  // V2 list item titles took no letter spacing; V4 adds the body 0.5px.
+  .v-list-item-title {
+    letter-spacing: normal;
+  }
+
+  &--link .v-list-item__overlay {
+    background-color: unset !important;
+  }
+}

@@ -1,0 +1,30 @@
+services:
+  panel:
+    build:
+      context: .
+      # The Dockerfile is at the repository root (the Engine's build context).
+      dockerfile: ../Dockerfile
+      # The dev image mounts the checkout over /app; build only the code-free
+      # runtime target. The Engine builds `prod` from
+      # the repository root instead.
+      target: base
+    # image: ghcr.io/panelalpha/app-lite-v1:20261005
+    # pull_policy: missing
+    restart: always
+    ports:
+      - 9080:80
+      # :82 is the internal backend hop; it is never published.
+    volumes:
+      - ./:/app/
+      # The repository-root deploy files the test suite checks (base_path('../../…')).
+      - ../.panelalpha:/.panelalpha:ro
+      - ../.dockerignore:/.dockerignore:ro
+      - ../Dockerfile:/Dockerfile:ro
+      # nginx serves /app/frontend/dist (the image's path); in dev it is the
+      # Client Area submodule's own build (`npm run build-only` in
+      # frontend/client-area). Docker creates frontend/dist as the mount point.
+      - ./frontend/client-area/dist:/app/frontend/dist
+      # temp!
+      - ../packages/:/packages/
+    working_dir: /app/backend/
+    command: bash /app/entrypoint.sh

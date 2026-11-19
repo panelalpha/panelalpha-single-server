@@ -1,0 +1,62 @@
+{
+  "app": {
+    "name": "Sebastian Test DEV",
+    "default_language": "en",
+    "default_date_format": "YYYY-MM-DD",
+    "support_link": null,
+    "documentation_link": null,
+    "order_custom_ssl_certificate_link": null,
+    "page_speed_enabled": false,
+    "languages": [
+      "en"
+    ],
+    "language_flags": {
+      "en": "GB"
+    },
+    "custom_js_header": null,
+    "custom_js_footer": null,
+    "custom_css": null,
+    "billing_enabled": false,
+    "registration_enabled": false,
+    "registration_tos": null,
+    "recaptcha_site_key": null,
+    "from_control_panel_registration": {
+      "tos": null
+    },
+    "integrations": {
+      "report_provider_enabled": true,
+      "preview_site_provider_enabled": false,
+      "atarim_enabled": false,
+      "auth": []
+    },
+    "beta_mode": false,
+    "setup_required": false,
+    "community_panel": true,
+    "single_server": {
+      "active": true,
+      "server_id": null,
+      "has_running_tasks": false,
+      "has_uncompleted_imports": false
+    },
+    "hub_login": false,
+    "hub_paired": false,
+    "mcp_url": "https://203.0.113.10:2011/mcp",
+    "theme": {
+      "colors": {
+        "base": "#07C07E",
+        "lighten1": "#1FD895",
+        "lighten2": "#CDF2E5",
+        "lighten4": "#E6F9F2",
+        "darken1": "#0AAA71"
+      },
+      "style": {
+        "disableShadows": false,
+        "darkMode": false,
+        "darkUserChangeMode": true
+      },
+      "logo": false,
+      "darkLogo": false,
+      "favicon": false
+    }
+  }
+}

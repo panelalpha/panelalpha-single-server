@@ -1,0 +1,61 @@
+// Imported once (legacy index.scss imported it twice).
+// The `.v-application` ancestor is dropped so skeletons inside dialogs match too. V4 `.v-skeleton-loader` / `.v-skeleton-loader__bone` keep their V2 names.
+
+.skeleton-row {
+  margin: 0 -36px 0 -24px;
+  padding: 0 24px;
+  width: calc(100% + 36px);
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--v-gray-lighten2);
+  &::after {
+    display: none;
+  }
+  td:first-child {
+    padding-left: 0px !important;
+  }
+}
+// V2 `.text` is the palette background class (`bg-text` in V4); legacy skeletons carried it and reset it to transparent.
+// Legacy nested this in `.v-application` (0,3,0), which beat the theme sheet `.v-application .text` (0,2,0). The theme sheet
+// (`theme-utilities.scss`) has (0,2,0) and comes later, so the prefix restores the legacy specificity.
+:is(.v-application, .v-overlay-container) .v-skeleton-loader.bg-text {
+  background-color: transparent !important;
+}
+
+// V2 `type="list-item"` is 48px tall; V4 draws a 12px text bone with 16px margins (44px). Bone is centred and the root keeps the V2 height.
+.v-skeleton-loader:has(> .v-skeleton-loader__list-item) {
+  min-height: 48px;
+  justify-content: center;
+}
+
+.v-skeleton-loader {
+  .v-skeleton-loader__bone {
+    background-color: var(--v-skeleton-base) !important;
+  }
+}
+.record {
+  &-skeleton {
+    display: flex;
+    align-items: center;
+    .skeleton {
+      &-text {
+        height: 8px;
+        width: 101px;
+        .v-skeleton-loader__text {
+          margin-bottom: 0;
+        }
+      }
+      &-label {
+        height: 20px;
+        width: 48px;
+        margin-left: 8px;
+        .v-skeleton-loader__text {
+          height: 24px;
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+}

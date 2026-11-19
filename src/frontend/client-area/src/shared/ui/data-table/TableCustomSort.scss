@@ -1,0 +1,67 @@
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+// `.custom-sort .sort-item:last-child` (legacy `::v-deep`) lives only here:
+// the `td.sort-item` cells belong to this component, so it needs no deep selector.
+
+.custom-sort {
+  padding: 0 24px;
+  height: 56px;
+
+  // V2 header cells carried `padding: 0 12px 0 0`; V4 renders this row as plain `td`s with the user agent's `padding: 1px`,
+  // which changed every column width.
+  td {
+    padding: 0 12px 0 0;
+  }
+
+  td:first-child {
+    padding-left: 24px;
+    padding-right: 0px;
+  }
+
+  .sort-item:last-child {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    height: 56px;
+  }
+}
+
+.custom-sort__arrows {
+  margin-left: 6px;
+  display: flex;
+}
+
+// The legacy `arrows-sort.vue` icon read `$parent.$attrs.up/down` to paint one arrow green; the V4 icon has a
+// static fill, so the `up` / `down` attributes on the `v-icon` drive the same two paths here.
+.custom-sort__arrow-up[up] :deep(path:first-of-type),
+.custom-sort__arrow-up[down] :deep(path:last-of-type) {
+  fill: var(--v-success-base);
+}
+
+.custom-sort__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  color: map.get(v.$text, base);
+  font-size: v.$font-size-sm;
+  line-height: v.$line-height-sm;
+
+  &--sortable {
+    cursor: pointer;
+
+    &:hover {
+      color: map.get(v.$primary, darken1);
+    }
+  }
+}
+
+.item--select {
+  justify-content: flex-start;
+  padding: 0 !important;
+}
+
+.item--title {
+  padding-left: 8px !important;
+}

@@ -1,0 +1,36 @@
+# The Engine builds `Dockerfile` with the repository root as the build
+# context. Keep the context to what the two build
+# stages and `prod` actually copy, and never send local state or the old app
+# in.
+
+# VCS and editor working files.
+.git
+**/.git
+.gitmodules
+.idea
+.aider*
+.vscode
+
+# Runtime state and local secrets – never bake these into an image.
+.env
+# The Engine copies every `.env.example` / `.env.local.example` in the tree to
+# `.env` / `.env.local` before the build. Keep every copy out of
+# the context at any depth; `*.example` templates do not match these patterns.
+**/.env
+**/.env.local
+src/data
+src/backend/.env
+src/backend/vendor
+src/backend/storage
+src/backend/bootstrap/cache
+
+# Node modules and previous builds are recreated inside the build stages.
+node_modules
+**/node_modules
+src/frontend/client-area/dist
+# The Client Area's test harnesses (Playwright e2e baselines, parity reports)
+# never reach the bundle.
+src/frontend/client-area/e2e
+src/frontend/client-area/parity
+src/frontend/client-area/playwright-report
+src/frontend/client-area/test-results

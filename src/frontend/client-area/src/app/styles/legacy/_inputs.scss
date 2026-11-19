@@ -1,0 +1,742 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// Selectors rewritten for Vuetify 4:
+// `.v-input__slot`/`fieldset` -> `.v-field`/`.v-field__outline`, `.v-text-field__details` -> `.v-input__details`,
+// `.error--text` -> `.v-field--error`, `.primary--text` (V2 focus state) -> `.v-field--focused`,
+// `.v-select--is-menu-active` -> `.v-select--active-menu`. The V4 outline paints its border with `currentColor`
+// and `--v-field-border-*`, so legacy `border-color` becomes `color` on `.v-field__outline`.
+
+.v-text-field input {
+  line-height: 25px;
+}
+
+// V2 vendor `.v-text-field--outlined { border-radius: 4px }` sits on the root of every outlined field (select, text field,
+// textarea); the V4 root `.v-input` has no radius (the radius is on `.v-field`). Not in legacy `_inputs.scss`; measured on the
+// update and copy dialogs.
+.v-input:has(> .v-input__control > .v-field--variant-outlined) {
+  border-radius: 4px;
+}
+
+// V2 `.v-menu__content .v-select-list`: the list inside a VSelect menu.
+.v-menu > .v-overlay__content {
+  &.v-select__content .v-list {
+    background-color: var(--v-tooltip-base) !important;
+
+    .v-chip {
+      cursor: pointer !important;
+    }
+  }
+
+  .dropdown-left {
+    background-color: var(--v-tooltip-base) !important;
+  }
+}
+
+// V2 `BasicModal.vue` selects are `dense` (`BasicModalField` `list-props` compact): the menu list items are 40px with no vertical padding, so
+// a seven-option menu is 296px and shows every option (V4 one-line items are 48px and the menu stops at its 310px max height). The V2 menu
+// content inherited the app text colour (`.v-application`), not the theme colour of `_dropdowns.scss`. Doubled class: that theme rule is 0,3,0.
+// Measured on the cron add modal.
+.v-menu > .v-overlay__content.basic-modal-select-menu.basic-modal-select-menu {
+  color: var(--v-text-base);
+  // V2 sized the menu to the field and cut long options with an ellipsis; V4 sets the field width inline as `min-width` and lets the
+  // menu grow to its longest option (226px against the 199px field on a 375px screen). A max width under the min width loses to it,
+  // so the menu is the field's width; `!important` beats the inline `max-width` of the V4 location strategy. It relies on that inline
+  // `min-width`, which the connected strategy sets only for a menu opened along the y axis (Vuetify `locationStrategies`): `BasicModalField`
+  // menus always open below the field. Do not reuse the class on a menu opened to the side.
+  max-width: 0 !important;
+
+  .v-list-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  // V2 scrolled the menu content (`maxHeight` 304, `BasicModalField` `menu-props`) over the full list; the V4 list shrinks in the flex sheet
+  // of `.v-select__content` and scrolls itself. Measured on the cron frequency menu (eleven options).
+  .v-list {
+    flex-shrink: 0;
+    overflow: visible;
+  }
+}
+
+.v-form {
+  .v-input {
+    &.v-text-field {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// V2 vendor: `.theme--light/dark.v-input` (and its `textarea`) text colour; the textarea keeps it when the errored
+// `.v-field` turns red; V4 fields inherit it from the container, which in a card is the
+// dimmed `.v-card__text` colour.
+.v-theme--light .v-input,
+.v-theme--light .v-input input,
+.v-theme--light .v-input textarea {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.v-theme--dark .v-input,
+.v-theme--dark .v-input input,
+.v-theme--dark .v-input textarea {
+  color: #fff;
+}
+
+// V2 vendor: `.v-input.error--text` is `color: <error> !important` on the root (the input text keeps its own colour above); the
+// root rule above would otherwise leave the errored root at the text colour.
+.v-theme--light .v-input.v-input--error:not(.v-input--disabled),
+.v-theme--dark .v-input.v-input--error:not(.v-input--disabled) {
+  color: var(--v-error-base);
+}
+
+// V2 vendor: `.theme--light.v-input--is-disabled` / `.theme--dark.v-input--is-disabled` set the root text colour to .38 / .5 (the
+// root rule above would keep .87 / white on a disabled field).
+.v-theme--light .v-input.v-input--disabled {
+  color: var(--v-input-disabled-color);
+}
+
+.v-theme--dark .v-input.v-input--disabled {
+  color: var(--v-input-disabled-color);
+}
+
+// V2 `VTextField` put `.primary--text` on the `.v-input` root while focused (and not errored), so the root `color`
+// is the primary colour. The text itself keeps its own colour (`input` above), only the root differs.
+.v-input:has(.v-field--focused:not(.v-field--error)) {
+  color: var(--v-primary-base);
+}
+
+// V2 vendor: `.theme--light.v-label` was `rgba(0, 0, 0, 0.6)` (dark stayed white); V4 inherits the 0.87 text colour.
+.v-theme--light .v-input.v-checkbox .v-label {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+// V2 vendor: `.v-input` set no line height (it took its container's, 22px in a card), no font weight (V4 sets 400, so a
+// checkbox inside `p-2` lost the light weight) and `letter-spacing: normal`; V4 sets 1.5.
+.v-input {
+  line-height: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+}
+
+// V2 vendor: the label sat at the start of the slot content, with no inline margin (V4 offsets it by `--v-field-padding-*`).
+.v-input .v-field .v-label.v-field-label {
+  margin-inline: 0;
+  max-width: 100%;
+}
+
+// V2 vendor: V4 `.v-field` and `.v-label` carry their own letter spacing; V2 inherited `normal` from `.v-input`.
+.v-input .v-field,
+.v-input .v-field .v-label,
+.v-input .v-field .v-field__input {
+  letter-spacing: inherit;
+}
+
+// V2 vendor: `.theme--light.v-label` was a plain `rgba(0, 0, 0, 0.6)` at full opacity; V4 draws the 0.87 text colour at opacity 0.6.
+// Dark stayed white; only V4's 0.7 opacity differs.
+.v-theme--light .v-input .v-field .v-label.v-field-label {
+  color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+// V2 vendor: a floating label (`outlined` without `solo`) took the validation colour, so it turned `error` red with the border and the
+// message. An `outlined solo` field (V4 `single-line`: login, settings selects) keeps the grey label in error, so it is left out.
+.v-theme--light .v-input--error:not(.v-input--disabled) .v-field:not(.v-field--single-line) .v-label.v-field-label {
+  color: rgb(var(--v-theme-error));
+}
+
+.v-theme--dark .v-input .v-field .v-label.v-field-label {
+  opacity: 1;
+}
+
+// V2 vendor: the label of a focused field (`outlined` without `solo`) took the primary colour (`primary--text` from the validation
+// state, `rgb(7, 192, 126)`), the same as the border; V4 keeps it grey. A `solo` (V4 `single-line`) field hides its label on focus in
+// both versions, so it is left out. The error colour above stays for the errored field.
+:is(.v-theme--light, .v-theme--dark) .v-input:not(.v-input--disabled) .v-field.v-field--focused:not(.v-field--error):not(.v-field--single-line) .v-label.v-field-label {
+  color: rgb(var(--v-theme-primary));
+}
+
+// V2 vendor: `.v-text-field__suffix` is always visible (`padding-left: 4px`, no colour of its own, so it follows the field text: primary
+// on focus, error in error). V4 hides it (`opacity: 0`) until the field is active and paints it grey, so `.zip` of the File Manager
+// archive name and the units of the crop fields showed up only on focus. Same rule as the prefix of `BasicModalField`;
+// the `@` and `.` blocks of `TextSelectInput` are their own element and were already visible.
+.v-text-field.v-input .v-field .v-text-field__suffix {
+  padding-inline: 4px 0;
+  color: inherit;
+  opacity: 1;
+  white-space: nowrap;
+}
+
+.v-input {
+  .v-field__prepend-inner {
+    .v-icon > svg {
+      transition: color 0.24s ease;
+    }
+  }
+
+  // V2 vendor: centred the prepend icon in the 48px field; V4 top-aligns it under `--v-field-padding-top` (2px too high).
+  &:not(.v-textarea) .v-field__prepend-inner {
+    align-items: center;
+    padding-top: 0;
+
+    // V4 `.v-icon` keeps `line-height: 1em`, which lifts the svg 2px above the V2 position inside the 24px icon box.
+    > .v-icon {
+      line-height: 0;
+    }
+  }
+
+  // V4 `.v-input__details` is a sibling of `.v-input__control`, not a child of it.
+  .v-input__details {
+    // V2 vendor: `.v-messages` inherited `letter-spacing: normal` from `.v-input`; V4 `.v-input__details` sets 0.0333em
+    // (the wrapped message on the set-password step of register in light mobile was wider and broke the pixel ratio).
+    letter-spacing: normal;
+    padding-left: 0px;
+    // V2 vendor: `.v-text-field__details` kept `padding: 0 12px` on the right (V4 uses 16px).
+    padding-right: 12px;
+    // Legacy -4px sits on top of the V2 slot's 8px margin (below); V4 details add their own 6px padding-top.
+    margin-top: -10px;
+    margin-bottom: -12px;
+
+    .v-messages__message {
+      font-size: v.$font-size-sm;
+      line-height: v.$line-height-sm;
+      font-weight: v.$font-weight-normal;
+    }
+  }
+
+  &:hover {
+    .v-input__control {
+      .v-field {
+        .v-field__outline {
+          color: map.get(v.$primary, base);
+        }
+      }
+    }
+  }
+
+  .v-field {
+    background: unset !important;
+    border: var(--v-gray-lighten2) !important;
+
+    // V4 dims the control with `--v-high-emphasis-opacity`; the V2 slot was opaque.
+    .v-field__input {
+      opacity: 1;
+    }
+
+    input {
+      color: var(--v-text-darken2) !important;
+      font-weight: v.$font-weight-semibold;
+
+      &::placeholder {
+        color: map.get(v.$gray, lighten1);
+        font-weight: v.$font-weight-normal;
+        // V4 dims the placeholder with `--v-disabled-opacity`; V2 left it opaque.
+        opacity: 1;
+      }
+    }
+
+    .v-field__outline {
+      box-shadow: 0 0 0 4px transparent;
+      transition: box-shadow 0.24s ease;
+    }
+
+    // V4 dims the inner icons; V2 icons inside the slot were opaque.
+    .v-field__prepend-inner > .v-icon,
+    .v-field__append-inner > .v-icon,
+    .v-field__clearable > .v-icon {
+      opacity: 1;
+    }
+  }
+
+  // V2 vendor: `.v-input__slot` had `margin-bottom: 8px` while the input shows details (`hide-details="auto"` with a
+  // message); V4 renders `.v-messages__message` only then.
+  &:has(.v-messages__message) > .v-input__control > .v-field {
+    margin-bottom: 8px;
+  }
+
+  // V2 vendor: `.v-input.error--text` coloured the slot (and its inherited text) with the error colour.
+  &.v-input--error:not(.v-input--disabled) > .v-input__control > .v-field {
+    color: var(--v-error-base);
+  }
+
+  // V2 `.error--text`
+  .v-field.v-field--error {
+    .v-icon {
+      color: map.get(v.$error, base);
+    }
+
+    .v-field__outline {
+      color: var(--v-error-base) !important;
+      box-shadow: 0 0 0 4px var(--v-error-lighten5) !important;
+    }
+  }
+
+  // V2 `.primary--text` (the focused, non-error input)
+  .v-field.v-field--focused:not(.v-field--error) {
+    .v-field__outline {
+      color: var(--v-primary-base) !important;
+      box-shadow: 0 0 0 4px map.get(v.$primary, lighten4) !important;
+    }
+  }
+
+  &.v-textarea--no-resize {
+    .v-field {
+      textarea {
+        margin-top: 0 !important;
+        padding-top: 4px;
+        max-height: 100%;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          width: 14px;
+        }
+
+        &::-webkit-scrollbar-track {
+          box-shadow: none;
+          background-color: transparent;
+          max-width: 8px;
+          border: 3px solid transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--v-gray-lighten2);
+          border-radius: 8px;
+          border: 4px solid transparent;
+          background-clip: padding-box;
+        }
+      }
+    }
+  }
+
+  // Legacy: a 48px slot (min-height only, no max-height) around a native input that keeps its own 25px line
+  // plus 8px paddings (41px). So the 48px lives on `.v-field`, and `.v-field__input` (the native input in
+  // V4 text fields) drops V4's own min-height; `.v-field__field` centers it like the V2 slot did.
+  .v-input__control .v-field {
+    min-height: 48px;
+
+    // V2 vendor: `.v-text-field--enclosed` slot padding (`0 12px`: outlined, solo, filled; a regular field had none); the
+    // native input itself had none (V4 puts the padding on `.v-field__input`). Underlined/plain keep V4's own.
+    &:not(.v-field--variant-underlined):not(.v-field--variant-plain) {
+      padding-inline: 12px;
+
+      .v-field__input {
+        padding-inline: 0;
+      }
+    }
+
+    .v-field__field {
+      align-items: center;
+    }
+
+    .v-field__input {
+      min-height: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+
+  &.v-textarea .v-input__control .v-field textarea.v-field__input {
+    min-height: 48px;
+  }
+
+  &.v-text-field {
+    &.v-input--lg .v-input__control .v-field {
+      min-height: 56px;
+    }
+
+    // Legacy kept the native input's own 8px paddings inside the 56px slot (41px input).
+    &.v-input--lg .v-input__control .v-field .v-field__input {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    // V2 measured a 20px label line in the `lg` field (V4: 22px, 2px lower).
+    &.v-input--lg .v-input__control .v-field .v-label.v-field-label {
+      line-height: 20px;
+    }
+
+    &.v-input--md .v-input__control .v-field {
+      min-height: 48px;
+    }
+
+    &.v-input--md .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.v-input--sm .v-input__control .v-field {
+      min-height: 40px;
+    }
+
+    &.v-input--sm .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.v-input--xsm .v-input__control .v-field {
+      min-height: 32px;
+    }
+
+    &.v-input--xsm .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &.v-select {
+    .v-chip {
+      cursor: pointer !important;
+    }
+
+    &.v-input--xlg .v-input__control .v-field {
+      min-height: 56px;
+    }
+
+    &.v-input--xlg .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.v-input--lg .v-input__control .v-field {
+      min-height: 48px;
+    }
+
+    &.v-input--lg .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.v-input--md .v-input__control .v-field {
+      min-height: 40px;
+    }
+
+    &.v-input--md .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.v-input--sm .v-input__control .v-field {
+      min-height: 32px;
+    }
+
+    &.v-input--sm .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .v-select__selection {
+        .font-weight-bold {
+          font-weight: 500 !important;
+        }
+      }
+    }
+
+    &.v-input--xsm .v-input__control .v-field {
+      min-height: 24px;
+    }
+
+    &.v-input--xsm .v-input__control .v-field .v-field__input {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .v-input__control {
+    .v-field {
+      .v-field__outline {
+        // V2 painted a 1px `$gray-lighten2` border; V4 draws it as `currentColor` at `--v-field-border-opacity`.
+        transition: color 0.24s ease;
+        color: map.get(v.$gray, lighten2);
+        --v-field-border-opacity: 1;
+      }
+
+      .v-field__prepend-inner,
+      .v-field__append-inner {
+        margin-top: 0px !important;
+        align-self: center;
+      }
+    }
+  }
+
+  &--short {
+    max-width: 180px;
+  }
+
+  &.v-text-field {
+    .v-field__prepend-inner {
+      padding-right: 10px;
+    }
+
+    .v-field__append-inner {
+      padding-left: 10px;
+    }
+  }
+
+  &.v-select {
+    // Focused select keeps a 1px border (its colour is the primary ring above); open menu goes to 2px.
+    .v-field--focused .v-field__outline {
+      --v-field-border-width: 1px;
+    }
+
+    &.v-select--active-menu {
+      .v-input__control .v-field .v-field__outline {
+        color: map.get(v.$primary, base);
+        --v-field-border-width: 2px;
+      }
+
+      .v-field__prepend-inner {
+        .v-icon > svg {
+          color: var(--v-primary-base) !important;
+          caret-color: var(--v-primary-base) !important;
+        }
+      }
+    }
+  }
+}
+
+.custom-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  position: relative;
+  padding: 0px 16px;
+  border-radius: 5px;
+  color: map.get(v.$text, headings);
+  box-shadow: 0 0 0 4px transparent;
+  transition: box-shadow 0.24s ease;
+
+  &:hover {
+    &::after {
+      border-color: map.get(v.$primary, base);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid map.get(v.$gray, lighten2);
+    transition: border-color 0.24s ease;
+    border-radius: 5px;
+    left: 0;
+    z-index: 0;
+  }
+
+  .filter-number {
+    color: map.get(v.$primary, darken1);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: map.get(v.$primary, lighten2);
+    margin-left: 10px;
+  }
+
+  .v-icon {
+    margin-left: 10px;
+    transition: transform 0.24s ease, color 0.24s ease;
+  }
+
+  &--active-info {
+    &::after {
+      border: 2px solid map.get(v.$info, base) !important;
+    }
+
+    // Legacy set `background-color: map-get($info, lighten2)`; `--v-info-lighten2` is undefined in legacy, so the
+    // invalid `var()` computed to the initial value and replaced the base `.filter-number` mint background.
+    // Same result here: transparent (a plain omission would keep the base mint, 0.125% pixel diff).
+    .filter-number {
+      color: map.get(v.$info, base);
+      background-color: transparent;
+    }
+  }
+
+  &--active,
+  &.v-select--active-menu {
+    box-shadow: 0 0 0 4px var(--v-primary-lighten4) !important;
+    color: var(--v-primary-base);
+
+    .v-field__append-inner {
+      .v-icon {
+        color: map.get(v.$primary, darken1) !important;
+        transform-origin: center;
+        transform: rotate(180deg);
+      }
+    }
+
+    &::after {
+      border: 2px solid map.get(v.$primary, base) !important;
+    }
+
+    .filter-number {
+      color: map.get(v.$primary, darken1);
+      background-color: map.get(v.$primary, lighten2);
+    }
+  }
+}
+
+.custom-select {
+  &.v-select--active-menu {
+    .v-field__append-inner {
+      .v-icon {
+        color: map.get(v.$primary, darken1) !important;
+        transform-origin: center;
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.v-select,
+.data-iterator-filter-controls .custom-menu {
+  .v-text-field__prefix {
+    cursor: pointer;
+  }
+
+  // V2 `.v-select__selections .v-select__selection`; V4 has no `__selections` wrapper.
+  .v-select__selection {
+    overflow: visible;
+    color: map.get(v.$text, headings);
+  }
+
+  &--select-bold {
+    .v-select__selection {
+      color: map.get(v.$text, headings);
+      font-weight: v.$font-weight-bold;
+    }
+  }
+
+  // V2 `.v-select__slot .v-text-field__prefix`; V4 has no `.v-select__slot`.
+  &--prefix-bold {
+    .v-text-field__prefix {
+      font-weight: v.$font-weight-bold;
+      color: map.get(v.$text, headings);
+    }
+  }
+
+  .v-field__append-inner {
+    align-self: center;
+    margin-top: 0px !important;
+  }
+}
+
+// Filters / Sort chevrons of the data iterator bar. V2 drew both opaque and centred in the 40/48px box; V4 gives
+// `.v-field__append-inner` an 8px `padding-top` (Filters chevron too low: its wrapper sits outside a `.v-field`), dims its
+// `.v-icon` (opacity) and keeps `line-height: 1em` (Sort chevron 2px too high).
+.data-iterator-filter-controls {
+  .custom-menu .v-field__append-inner,
+  .v-select .v-field__append-inner {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    > .v-icon {
+      opacity: 1;
+      line-height: 0;
+    }
+  }
+}
+
+// V2 `.theme--light.v-list-item:not(:hover)::before`: the list item state overlay is `.v-list-item__overlay` in V4.
+.v-theme--light .v-list-item:not(:hover) .v-list-item__overlay {
+  opacity: 0 !important;
+}
+
+// V2 `.theme--dark.v-list-item:focus::before { opacity: .24 }` (keyboard focus only; V2 blurs after a click): V4 gives `.12` there.
+.v-theme--dark .v-list-item:focus-visible > .v-list-item__overlay {
+  opacity: 0.24;
+}
+
+// V2 `.v-select__selection--comma` is the plain-text (non-chip) selection, `.v-select__selection-text` in V4.
+.dns-zone {
+  .v-select__selection-text {
+    font-weight: 700;
+  }
+}
+
+// V2 `.v-select__selections` wrapper -> `.v-field__input`.
+.v-select {
+  &.v-select--role-picker {
+    .v-field__input {
+      span.input-dropdown {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 105px;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.filter-select {
+  &.filter-select--role-access {
+    span.input-dropdown {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 140px;
+      overflow: hidden;
+    }
+  }
+}
+
+.owner-role {
+  > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    overflow: hidden;
+  }
+}
+
+.four-digit-input {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  .v-input {
+    max-width: 56px;
+    margin-bottom: 32px;
+    font-size: v.$font-size-h4;
+
+    .v-input__control {
+      height: 56px;
+
+      .v-field {
+        min-height: 56px;
+        // V4 `.v-field` sets its own 16px font size; V2 inherited it from `.v-input`.
+        font-size: inherit;
+
+        .v-field__input {
+          min-height: 56px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.my-hostings-search {
+  min-width: 260px;
+
+  .data-iterator-filter-controls__item {
+    .v-input {
+      min-width: 260px;
+    }
+  }
+}
+
+// The Add button of the page title keeps its label on a phone, so the search field next to it shrinks below `sm` (the 260px
+// minimum pushed the button, or the field itself in the right-aligned My server header, off the screen). From `sm` the minimum stays.
+@media (max-width: #{map.get(v.$grid-breakpoints, sm) - 0.02}) {
+  .my-hostings-search {
+    min-width: 0;
+
+    .data-iterator-filter-controls__item {
+      .v-input {
+        min-width: 54px;
+      }
+    }
+  }
+}

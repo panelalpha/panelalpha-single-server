@@ -1,0 +1,5 @@
+// The icon takes the button colour. `!important` stays: the global V4 `.v-icon` colour wins over `inherit` at this specificity
+// (same as McpToolPanel.vue); value unchanged.
+.v-btn .v-icon {
+  color: inherit !important;
+}

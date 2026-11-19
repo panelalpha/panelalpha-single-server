@@ -1,0 +1,287 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-application.v-application--is-rtl` and `.v-application--is-rtl` become
+// `[dir=rtl]`: `i18n.ts` sets `dir` on `<html>`, so teleported overlays match too (they have no `.v-application` ancestor).
+// Flips stay physical (`margin-left` <-> `margin-right`) because the legacy rules they undo are physical; logical properties would double-flip.
+// V2 selectors follow the earlier partials: `.v-main__wrap` -> `.v-main`, `.v-data-table__wrapper` -> `.v-table__wrapper`, `.v-card__actions` -> `.v-card-actions`,
+// `.v-input__prepend-inner/append-inner` -> `.v-field__prepend-inner/append-inner`, `.v-select__selections` -> `.v-field__input`, `.v-tabs-bar__content` -> `.v-slide-group__content`.
+
+// Margin and padding utility flips. Values are the Vuetify spacing steps (4px * n).
+$margin-steps: (6: 24px, 5: 20px, 4: 16px, 3: 12px, 2: 8px, 1: 4px);
+$padding-left-steps: (12: 48px, 6: 24px, 5: 20px, 4: 16px, 3: 12px, 2: 8px);
+$padding-right-steps: (6: 24px, 5: 20px, 4: 16px, 3: 12px, 2: 8px);
+
+[dir='rtl'] {
+  @each $step, $size in $margin-steps {
+    .ml-#{$step} {
+      margin-left: 0px !important;
+      margin-right: $size !important;
+    }
+  }
+
+  .ml-auto {
+    margin-left: unset !important;
+    margin-right: auto !important;
+  }
+
+  @each $step, $size in $margin-steps {
+    .mr-#{$step} {
+      margin-right: 0px !important;
+      margin-left: $size !important;
+    }
+  }
+
+  .mr-0 {
+    margin-left: 0px !important;
+  }
+
+  .mr-auto {
+    margin-right: unset !important;
+    margin-left: auto !important;
+  }
+
+  .ml-4.mr-4 {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+  }
+
+  @each $step, $size in $padding-left-steps {
+    .pl-#{$step} {
+      padding-left: 0px !important;
+      padding-right: $size !important;
+    }
+  }
+
+  @each $step, $size in $padding-right-steps {
+    .pr-#{$step} {
+      padding-right: 0px !important;
+      padding-left: $size !important;
+    }
+  }
+
+  .pr-0 {
+    padding-left: 0px !important;
+  }
+
+  // V4 `.v-tabs` has no theme class of its own; the theme class is on an ancestor.
+  .v-theme--light .v-tabs {
+    .v-tab {
+      + .v-tab {
+        margin-left: 0px;
+        margin-right: 40px;
+
+        @media (max-width: map.get(v.$grid-breakpoints, lg)) {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+
+  .custom-menu {
+    .v-icon {
+      margin-left: 0px;
+      margin-right: 10px;
+    }
+  }
+
+  .page-title__filter-controls {
+    .v-btn {
+      .v-icon {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .v-btn {
+    .v-icon {
+      margin-right: 0px;
+      margin-left: 10px;
+    }
+  }
+
+  .data-iterator-filter-controls__item {
+    .v-field__prepend-inner {
+      padding-right: 0px;
+      padding-left: 10px;
+    }
+
+    .v-field__append-inner {
+      padding-left: 0px;
+      padding-right: 10px;
+    }
+  }
+
+  // V2 `.v-select__selections` wrapper; V4 has the selection directly in `.v-field__input`, which every field has, so it is narrowed to selects.
+  .v-select .v-field__input {
+    padding-left: 6px;
+  }
+
+  // header rtl
+  .navbar__menu-items {
+    // V2 `.primary` colour class on the button -> `.bg-primary`; V4 icons are `<i class="v-icon">`, not `span.v-icon`.
+    .bg-primary {
+      .v-icon {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+    }
+
+    .pr-0 {
+      margin-left: 0px !important;
+    }
+  }
+
+  // `margin-inline` is logical in legacy too: the 44px lands on the start side, which is the right in RTL.
+  .v-toolbar-title {
+    .v-tabs {
+      margin-inline: 44px 0px !important;
+    }
+  }
+
+  // main content
+  .v-main {
+    .page-title__add-button {
+      margin-left: 0px;
+      margin-right: 10px;
+    }
+
+    .v-table__wrapper {
+      .custom-sort {
+        .custom-sort__arrows {
+          margin-left: 0px;
+          margin-right: 6px;
+        }
+      }
+
+      .item__title-box {
+        margin-left: 0px;
+        margin-right: 16px;
+      }
+    }
+
+    .preview-not-available__text.p-4 {
+      display: flex;
+    }
+
+    .data-iterator-page-number {
+      > span {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+    }
+
+    .v-card-actions {
+      .v-icon {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+    }
+
+    .analytics-card.analytics-card--visitors {
+      .v-slide-group__content {
+        > div:last-child {
+          margin-left: 0px;
+          margin-right: 40px;
+        }
+      }
+    }
+  }
+
+  // Data tables rtl style
+  .data-table {
+    td {
+      &:first-child {
+        padding-right: 24px !important;
+      }
+
+      &:last-child {
+        padding-left: 24px !important;
+      }
+    }
+  }
+
+  .v-data-table {
+    table {
+      tr {
+        td {
+          padding-left: 12px !important;
+          padding-right: 0px !important;
+        }
+      }
+    }
+  }
+
+  // dialog modal with choose theme. V2 `.v-dialog--active` is the open dialog; V4 marks the open overlay with `.v-overlay--active`.
+  .v-dialog.v-overlay--active {
+    .v-btn__content {
+      .v-icon {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .apexcharts-tooltip-series-group.apexcharts-active {
+    justify-content: flex-start;
+
+    .apexcharts-tooltip-marker {
+      margin-right: 0px;
+      margin-left: 12px;
+    }
+
+    .apexcharts-tooltip-text-y-value {
+      margin-left: 0px;
+      margin-right: 5px;
+    }
+  }
+
+  .instance-actions__content {
+    .v-icon {
+      margin-left: 10px;
+    }
+  }
+
+  .text-left {
+    text-align: right !important;
+  }
+
+  .v-btn--icon .v-icon {
+    margin-left: 0 !important;
+  }
+
+  .snackbar {
+    .v-icon,
+    .snackbar__item-number {
+      margin-right: 0px;
+      margin-left: 10px;
+    }
+  }
+
+  .input-group {
+    .v-input + .v-input {
+      margin-left: 0px;
+      margin-right: 16px;
+    }
+  }
+
+  ol {
+    padding-left: 0px !important;
+    padding-right: 24px;
+  }
+
+  // V2 `.v-dialog--persistent` has no V4 class (`persistent` is a prop), so every dialog's close button flips.
+  .v-dialog {
+    .close-model {
+      right: unset;
+      left: -8px;
+    }
+  }
+
+  .dns-zone {
+    .v-field__append-inner {
+      padding-left: 0px;
+      padding-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "panelalpha/community",
+    "description": "Community single-server feature package: the first-run setup wizard, the Community Settings, Tasks and Backups backend and the Client Area's PanelAlpha Hub pages and sign-in. Builds on the Client Area controller, the Engine client and the Hub package; names no host class.",
+    "type": "library",
+    "license": "Apache-2.0",
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0",
+        "panelalpha/client-area": "*",
+        "panelalpha/engine-client": "*",
+        "panelalpha/hub": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PanelAlpha\\Community\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PanelAlpha\\Community\\CommunityServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

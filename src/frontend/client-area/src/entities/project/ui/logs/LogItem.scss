@@ -1,0 +1,45 @@
+@use '@/app/styles/legacy/tokens/typography' as v;
+
+// The `<style lang="scss">` is not scoped, so the chip class is global, as in legacy.
+// Chip colours are restated from the V2 palette classes (`success lighten-5 success--text`, `red lighten-4 red--text`,
+// `warning lighten-5 warning--text`): V4 has no `bg-<c>-lighten-5` at the legacy alpha, so the legacy CSS variables and the
+// material red tokens are used. `border: none` / `box-shadow: none` reset the V4 chip, and
+// `variant="flat"` on the chip drops the V4 tonal underlay, which would darken the background. The chip is 24px high with a 4px radius
+// as the deployed legacy paints it (V2 `.v-chip--label` wins over the 5px of `.action-name`; the V4 chip would be 26px).
+.action-name {
+  border-radius: 4px;
+  padding: 4px;
+  height: 24px;
+  font-size: v.$font-size-xxs;
+  line-height: v.$line-height-xxs;
+  font-weight: v.$font-weight-bold;
+  margin-left: 0;
+  border: none;
+  box-shadow: none;
+
+  &.action-name--post {
+    background-color: var(--v-success-lighten5);
+    color: rgb(var(--v-theme-success));
+  }
+
+  &.action-name--delete {
+    background-color: var(--v-red-lighten4);
+    color: var(--v-red-base);
+  }
+
+  &.action-name--other {
+    background-color: var(--v-warning-lighten5);
+    color: rgb(var(--v-theme-warning));
+  }
+}
+
+// Legacy `grey--text text--darken-1` on the information: measured on the deployed legacy it is the project `gray` (#797997), not the material
+// #757575. Scoped to the log item, since the stylesheet is global as in legacy.
+.logs-table__log-item .information {
+  color: var(--v-gray-darken1);
+}
+
+// Legacy inline `gap: 4px` on the information span.
+.logs-table__log-item .log-item__information {
+  gap: 4px;
+}

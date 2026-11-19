@@ -1,0 +1,602 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// App-lite wins over app. Selectors rewritten for Vuetify 4:
+// `.v-btn--has-bg` -> `.v-btn--variant-elevated/-flat`, `.v-btn--outlined/--text/--plain` -> `.v-btn--variant-*`,
+// `.v-size--*` -> `.v-btn--size-*`, V2 `.primary`/`.error`/`.sand` colour classes -> `.bg-primary`/`.bg-error`/`.bg-sand`,
+// `.gray--text` -> `.text-gray`, and the V2 `::before` state overlay -> `.v-btn__overlay`.
+// `.v-application` ancestors are dropped: buttons also render inside teleported overlays.
+
+.v-theme--light .v-btn[aria-expanded="true"] {
+  .v-btn__overlay {
+    opacity: 0.08;
+  }
+}
+
+// Dark: a hovered tooltip/menu activator (`aria-expanded="true"`) keeps the V2 hover layer (0.08); V4 doubles it for the dark theme.
+.v-theme--dark .v-btn[aria-expanded="true"]:hover > .v-btn__overlay {
+  opacity: 0.08;
+}
+
+// V2 vendor state layer of every button, both themes (deployed legacy `chunk-vendors.css`:
+// `.theme--light/--dark.v-btn:hover:before { opacity: .08 }`, `:focus:before { opacity: .24 }`): fixed opacities, where V4
+// multiplies `--v-hover-opacity` 0.04 / `--v-focus-opacity` 0.12 by the colour's overlay multiplier (1 for a light colour such
+// as primary in the light theme). V2 `VBtn` blurs itself after a mouse click (`retainFocusOnClick: false`), so its `:focus`
+// layer only shows for keyboard focus: that is V4 `:focus-visible` (V4 keeps focus after a click). The V2 `::before` inherited
+// the radius. Active and open-menu buttons (V2 `--active` .18) and pagination items (V2 plain buttons without the layer)
+// keep the V4 layer: the layer is unlayered, so without the `:where` exclusions it would beat V4's activated + hover rules.
+// `:where` keeps the specificity at (0,3,0), so screen-level overlay overrides still win.
+.v-btn {
+  > .v-btn__overlay {
+    border-radius: inherit;
+  }
+
+  // V2 `::before` of an outlined button covers the border box (32 px for a 32 px button); V4 `.v-btn__overlay` sits inside the 1px border (30 px).
+  &.v-btn--variant-outlined > .v-btn__overlay {
+    inset: auto;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+  }
+
+  &:where(:not(.v-btn--active, [aria-expanded="true"], .v-pagination .v-btn)) {
+    &:hover > .v-btn__overlay {
+      opacity: 0.08;
+    }
+
+    &:focus-visible > .v-btn__overlay {
+      opacity: 0.24;
+    }
+  }
+
+  // V4 draws a 2px `currentColor` ring on `:focus-visible`; V2 has none (its `::after` is only the elevated shadow).
+  &::after {
+    opacity: 0;
+  }
+}
+
+// V2 vendor: `.v-btn` has no border (`border-style: none`); V4 paints `solid` + width 0. The outlined variant keeps its border.
+// V2 palette classes (`.primary`, `.error`) also set `border-color`, so the computed colour follows the fill.
+.v-btn:not(.v-btn--variant-outlined):not(.v-btn--border) {
+  border-style: none;
+}
+
+.v-btn.bg-primary {
+  border-color: var(--v-primary-base);
+}
+
+.v-btn.bg-error {
+  border-color: var(--v-error-base);
+}
+
+// V2 vendor: the `.info` and `.success` palette classes set `border-color` like `.primary` / `.error` (measured on the instance card
+// overlay buttons and the selection bar Share button), where V4 paints the theme border colour.
+.v-btn.bg-info {
+  border-color: var(--v-info-base);
+}
+
+.v-btn.bg-success {
+  border-color: var(--v-success-base);
+}
+
+// V2 `.gray` palette class: the fill, a border in the same colour and the default dark text; V4 `bg-gray` paints the fill, the theme border
+// colour and the `on-gray` (black) text. Was repeated in DnsSslIndicator, WpAdminSsoModal and PhpMyAdminSsoModal.
+.v-btn.bg-gray {
+  color: var(--v-text-default);
+  border-color: var(--v-gray-base);
+}
+
+// V2 vendor: a text button has no palette fill, so its (invisible, `border-style: none`) border keeps the colour the legacy
+// bundle computes: black in both themes (measured on the terms modal close button).
+.v-btn.v-btn--variant-text {
+  border-color: var(--v-btn-text-border);
+}
+
+// V2 vendor: `.theme--light.v-btn { color: rgba(0, 0, 0, .87) }` / `.theme--dark.v-btn { color: #fff }` for a button without `color`;
+// a V4 text button inherits its container (the dimmed `.v-card-text` colour, .6 / .7). Opt-in class, so screens already measured keep
+// their output (local and back buttons, the former `/setup`).
+.v-btn.btn-default-color {
+  color: var(--v-text-default);
+}
+
+// Legacy `.v-btn--rounded { border-radius: 36px !important }` (V4 `rounded` boolean adds the same class name).
+.v-btn.v-btn--rounded {
+  border-radius: 36px !important;
+}
+
+// V2 `.v-btn--icon.v-size--large` is a 48px square; V4 adds 12px to the large icon button (60px).
+.v-btn.v-btn--icon.v-btn--size-large {
+  width: 48px;
+  height: 48px;
+}
+
+.v-btn {
+  // V2 vendor: reset `button { line-height: inherit }` and `.v-btn` set none, so a button took its parent's line height
+  // (22px inside `.v-card__text`); V4 sets `normal`.
+  line-height: inherit;
+  // `--v-btn-padding-x` lets a screen widen the button without its own `!important`.
+  padding-left: var(--v-btn-padding-x, 16px) !important;
+  padding-right: var(--v-btn-padding-x, 16px) !important;
+  text-transform: none;
+  // V2 vendor: `.v-btn { text-indent: .0892857143em }` (1.43px at 16px, inherited by the label span); V4 ships .0071428571em.
+  // RTL too: V2 has no RTL override (deployed `chunk-vendors` CSS has this one `text-indent`), and this unlayered rule
+  // beats V4's layered `.v-locale--is-rtl .v-btn { text-indent: -0.0071em }`, so RTL matches legacy.
+  text-indent: 0.0892857143em;
+  font-weight: v.$font-weight-medium;
+  transition: background-color 0.24s ease;
+
+  .v-btn__content {
+    letter-spacing: 0em;
+    white-space: break-spaces;
+    max-width: 100%;
+  }
+
+  .v-btn__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0em;
+    white-space: break-spaces;
+    max-width: 100%;
+  }
+
+  .v-icon {
+    margin-right: 10px;
+  }
+
+  &--icon {
+    .v-icon {
+      margin-right: 0px;
+    }
+  }
+
+  // V2 `$btn-sizes` / `$btn-font-sizes`: an x-small icon button is a 32px square with a 14px font
+  // (V4: 24px + 12px = 36px, 10px font; `settings.scss` keeps the stock size scale).
+  &.v-btn--icon.v-btn--size-x-small {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  // V2 `$btn-font-sizes` also gave the small and x-small text buttons 14px (V4: 12px / 10px); the label inherits it.
+  &.v-btn--size-small,
+  &.v-btn--size-x-small {
+    font-size: 14px;
+  }
+
+  &.v-btn--size-default {
+    border-radius: 5px;
+
+    .v-btn__content {
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-sm;
+      line-height: v.$line-height-sm;
+    }
+  }
+
+  &.v-btn--size-large {
+    border-radius: 5px;
+
+    .v-btn__content {
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-base;
+      line-height: v.$line-height-base;
+    }
+  }
+
+  &.v-btn--size-x-large {
+    border-radius: 5px;
+
+    .v-btn__content {
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-lg;
+      line-height: v.$line-height-lg;
+    }
+
+    .v-btn__loader {
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-lg;
+      line-height: v.$line-height-lg;
+    }
+  }
+
+  // Legacy `.v-size--xx-large`: the 60px button of the onboarding modals. V4 `VBtn`
+  // has no `xx-large` size. The class is renamed to `.btn-xx-large` because `legacy-layer.test.ts` forbids V2 `.v-size--*` selectors.
+  &:not(.v-btn--round).btn-xx-large {
+    height: 60px;
+    border-radius: 8px;
+
+    .v-btn__content {
+      font-weight: v.$font-weight-semibold;
+      font-size: v.$font-size-xlg;
+      line-height: v.$line-height-xlg;
+    }
+  }
+
+  &.v-btn--gray {
+    background-color: map.get(v.$gray, lighten2) !important;
+    color: map.get(v.$text, headings);
+  }
+
+  // V2 `.gray--text`
+  &.text-gray {
+    &:not(:hover) > .v-btn__overlay {
+      opacity: 0;
+    }
+  }
+
+  // V2 `.primary`: the colour class V2 put on elevated/flat buttons.
+  &.bg-primary {
+    &:not(.v-btn--variant-outlined) {
+      &:hover {
+        background-color: map.get(v.$primary, lighten1) !important;
+      }
+
+      // V2 `VBtn.click` blurs the button after a pointer click (`retainFocusOnClick` is false), so `:focus` only matched keyboard focus; V4 keeps focus.
+      &:focus-visible {
+        border-color: map.get(v.$primary, lighten4) !important;
+      }
+    }
+  }
+
+  // V2 `.primary.lighten-2`
+  &.bg-primary-lighten-2 {
+    &:not(.v-btn--variant-outlined) {
+      background-color: map.get(v.$primary, lighten4) !important;
+
+      &:hover {
+        background-color: map.get(v.$primary, lighten2) !important;
+      }
+
+      &:focus {
+        background-color: map.get(v.$primary, lighten4) !important;
+        border-color: map.get(v.$primary, lighten2) !important;
+      }
+    }
+  }
+
+  &.v-btn--variant-outlined {
+    border-color: map.get(v.$gray, lighten2) !important;
+    transition: background-color 0.24s ease, border-color 0.24s ease;
+
+    .v-btn__content {
+      color: map.get(v.$primary, base);
+    }
+
+    &:hover {
+      background-color: map.get(v.$primary, lighten4) !important;
+      border-color: map.get(v.$primary, base) !important;
+    }
+  }
+
+  // App-lite `.v-btn--default` (a project class, not a V2 one: the white bordered "Copy" button of Connect AI). V2 blurred a button after a
+  // pointer click, so its `:focus` only matched the keyboard; V4 keeps the focus, hence `:focus-visible`.
+  // The `:not()` pair outranks the border reset above (V2 `.v-btn` has no border; this one does).
+  &.v-btn--default:not(.v-btn--variant-outlined):not(.v-btn--border) {
+    background-color: var(--v-btn-white-bg) !important;
+    background: var(--v-btn-white-bg) !important;
+    border: 1px solid map.get(v.$gray, lighten2);
+    color: map.get(v.$gray, darken1);
+    transition: 0.3s;
+    // V2 generated the minimum width of a default button from `$btn-sizes` (40px high): 71px, where V4's is 72px (measured on the
+    // Connect AI "Copy" button, the only default button short enough to sit on it).
+    min-width: 71px;
+
+    // V2 painted the hover/focus overlay (`::before`) over the whole 40px border box, V4's `.v-btn__overlay` stops inside the 1px border
+    // (38px; measured on the copy dialog and the Developer Settings Log In button, hover and focus).
+    > .v-btn__overlay {
+      top: -1px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+    }
+
+    &:hover {
+      color: map.get(v.$gray, darken2);
+    }
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: unset !important;
+      background: none !important;
+      border-color: map.get(v.$gray, lighten1);
+    }
+
+    &:active,
+    &:focus-visible {
+      background: map.get(v.$gray, lighten6) !important;
+      background-color: unset !important;
+    }
+  }
+
+  &.v-btn--disabled {
+    background-color: map.get(v.$gray, lighten5) !important;
+
+    &:not(.bg-primary):not(.bg-error) .v-btn__content {
+      color: map.get(v.$gray, darken1);
+    }
+  }
+
+  // V2 `.sand`
+  &.bg-sand {
+    color: white;
+
+    .v-btn__content {
+      color: white;
+    }
+  }
+
+  &.btn-icon {
+    min-width: unset !important;
+    padding: 0 7px !important;
+    width: 32px;
+    height: 32px;
+
+    .v-icon {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &.forgot-password-btn {
+    height: unset !important;
+    min-height: 48px !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+
+    .v-btn__content {
+      white-space: break-spaces !important;
+      max-width: 100% !important;
+    }
+  }
+
+  &.loader-on {
+    .v-btn__content {
+      justify-content: center !important;
+    }
+  }
+}
+
+// V2 vendor: an icon inside a button took the label colour. The unlayered global `.v-icon` colours (`_general` gray-darken1, `_icons`
+// `div:not(.status-indicator) .v-icon` darkicon, specificity (0,2,1)) beat the colour the button gives its content, so an icon next to
+// white / primary / error / disabled label text stayed dark. (0,3,0) wins over both; the `!important` `text-*` utilities (a `color` on the
+// `v-icon` itself) and the svg-level rules of a screen still win over `inherit`. Covers the `prepend-icon` / `append-icon` slots, which sit
+// outside `.v-btn__content`.
+.v-btn :is(.v-btn__content, .v-btn__prepend, .v-btn__append) .v-icon {
+  color: inherit;
+}
+
+// Disabled elevated/flat button follows app-lite:
+// a soft mint chip (`--v-btn-disabled-bg`, primary-lighten4) with brand text and icons at full opacity, no
+// border and no shadow. V2 skipped the colour class on a disabled button, so the chip is the same for every colour but error; V4 keeps
+// `.bg-primary` on a disabled VBtn and `.bg-primary` is an unlayered `!important` utility, so this rule needs its own
+// `!important` declarations to win. `.v-btn--default` (a legacy class of the gray secondary buttons) is muted like outlined, below.
+// A loading (not disabled) button keeps its solid colour with the loader.
+.v-btn:is(.v-btn--variant-elevated, .v-btn--variant-flat).v-btn--disabled:not(.v-btn--icon):not(.bg-error):not(.v-btn--default) {
+  opacity: 1 !important;
+  background-color: var(--v-btn-disabled-bg) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgb(var(--v-theme-primary)) !important;
+  -webkit-text-fill-color: rgb(var(--v-theme-primary)) !important;
+
+  // V2 painted no state layer on a disabled button; V4 shows `.v-btn__overlay` at 46% in the text colour.
+  .v-btn__overlay {
+    opacity: 0 !important;
+  }
+
+  .v-btn__content,
+  .v-btn__content span,
+  .v-btn__loader,
+  .v-icon {
+    color: rgb(var(--v-theme-primary)) !important;
+    -webkit-text-fill-color: rgb(var(--v-theme-primary)) !important;
+  }
+}
+
+// Disabled error button follows app-lite, like the primary one above: a soft error
+// chip (`--v-error-lighten5`) with error text and icons at full opacity.
+.v-btn:is(.v-btn--variant-elevated, .v-btn--variant-flat).v-btn--disabled.bg-error:not(.v-btn--icon):not(.v-btn--default) {
+  opacity: 1 !important;
+  background-color: var(--v-error-lighten5) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgb(var(--v-theme-error)) !important;
+  -webkit-text-fill-color: rgb(var(--v-theme-error)) !important;
+
+  .v-btn__overlay {
+    opacity: 0 !important;
+  }
+
+  .v-btn__content,
+  .v-btn__content span,
+  .v-btn__loader,
+  .v-icon {
+    color: rgb(var(--v-theme-error)) !important;
+    -webkit-text-fill-color: rgb(var(--v-theme-error)) !important;
+  }
+}
+
+// Disabled icon button (V2): the label colour is the grey `--v-btn-disabled-text` at full opacity; V4 keeps the text colour and dims the
+// whole button to 26 % (same look, different computed colour and opacity; users table Delete of the user with id 1). Pagination arrows are
+// left out: `DataIteratorFooter.scss` dims them to 0.6.
+.v-btn.v-btn--icon.v-btn--disabled:not(.v-pagination *) {
+  opacity: 1 !important;
+  color: var(--v-btn-disabled-text) !important;
+}
+
+// Secondary (outlined and the legacy `.v-btn--default`): muted disabled, no mint fill, no white-on-brand.
+.v-btn.v-btn--disabled:is(.v-btn--variant-outlined, .v-btn--default) {
+  opacity: 1 !important;
+  background-color: var(--v-btn-white-bg) !important;
+  background-image: none !important;
+  border-color: var(--v-gray-lighten2) !important;
+  color: var(--v-gray-lighten1) !important;
+  -webkit-text-fill-color: var(--v-gray-lighten1) !important;
+
+  // V2 painted no state layer on a disabled button; V4 shows `.v-btn__overlay` at 46% in the text colour (a gray fill over the white
+  // button: Purge on the CDN page). Same as the disabled filled buttons above.
+  .v-btn__overlay {
+    opacity: 0 !important;
+  }
+
+  .v-btn__content,
+  .v-btn__content * {
+    color: var(--v-gray-lighten1) !important;
+    -webkit-text-fill-color: var(--v-gray-lighten1) !important;
+  }
+}
+
+// Legacy app `.v-card .v-btn--disabled { background: unset }`: inside a card a disabled button has no fill.
+// V2 vendor: disabled text (`rgba(0,0,0,.26)` light /
+// `rgba(255,255,255,.3)` dark) and no shadow on the button itself.
+// The label keeps the disabled-outlined `.v-btn__content *` colour above; a screen sets its own, as legacy did inline.
+.v-card .v-btn.v-btn--disabled.v-btn--variant-outlined {
+  background: unset !important;
+  box-shadow: none !important;
+  color: var(--v-btn-disabled-text) !important;
+  -webkit-text-fill-color: var(--v-btn-disabled-text) !important;
+
+  .v-theme--dark & {
+    color: var(--v-btn-disabled-text) !important;
+    -webkit-text-fill-color: var(--v-btn-disabled-text) !important;
+  }
+}
+
+.btn-close {
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.instance-domain-link {
+  color: map.get(v.$gray, darken1) !important;
+  transition: color 0.24s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    color: map.get(v.$info, base) !important;
+  }
+}
+
+// `AppButton kind="surface"`: the V2 button without a colour is the `#f5f5f5` surface (`--v-btn-surface`, `#272727` in dark), the V4 one is the
+// white card surface, so Cancel in Filters looked like a plain label on the white popover. Text colour stays the theme one.
+.v-btn.app-button--surface {
+  background-color: var(--v-btn-surface);
+}
+
+.add-new-button {
+  min-width: unset !important;
+
+  svg {
+    color: var(--v-icon-lighten5);
+  }
+
+  // The disabled chip has brand text (disabled elevated/flat rule above), so its icons (the Actions chevron of `QuickActionsButton`)
+  // take the same colour instead of the light icon colour set on the svg.
+  &.v-btn--disabled svg {
+    color: rgb(var(--v-theme-primary));
+  }
+}
+
+.color-indicator {
+  border: var(--v-color-indicator-base);
+}
+
+// The Vuetify 2 vendor `v-btn-toggle`,
+// opt-in by the `v-btn-toggle-v2` class on a `v-btn-toggle` (V4 `.v-btn-group`), because V4 paints a pressed button with the full
+// toggle colour and no borders. V2: a white (dark `#1e1e1e`) group with a 4px radius and the V2 button text colour, `#f5f5f5` (dark
+// `#272727`) buttons with thin borders, an 0.8 opacity off and 1 on, `min-width: 48px`, 40px tall (the app's default button height);
+// the pressed button takes the group colour and the 0.18 `::before` tint (V4: the overlay). `v-btn-toggle-v2--primary` is V2
+// `color="primary"` on the toggle: the group (and so the pressed button) is primary.
+.v-btn-group.v-btn-toggle-v2 {
+  height: 40px;
+  border-radius: 4px;
+  background: var(--v-sheet-surface);
+  color: var(--v-text-default);
+
+  &.v-btn-toggle-v2--primary {
+    color: rgb(var(--v-theme-primary));
+  }
+
+  > .v-btn {
+    height: 40px;
+    min-width: 48px;
+    border: thin solid var(--v-btn-toggle-border);
+    border-radius: 0;
+    background-color: var(--v-btn-surface);
+    color: var(--v-text-default);
+    opacity: 0.8;
+    box-shadow: none;
+
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    &:last-child {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    &:not(:first-child) {
+      border-left-width: 0;
+    }
+
+    &.v-btn--active {
+      opacity: 1;
+      color: inherit;
+
+      > .v-btn__overlay {
+        opacity: 0.18;
+      }
+    }
+  }
+}
+
+// One look of the green Add button of a page title (`PageAddButton`, the `QuickActionsButton`
+// activator). V2 `.v-btn.v-size--default { font-size: 14px }` (0,2,0) beat `.p-2` (16px) with a 24px line height; the V4 size rule is layered
+// and loses to the unlayered `.p-2`, so the default-size button (below `md`) restates both. Was repeated in `hosting-screen.scss`,
+// `hosting-title-row.scss`, `QuickActionsButton.vue`, `ConnectAiView.scss`, `EnvFileView.vue` and `ApiTokensTable.vue`.
+.page-title__add-button.v-btn--size-default {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.page-title__add-button {
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  .v-btn__content {
+    white-space: nowrap;
+  }
+}
+
+// The icon button of a toolbar (file manager). A disabled one is only grayed out (the colour comes from the
+// disabled icon button rule above), without the `gray lighten5` fill of `.v-btn.v-btn--disabled`, in light and in dark. 36px, 44px below `md`
+// (touch target). The icon keeps the colour of the other icon buttons.
+.v-btn.app-button--toolbar {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+
+  &:not(.v-btn--disabled):not(.text-primary) {
+    color: var(--v-icon-btn-color);
+  }
+
+  &.v-btn--disabled {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  @media (max-width: 767.98px) {
+    width: 44px;
+    height: 44px;
+  }
+}

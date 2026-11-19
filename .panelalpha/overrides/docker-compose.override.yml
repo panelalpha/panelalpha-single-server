@@ -1,0 +1,14 @@
+# Keep one panel container per project. The Engine's
+# generated compose service is `app` (GeneratedCompose::APP_SERVICE). Without a
+# fixed container_name a redeploy starts a second copy, and two supervisor
+# stacks would share one SQLite file.
+#
+# The image is the one this version publishes. The Engine pulls it and starts
+# without a build; when the registry does not have it (a branch, a version not
+# published yet) it builds the Dockerfile as before. The tag is v<version> from
+# src/backend/config/system.php, which PanelalphaConfigTest keeps in step.
+services:
+  app:
+    container_name: panelalpha-single-server
+    image: ghcr.io/panelalpha/panel:v2.0.0-beta
+    pull_policy: missing

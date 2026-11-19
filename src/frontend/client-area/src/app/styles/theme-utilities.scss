@@ -1,0 +1,103 @@
+// The runtime theme sheet of Vuetify (`composables/theme.js`) is injected as a string and does not go through PostCSS, hence this static sheet;
+// the V4 palette classes (`.text-red` etc.) do go through the `build/vuetify-v2-utilities.ts` plugin.
+// V2 theme color classes that the V4 runtime does not give. V2 (`customProperties: true`, theme sheet appended to the end of
+// `<head>`, so after the legacy layer) emitted `.v-application .primary--text { color; caret-color }` and
+// `.v-application .primary { background-color; border-color }`, all `!important`, with values from `--v-<key>-<variant>`.
+// V4 `.text-<key>` / `.bg-<key>` are layered and bare, so the unlayered legacy layer and SFC rules beat them.
+// Values: the legacy variable (`themes-variables.scss`) when it exists, so the dark shade stays the legacy one
+// (`text-gray-darken-1` is #9494AD in dark), else the V4 theme variable. Imported after `legacy/index.scss`.
+// The key list must match `src/app/plugins/theme-colors.ts` (light + dark keys without the M3 surface keys and `on-*`, plus
+// `variations`); `theme-utilities.test.ts` checks it. Selector: V2 `.v-application .x` (0,2,0), covering overlays like the utilities.
+$theme-colors: (
+  'accent': rgb(var(--v-theme-accent)),
+  'body': var(--v-body-base),
+  'checkbox': rgb(var(--v-theme-checkbox)),
+  'darkicon': var(--v-darkicon-base),
+  'error': var(--v-error-base),
+  'error-darken-1': rgb(var(--v-theme-error-darken-1)),
+  'error-darken-2': rgb(var(--v-theme-error-darken-2)),
+  'error-lighten-1': rgb(var(--v-theme-error-lighten-1)),
+  'error-lighten-2': rgb(var(--v-theme-error-lighten-2)),
+  'error-lighten-3': rgb(var(--v-theme-error-lighten-3)),
+  'error-lighten-4': rgb(var(--v-theme-error-lighten-4)),
+  'error-lighten-5': var(--v-error-lighten5),
+  'field': rgb(var(--v-theme-field)),
+  'gray': var(--v-gray-base),
+  'gray-darken-1': var(--v-gray-darken1),
+  'gray-darken-2': var(--v-gray-darken2),
+  'gray-lighten-1': var(--v-gray-lighten1),
+  'gray-lighten-2': var(--v-gray-lighten2),
+  'gray-lighten-3': var(--v-gray-lighten3),
+  'gray-lighten-4': var(--v-gray-lighten4),
+  'gray-lighten-5': var(--v-gray-lighten5),
+  'gray-lighten-6': var(--v-gray-lighten6),
+  'icon': var(--v-icon-base),
+  'info': var(--v-info-base),
+  'info-darken-1': rgb(var(--v-theme-info-darken-1)),
+  'info-darken-2': rgb(var(--v-theme-info-darken-2)),
+  'info-lighten-1': rgb(var(--v-theme-info-lighten-1)),
+  'info-lighten-2': rgb(var(--v-theme-info-lighten-2)),
+  'info-lighten-3': rgb(var(--v-theme-info-lighten-3)),
+  'info-lighten-4': var(--v-info-lighten4),
+  'info-lighten-5': var(--v-info-lighten5),
+  'link': var(--v-link-base),
+  'massaction': var(--v-massaction-base),
+  'nav': var(--v-nav-base),
+  'panel': var(--v-panel-base),
+  'primary': var(--v-primary-base),
+  'primary-darken-1': var(--v-primary-darken1),
+  'primary-darken-2': rgb(var(--v-theme-primary-darken-2)),
+  'primary-lighten-1': var(--v-primary-lighten1),
+  'primary-lighten-2': var(--v-primary-lighten2),
+  'primary-lighten-3': rgb(var(--v-theme-primary-lighten-3)),
+  'primary-lighten-4': var(--v-primary-lighten4),
+  'primary-lighten-5': var(--v-primary-lighten5),
+  'sand': var(--v-sand-base),
+  'sand-darken-1': var(--v-sand-darken1),
+  'sand-darken-2': var(--v-sand-darken2),
+  'sand-lighten-1': rgb(var(--v-theme-sand-lighten-1)),
+  'sand-lighten-2': rgb(var(--v-theme-sand-lighten-2)),
+  'sand-lighten-3': rgb(var(--v-theme-sand-lighten-3)),
+  'sand-lighten-4': rgb(var(--v-theme-sand-lighten-4)),
+  'sand-lighten-5': var(--v-sand-lighten5),
+  'secondary': rgb(var(--v-theme-secondary)),
+  'success': var(--v-success-base),
+  'success-darken-1': rgb(var(--v-theme-success-darken-1)),
+  'success-darken-2': rgb(var(--v-theme-success-darken-2)),
+  'success-lighten-1': rgb(var(--v-theme-success-lighten-1)),
+  'success-lighten-2': rgb(var(--v-theme-success-lighten-2)),
+  'success-lighten-3': rgb(var(--v-theme-success-lighten-3)),
+  'success-lighten-4': rgb(var(--v-theme-success-lighten-4)),
+  'success-lighten-5': var(--v-success-lighten5),
+  'text': var(--v-text-base),
+  'text-darken-1': var(--v-text-darken1),
+  'text-darken-2': var(--v-text-darken2),
+  'text-lighten-1': rgb(var(--v-theme-text-lighten-1)),
+  'text-lighten-2': rgb(var(--v-theme-text-lighten-2)),
+  'text-lighten-3': rgb(var(--v-theme-text-lighten-3)),
+  'text-lighten-4': rgb(var(--v-theme-text-lighten-4)),
+  'text-lighten-5': rgb(var(--v-theme-text-lighten-5)),
+  'tooltip': var(--v-tooltip-base),
+  'warning': var(--v-warning-base),
+  'warning-darken-1': rgb(var(--v-theme-warning-darken-1)),
+  'warning-darken-2': rgb(var(--v-theme-warning-darken-2)),
+  'warning-lighten-1': rgb(var(--v-theme-warning-lighten-1)),
+  'warning-lighten-2': rgb(var(--v-theme-warning-lighten-2)),
+  'warning-lighten-3': rgb(var(--v-theme-warning-lighten-3)),
+  'warning-lighten-4': rgb(var(--v-theme-warning-lighten-4)),
+  'warning-lighten-5': var(--v-warning-lighten5),
+  'white': var(--v-white-base),
+);
+
+@each $key, $value in $theme-colors {
+  :is(.v-application, .v-overlay-container) .text-#{$key} {
+    color: $value !important;
+    caret-color: $value !important;
+  }
+
+  // No `color`: the `on-<key>` text color of the V4 runtime stays, so a local text color on `bg-*` keeps working.
+  :is(.v-application, .v-overlay-container) .bg-#{$key} {
+    background-color: $value !important;
+    border-color: $value !important;
+  }
+}

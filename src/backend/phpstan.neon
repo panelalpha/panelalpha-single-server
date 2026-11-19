@@ -1,0 +1,34 @@
+# Static analysis. Larastan understands the framework magic
+# (models, facades, container); the package sources are analysed as written in
+# src/packages, not only through the vendor symlink.
+#
+# There is deliberately no baseline file: every reported error is fixed in code.
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 9
+    # A docblock type is not certainty: Engine/request data asserted as one shape
+    # must still be validated at runtime, so a defensive guard is never "dead".
+    treatPhpDocTypesAsCertain: false
+    # The same roots as psalm.xml, so neither analyser can be narrowed silently.
+    paths:
+        - app
+        - ../packages/engine-client/src
+        - ../packages/hub/src
+        - ../packages/client-area/src
+        - ../packages/community/src
+        - bootstrap
+        - config
+        - database
+        - routes
+        - public/index.php
+        - artisan
+
+# The project rules: the AST application-query guard
+# and the package-direction guard. They replace the regex
+# scanners so PHPStan itself fails a direct Application query and any controller
+# reference to the legacy package.
+rules:
+    - PanelAlpha\StaticAnalysis\ApplicationQueryRule
+    - PanelAlpha\StaticAnalysis\PackageDirectionRule

@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// Framework-independent. The empty `@media (max-width: md)` block is omitted.
+
+.mobile-table-item {
+  width: 100%;
+  display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid map.get(v.$gray, lighten3);
+  }
+  &__select {
+    margin-right: 8px;
+  }
+  &__header {
+    font-size: v.$font-size-xs;
+    line-height: v.$line-height-xs;
+    font-weight: v.$font-weight-light;
+    color: map.get(v.$gray, darken1);
+    cursor: pointer;
+    &:hover {
+      color: map.get(v.$primary, darken1);
+    }
+  }
+  &__values {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    font-size: v.$font-size-sm;
+    line-height: v.$line-height-sm;
+    flex-direction: column !important;
+  }
+  &__row {
+    margin-left: -0px;
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+  &__group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+  &__actions {
+    margin-left: -0px;
+  }
+}
+
+// V2 `.v-data-table__mobile-table-row` is `display: block`, so the cell shrinks to its content; a V4 row stays a table row.
+// Global; the scoped copies in HostingFtpTable, ConfigsTable and
+// WordpressUsersTable are gone, so this is the only source. The `DataTable` card does not use it:
+// FTP and SFTP left it there; the Advanced tables (ConfigsTable, UsersTable, WordpressUsersTable) still do.
+.mobile-table-item-row {
+  display: block;
+
+  > td {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}

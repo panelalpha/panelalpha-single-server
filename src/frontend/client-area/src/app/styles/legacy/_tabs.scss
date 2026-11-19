@@ -1,0 +1,145 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-tabs-slider` -> `.v-tab__slider`, `.v-tab--active` -> `.v-tab--selected`,
+// `[aria-selected="true"]` -> `.v-tab--selected`, V2 `::before` hover overlay -> `.v-btn__overlay`, `.v-tabs-bar` -> `.v-tabs` / `.v-slide-group__content`.
+// V4 `.v-tab` is a `.v-btn`, so `_buttons` padding, radius and content typography are undone for tabs.
+
+.v-tabs {
+  // V2 `> .v-tabs-bar`: the bar is the V4 `.v-tabs` root.
+  background-color: transparent !important;
+
+  .v-tab__slider {
+    height: 3px !important;
+  }
+
+  .v-tab {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    border-radius: 0;
+
+    .analytics-card {
+      &__title {
+        transition: color 0.3s ease;
+      }
+    }
+
+    .v-btn__overlay {
+      background-color: transparent;
+    }
+
+    + .v-tab {
+      margin-left: 24px;
+
+      @media (max-width: map.get(v.$grid-breakpoints, lg)) {
+        margin-left: 16px;
+      }
+    }
+
+    &.v-tab--selected {
+      color: var(--v-primary-darken1);
+    }
+
+    // V4 disabled tabs carry `.v-btn--disabled` (no `.v-tab--disabled`).
+    &.v-btn--disabled {
+      opacity: 1;
+      font-weight: v.$font-weight-light;
+      color: var(--v-gray-lighten1) !important;
+
+      * {
+        font-weight: v.$font-weight-light;
+        color: var(--v-gray-lighten1) !important;
+      }
+    }
+  }
+
+  .v-tab {
+    // V2 `.v-tab` is an `<a>`, not a `.v-btn`, so it has no `text-indent` (the global `.v-btn` one widens the label by 1.6px).
+    text-indent: 0;
+    font-weight: v.$font-weight-medium;
+    font-size: v.$font-size-lg;
+    line-height: v.$line-height-lg;
+    letter-spacing: 0px;
+    transition: color 0.3s ease;
+
+    // `_buttons` types `.v-btn__content` itself, which would hide the tab font above.
+    .v-btn__content {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+
+    &:not(.v-tab--selected) {
+      color: var(--v-text-darken2) !important;
+    }
+
+    &:hover {
+      color: map.get(v.$primary, base) !important;
+    }
+  }
+
+  .v-slide-group {
+    &__prev,
+    &__next {
+      max-width: 24px;
+      min-width: 24px;
+      display: none !important;
+      flex: 0;
+    }
+
+    &__prev {
+      margin-right: 8px;
+    }
+
+    &__next {
+      margin-left: 8px;
+    }
+  }
+}
+
+// Page-level tabs (e.g. Account, Settings): compact tabs without a min width and without the prev/next arrows in the light theme.
+// Rules for `.v-tabs.v-tabs--page`. V4 `.v-tab` is a `.v-btn`: the `.v-tabs .v-tab` padding above is `!important`, so the
+// 4px needs `!important` too (higher specificity wins), and the text variant paints the border black, hence `border-color: currentcolor`.
+// V2 `&.theme--light` (a class on the tabs root) becomes an ancestor `.v-theme--light` (V4 puts the theme class on the app/ancestors).
+.v-tabs.v-tabs--page {
+  .v-tab {
+    min-width: unset;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    border-color: currentcolor;
+  }
+}
+
+.v-theme--light .v-tabs.v-tabs--page {
+  .v-slide-group__prev,
+  .v-slide-group__next {
+    display: none !important;
+  }
+}
+
+.navbar-tabs {
+  .v-slide-group__content {
+    background: transparent;
+
+    a:not(.v-tab--selected) {
+      color: var(--v-text-darken2) !important;
+    }
+  }
+}
+
+.analytics-card {
+  .v-tabs {
+    // V2 `.v-item-group` was the tabs bar, i.e. the V4 `.v-tabs` root.
+    background-color: transparent !important;
+
+    .v-tab:not(.v-tab--selected) {
+      color: var(--v-text-darken2) !important;
+    }
+  }
+}
+
+.domain-info {
+  .v-tabs {
+    background-color: var(--v-panel-base) !important;
+  }
+}

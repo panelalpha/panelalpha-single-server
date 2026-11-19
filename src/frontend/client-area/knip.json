@@ -1,0 +1,35 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/**/*.test.ts",
+    "scripts/**/*.ts",
+    "build/**/*.ts",
+    "parity/states/**/*.parity.ts",
+    "parity/report/global-setup.ts",
+    "parity/scripts/*.ts",
+    "parity/**/*.test.ts",
+    "e2e/**/*.spec.ts",
+    "parity/report/write-report.ts",
+    "src/shared/ui/modal/form-rules-fit.type-check.ts"
+  ],
+  "project": [
+    "src/**/*.{ts,vue}",
+    "parity/**/*.ts",
+    "e2e/**/*.ts",
+    "scripts/**/*.ts",
+    "build/**/*.ts"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "ignore": [
+    "**/*.d.ts"
+  ],
+  "ignoreDependencies": [
+    "@fontsource/nunito-sans",
+    "unfonts.css"
+  ],
+  "ignoreIssues": {
+    "parity/states/**": [
+      "exports"
+    ]
+  }
+}

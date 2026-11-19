@@ -1,0 +1,195 @@
+@use './tokens/variables' as v;
+
+// Ported as is (only the typography tokens are namespaced): framework-independent `.apexcharts*` rules. Unverified until a chart screen exists.
+
+.apexcharts {
+  &-toolbar {
+    z-index: 8;
+  }
+}
+
+.apexcharts-canvas {
+  margin-bottom: -16px;
+  direction: ltr;
+  svg {
+    background-color: var(--v-panel-base) !important;
+  }
+  * {
+    font-family: "Nunito sans" !important;
+  }
+  .apexcharts-xaxis-texts-g {
+    .apexcharts-text {
+      transform: translateY(20px);
+    }
+  }
+  .apexcharts-yaxis-texts-g {
+    .apexcharts-text {
+      transform: translateY(2px);
+    }
+  }
+  .apexcharts-xcrosshairs {
+    stroke-dasharray: 0;
+    stroke: var(--v-gray-lighten3);
+  }
+  .apexcharts-xaxistooltip {
+    display: none;
+  }
+
+  .apexcharts-toolbar {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .apexcharts-tooltip {
+    padding: 16px 20px 20px 20px;
+    background-color: var(--v-tooltip-base) !important;
+    border-radius: 6px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.12),
+      0px 8px 24px 6px rgba(0, 0, 0, 0.05), 0px 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 220px;
+    min-width: 220px;
+    border: none !important;
+    .apexcharts-tooltip-title {
+      background-color: var(--v-tooltip-base) !important;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--v-gray-lighten5) !important;
+      color: var(--v-gray-darken1) !important;
+      font-size: v.$font-size-base !important;
+      line-height: v.$line-height-base !important;
+      font-weight: v.$font-weight-bold;
+    }
+    .apexcharts-tooltip-series-group {
+      padding: 0px;
+      margin: 0px;
+      margin-top: 16px;
+      position: relative;
+      color: var(--v-text-darken1);
+      + .apexcharts-tooltip-series-group {
+        margin-top: 0px;
+      }
+
+      .apexcharts-tooltip-marker {
+        width: 4px;
+        height: 4px;
+        margin-right: 12px;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          top: calc(50% - 6px);
+          left: calc(50% - 6px);
+          opacity: 0.1;
+          color: inherit;
+          background-color: inherit;
+          border-radius: 50%;
+        }
+      }
+
+      .apexcharts-tooltip-text {
+        .apexcharts-tooltip-text-label,
+        .apexcharts-tooltip-text-value {
+          font-size: v.$font-size-sm;
+          line-height: v.$line-height-sm;
+          color: var(--v-gray-darken4);
+        }
+        .apexcharts-tooltip-text-label {
+          font-weight: v.$font-weight-normal;
+        }
+        .apexcharts-tooltip-text-value {
+          font-weight: v.$font-weight-bold;
+        }
+      }
+    }
+    &:has(> .apexcharts-tooltip-title:empty) {
+      display: none;
+    }
+  }
+
+  // Not in legacy `_chart.scss`: the Monitoring pie and doughnut were chart.js 2 charts with its default canvas tooltip, so their Apex
+  // tooltip (`PIE_TOOLTIP_CLASS` in `monitoring.ts`) undoes the area-chart card above and draws chart.js 2 `tooltips` defaults: `xPadding` /
+  // `yPadding` 6, `cornerRadius` 6, body 12px normal, a 12px colour box with a 1px `multiKeyBackground` frame and 2px to the text.
+  .apexcharts-tooltip.chart-tooltip-pie {
+    padding: 6px;
+    min-width: 0;
+    max-width: none;
+    background-color: var(--v-chart-tooltip-bg) !important;
+    border-radius: 6px;
+    box-shadow: none;
+    .apexcharts-tooltip-series-group {
+      margin: 0;
+      padding: 0;
+      font-size: v.$font-size-xxs;
+      line-height: v.$font-size-xxs;
+      color: var(--v-chart-tooltip-text);
+      .apexcharts-tooltip-marker {
+        box-sizing: border-box;
+        width: 12px;
+        height: 12px;
+        margin-right: 2px;
+        border: 1px solid var(--v-chart-tooltip-box-frame);
+        background-color: currentColor;
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+      .apexcharts-tooltip-y-group {
+        padding: 0;
+      }
+      .apexcharts-tooltip-text {
+        .apexcharts-tooltip-text-y-label,
+        .apexcharts-tooltip-text-y-value {
+          font-size: v.$font-size-xxs;
+          line-height: v.$font-size-xxs;
+          font-weight: v.$font-weight-normal;
+          color: var(--v-chart-tooltip-text);
+        }
+        .apexcharts-tooltip-text-y-value {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+}
+.apexcharts-legend {
+  justify-content: center !important;
+  .apexcharts-legend-series {
+    margin: 20px 20px 0px 20px !important;
+
+    &:first-child {
+      margin-left: 0px !important;
+    }
+
+    &:last-child {
+      margin-right: 0px !important;
+    }
+
+    .apexcharts-legend-marker {
+      width: 8px !important;
+      height: 4px !important;
+      border-radius: 55px !important;
+      &::after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: calc(100% + 6px);
+        height: calc(100% + 6px);
+        background: currentColor;
+        opacity: 0.1;
+        border-radius: 55px;
+      }
+    }
+    .apexcharts-legend-text {
+      font-weight: 700 !important;
+      font-size: v.$font-size-xxs !important;
+      line-height: v.$line-height-xxs;
+      color: var(--v-gray-darken2) !important;
+      margin-left: 12px !important;
+    }
+  }
+}

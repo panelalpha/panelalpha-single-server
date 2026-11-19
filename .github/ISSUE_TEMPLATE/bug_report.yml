@@ -1,0 +1,101 @@
+name: "Report a bug"
+description: "Something in the panel is broken or does not work as expected."
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug.
+
+        > **Found a security vulnerability?** Do **not** report it here.
+        > Report it privately as described in [`SECURITY.md`](../blob/master/SECURITY.md).
+
+        > **A site failed to deploy or does not start?** That is usually a support question.
+        > Ask on [Discord](https://discord.gg/9twHWR7xGX) or in the [community forum](https://community.panelalpha.com/).
+        > Open an issue here when the panel itself does the wrong thing.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      options:
+        - label: I searched the existing issues and this has not been reported yet.
+          required: true
+        - label: I am running the latest version of the panel, or I can reproduce the bug on it.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen instead.
+      placeholder: "When I ..., the panel ... . I expected ... ."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The exact steps, so we can see the problem too. Name the pages and buttons you used.
+      placeholder: |
+        1. Open **My Projects** and select **Manage** on a project
+        2. Go to **Backups** and select ...
+        3. See the error
+    validations:
+      required: true
+
+  - type: input
+    id: engine-version
+    attributes:
+      label: Engine version
+      description: "Output of `pae system:version` on the server."
+      placeholder: "e.g. 2.3.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: host-os
+    attributes:
+      label: Server operating system
+      options:
+        - Debian 12
+        - Debian 13
+        - Ubuntu 22.04
+        - Ubuntu 24.04
+        - Ubuntu 26.04
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: Only if the problem is in the panel's interface.
+      placeholder: "e.g. Firefox 140, Chrome 141"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or output
+      description: |
+        Paste error messages, the reason shown in **Tasks**, deploy logs or command output.
+        This is shown as code, so you do not need backticks.
+        Remove tokens, passwords and anything else secret.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Screenshots, related issues, workarounds you tried.
+    validations:
+      required: false

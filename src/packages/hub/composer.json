@@ -1,0 +1,23 @@
+{
+    "name": "panelalpha/hub",
+    "description": "PanelAlpha Hub (PanelAlpha Connect) protocol: the pairing, the connect request, the signed report and disconnect, and the login ticket check. Knows the Hub, nothing about the panel: each product binds where the pairing is stored and what the panel reports.",
+    "type": "library",
+    "license": "Apache-2.0",
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PanelAlpha\\Hub\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PanelAlpha\\Hub\\HubServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

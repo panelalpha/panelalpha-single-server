@@ -1,0 +1,29 @@
+// Layout rules shared by the hosting screens (every screen imports this file). Legacy gets them from a global stylesheet (not ported globally);
+// each screen pulls this file into its own scoped styles: `<style lang="scss" scoped src="@/views/hosting/hosting-screen.scss"></style>`.
+@use 'sass:map';
+@use '@/app/styles/legacy/tokens/variables' as v;
+
+// V2 `.container` padding is 12px, V4 `.v-container` 16px; `px-0` keeps the inline padding at 0.
+.v-container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+// Legacy `.row:not(.row--small, .no-gutters)` is `margin: -16px` with `.col` padding 16px (not ported globally).
+.v-row {
+  margin: -16px;
+  // V4 spaces columns with `gap` and sizes them from these variables (default 24px); V2 had none.
+  --v-col-gap-x: 0px;
+  --v-col-gap-y: 0px;
+}
+
+.v-col {
+  padding: 16px;
+}
+
+// The domain row of the email screens is a plain `v-row` in legacy: its column keeps
+// the V2 12px padding, while the rule above gives every other column 16px.
+.v-col.domain-col {
+  padding: 12px;
+}
+

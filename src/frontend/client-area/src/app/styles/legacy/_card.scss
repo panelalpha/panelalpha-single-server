@@ -1,0 +1,252 @@
+@use 'sass:map';
+@use './tokens/variables' as v;
+
+// `.v-card__title/text/subtitle/actions` -> `.v-card-title/-text/-subtitle/-actions`.
+// V4 `.v-card-title` is `white-space: nowrap` + ellipsis; legacy titles wrapped, so both are undone here.
+
+.v-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // V2 vendor: legacy wrote 8px here, but V2 `.v-card:not(.v-sheet--tile):not(.v-card--shaped) { border-radius: 4px }` outranked
+  // it, so every legacy card computes 4px (measured on login and register).
+  border-radius: 4px;
+  box-shadow: v.$box-shadow-elevation-2 !important;
+  background-color: var(--v-panel-base);
+}
+
+// V2 vendor: `.v-card` has no border (`border-style: none`, colour `currentColor`); V4 paints `solid` + width 0 with the
+// theme border colour. Cards that ask for a border (`border` prop, outlined variant) keep V4's.
+// V2 `.theme--light/dark.v-sheet` also set `border-color` (#fff / #1e1e1e), so the computed colour is not `currentColor`.
+.v-card:not(.v-card--border, .v-card--variant-outlined) {
+  border-style: none;
+}
+
+// V2 vendor: `.v-card > :first-child` (except button, chip, avatar) took the card's top corner radius. V4 puts `.v-card__loader` /
+// `.v-card__underlay` before the title, so `:first-child` never matches it; the title is addressed directly.
+// The `:last-child` half is not ported: V4 ends the card with `.v-card__overlay`, and no legacy last child painted a background.
+.v-card > .v-card-title {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.v-theme--light .v-card:not(.v-card--border, .v-card--variant-outlined),
+.v-theme--dark .v-card:not(.v-card--border, .v-card--variant-outlined) {
+  border-color: var(--v-sheet-surface);
+}
+
+// V2 vendor: `.v-application .elevation-N` (0,2,0) outranked the `.v-card` elevation-2 rule above. The `.v-application`
+// ancestor is dropped in `_general` (overlays), so on a card the later `.v-card` rule would win; restore the order.
+.v-card {
+  &.elevation-4 {
+    box-shadow: v.$box-shadow-elevation-4 !important;
+  }
+
+  &.elevation-8 {
+    box-shadow: v.$box-shadow-elevation-8 !important;
+  }
+}
+
+// Legacy `&__title` etc. compiled to flat `.v-card__title` selectors, so these stay flat.
+.v-card-subtitle,
+.v-card-text,
+.v-card-title {
+  padding: 24px;
+}
+
+// V2 vendor: card typography (`.v-card__title/__subtitle/__text`); V4 ships its own metrics (title 22px/400/normal
+// spacing, text line-height 20px, text colour inherited), which showed up as width, height and colour deltas.
+.v-card-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  // V2 vendor: the deployed legacy bundle's `.v-card__title` has `line-height: 28px` for every card (not 2rem); also measured
+  // on the terms modal title. V4 `.v-card .v-card-title` is 1.27.
+  line-height: 1.75rem;
+  letter-spacing: 0.0125em;
+}
+
+.v-card-subtitle,
+.v-card-text {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  letter-spacing: 0.0071428571em;
+}
+
+.v-theme--light.v-card > .v-card-subtitle,
+.v-theme--light.v-card > .v-card-text {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.v-theme--dark.v-card > .v-card-subtitle,
+.v-theme--dark.v-card > .v-card-text {
+  color: hsla(0, 0%, 100%, 0.7);
+}
+
+.v-card-title {
+  padding-bottom: 12px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+
+  + .v-card-text {
+    padding-top: 0px;
+  }
+}
+
+.v-card-text,
+.v-card-subtitle {
+  margin-bottom: auto;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-bottom: 0px;
+
+  &:last-child {
+    padding-bottom: 24px;
+  }
+}
+
+.v-card-actions {
+  // V4 `.v-card-actions` has `min-height: 52px`; V2 `.v-card__actions` had none (a 22px row plus padding measured 44px).
+  min-height: 0;
+  padding-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 20px;
+  margin-top: auto;
+}
+
+.v-card {
+  &.active {
+    outline: 1px solid map.get(v.$primary, base);
+  }
+
+  .card-active-indicator {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: white;
+    z-index: 1;
+    border-radius: 8px;
+    padding: 7px;
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.16)) drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.1));
+  }
+
+  &.v-card--mwidth {
+    @each $width in 420px 540px 600px {
+      &-#{$width} {
+        max-width: $width !important;
+      }
+    }
+  }
+
+  &.v-card--minheight {
+    @each $height in 420px 508px 540px 600px {
+      &-#{$height} {
+        min-height: $height !important;
+      }
+    }
+  }
+}
+
+.v-card.analytics-card {
+  .v-tabs {
+    .v-tab {
+      margin-bottom: 8px;
+    }
+
+    // V2 drew the slider on the bar, under the tab's 8px margin; the V4 slider sits at the bottom of the tab and cut across the text.
+    .v-tab__slider {
+      bottom: -8px;
+    }
+  }
+
+  &--system {
+    .v-tabs {
+      .v-tab:hover {
+        .analytics-card {
+          &__title {
+            color: map.get(v.$info, base) !important;
+          }
+        }
+      }
+    }
+  }
+
+  &--visitors {
+    .v-tabs {
+      .v-tab:hover {
+        .analytics-card {
+          &__title {
+            color: map.get(v.$primary, base) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.data-iterator-card {
+  max-width: 100%;
+
+  &__image {
+    border-radius: 8px 8px 0px 0px;
+    overflow: hidden;
+  }
+
+  &__title {
+    max-width: calc(100%);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__title-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+
+    > a {
+      width: calc(100% - 32px);
+    }
+  }
+
+  &__url-box {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .v-img {
+    background-color: map.get(v.$gray, lighten5);
+  }
+}
+
+.monitoring-card {
+  height: 100%;
+}
+
+.responsive-card {
+  padding: 16px !important;
+
+  @media (max-width: map.get(v.$grid-breakpoints, lg)) {
+    padding: 12px !important;
+  }
+}
+
+.responsive-row {
+  margin: -16px !important;
+
+  @media (max-width: map.get(v.$grid-breakpoints, lg)) {
+    margin: -12px !important;
+  }
+}
+
+.v-theme--dark {
+  .v-card {
+    background-color: var(--v-panel-base);
+  }
+}

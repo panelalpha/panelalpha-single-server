@@ -1,0 +1,64 @@
+// Scoped to the screen. Selectors follow the DOM of Vuetify 4.
+
+// Legacy `.row:not(.row--small, .no-gutters)` is not global in next (V4 spaces columns with `gap`).
+// The screen carries its numbers locally: row margin -16px, column padding 12px (V2 `.col`).
+.page-tab-filters-controls {
+  --v-col-gap-x: 0px;
+  --v-col-gap-y: 0px;
+  margin: -16px;
+
+  > .v-col {
+    padding: 12px;
+  }
+
+  // Legacy global `.page-title__filter-controls` raises the filters column to 16px sides; it is scoped
+  // to `.page-title`, which this template does not wrap, so the screen carries the rule.
+  > .page-title__filter-controls {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 976px) {
+  .page-tab-filters-controls {
+    display: flex;
+    flex-wrap: wrap-reverse;
+
+    // The tab row is a plain `v-row` (no `PageTitle`): the selectors compile to the same `.page-title__*` pair as before.
+    & .page-title__filter-controls {
+      flex-basis: auto;
+      margin-left: auto;
+      width: unset;
+    }
+
+    & .page-title__tabs {
+      flex-basis: auto;
+      width: unset;
+    }
+  }
+}
+
+// The project header: V2 `.container` padding 12px (`py-3` in the template) and
+// `.row:not(.row--small, .no-gutters)` margin -16px (not ported globally; V4 spaces columns with `gap`). The tab row's
+// column keeps the V2 default 12px, the title and filter columns the 16px sides and 0 top and bottom.
+.advanced-hosting-page .page-title--advanced {
+  > .v-row {
+    --v-col-gap-x: 0px;
+    --v-col-gap-y: 0px;
+    margin: -16px;
+  }
+
+  .page-title__tabs {
+    padding: 12px;
+  }
+}
+
+// The window of the tabs keeps the column's width, so the page never scrolls sideways.
+.v-window {
+  background-color: transparent;
+  padding: 8px 0 16px 0;
+  margin: -8px 0 -16px 0;
+  max-width: unset;
+}
+
+// The tab strip (`.v-tab`, `.v-tabs`) is styled in `DatabasesTabs.vue`.

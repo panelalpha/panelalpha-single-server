@@ -1,0 +1,30 @@
+// Legacy global style layer: the 26 unique legacy partials as `@use './<partial>';` lines,
+// in the legacy order (`_skeleton` once, `_rtl` last).
+// No @layer: the layer is unlayered, like legacy.
+
+@use './general';
+@use './fonts';
+@use './inputs';
+@use './buttons';
+@use './card';
+@use './dropdowns';
+@use './pagination';
+@use './tabs';
+@use './icons';
+@use './tables';
+@use './labels';
+@use './list';
+@use './snackbar';
+@use './noData';
+@use './switch';
+@use './skeleton';
+@use './data-iterator';
+@use './dialog';
+@use './alert';
+@use './pageTitle';
+@use './mobileTableItems';
+@use './transitions';
+@use './dividers';
+@use './chart';
+@use './collapse';
+@use './rtl';
